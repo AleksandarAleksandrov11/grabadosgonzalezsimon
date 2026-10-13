@@ -16,7 +16,13 @@ import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { site } from "@/data/site";
 import { tierFor, unitPriceFor } from "@/lib/commerce/pricing";
 import type { Product } from "@/lib/commerce/types";
-import { findVariant, PENDING_DESIGN, selectedFromVariant, toCartLine, variantById } from "@/lib/commerce/variant";
+import {
+  findVariant,
+  PENDING_DESIGN,
+  selectedFromVariant,
+  toCartLine,
+  variantById,
+} from "@/lib/commerce/variant";
 import { thumbnail } from "@/lib/engrave/render";
 import { captureDesign, designAttributes, useCustomizer } from "@/lib/engrave/store";
 import { DEFAULT_DESIGN, type Design } from "@/lib/engrave/types";
@@ -85,7 +91,14 @@ export function ProductExperience({ product }: { product: Product }) {
   // inicializar el personalizador con la pieza del producto
   useEffect(() => {
     if (!canPersonalize) return;
-    useCustomizer.getState().init({ glass, productHandle: product.handle, design: initialDesign(mf.sampleEngraving), background: "negro" });
+    useCustomizer
+      .getState()
+      .init({
+        glass,
+        productHandle: product.handle,
+        design: initialDesign(mf.sampleEngraving),
+        background: "negro",
+      });
     useCustomizer.setState({ touched: false });
   }, [canPersonalize, glass, product.handle, mf.sampleEngraving]);
 
@@ -113,13 +126,25 @@ export function ProductExperience({ product }: { product: Product }) {
         attributes = designAttributes(useCustomizer.getState().design, PIECES[glass].label);
       }
       add(toCartLine(product, variant, attributes, preview), qty);
-      toast({ title: "Añadido al carrito", description: `${product.title}${qty > 1 ? ` · ${qty} uds.` : ""}` });
+      toast({
+        title: "Añadido al carrito",
+        description: `${product.title}${qty > 1 ? ` · ${qty} uds.` : ""}`,
+      });
       if (buyNow) {
         router.push("/checkout");
         return;
       }
       const r = stageRef.current?.getBoundingClientRect();
-      if (r) flyToCart({ x: r.left, y: r.top, w: r.width, h: r.height, image: preview ? `<img src="${preview}" alt="" style="width:100%;height:100%;object-fit:cover" />` : undefined });
+      if (r)
+        flyToCart({
+          x: r.left,
+          y: r.top,
+          w: r.width,
+          h: r.height,
+          image: preview
+            ? `<img src="${preview}" alt="" style="width:100%;height:100%;object-fit:cover" />`
+            : undefined,
+        });
       else useUI.getState().setCartOpen(true);
     } finally {
       setAdding(false);
@@ -131,7 +156,10 @@ export function ProductExperience({ product }: { product: Product }) {
   useEffect(() => {
     const el = buyRef.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setShowSticky(!e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 });
+    const io = new IntersectionObserver(
+      ([e]) => setShowSticky(!e.isIntersecting && e.boundingClientRect.top < 0),
+      { threshold: 0 },
+    );
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -148,24 +176,29 @@ export function ProductExperience({ product }: { product: Product }) {
   ) : null;
 
   return (
-    <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
       {/* galería */}
-      <div className="lg:col-span-7">
-        <div
-          className={cn(
-            "lg:sticky lg:top-[calc(var(--header-h)+1rem)]",
-            editing && "max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-[var(--gutter)] max-lg:bg-paper/95 max-lg:px-[var(--gutter)] max-lg:py-2 max-lg:backdrop-blur",
-          )}
-        >
+      <div
+        className={cn(
+          "self-start lg:sticky lg:top-[calc(var(--header-h)+1rem)] lg:col-span-7",
+          editing &&
+            "max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-[var(--gutter)] max-lg:border-b max-lg:border-line max-lg:bg-paper max-lg:px-[var(--gutter)] max-lg:py-2 max-lg:[&_.gallery-arrows]:hidden max-lg:[&_.gallery-thumbs]:hidden",
+        )}
+      >
+        <div>
           <div className={cn(editing && "max-lg:mx-auto max-lg:w-[52vw]")}>
             {canPersonalize ? (
-              <ProductGallery product={product} live={live} className={cn(editing && "max-lg:[&>ul]:hidden")} />
+              <ProductGallery product={product} live={live} />
             ) : (
               <ProductGallery product={product} />
             )}
           </div>
           {editing ? (
-            <button type="button" onClick={() => setEditing(false)} className="mx-auto mt-2 block rounded-full bg-fg px-4 py-1.5 text-[0.75rem] font-semibold text-bg lg:hidden">
+            <button
+              type="button"
+              onClick={() => setEditing(false)}
+              className="mx-auto mt-2 block rounded-full bg-fg px-4 py-1.5 text-[0.75rem] font-semibold text-bg lg:hidden"
+            >
               Listo
             </button>
           ) : null}
@@ -178,11 +211,20 @@ export function ProductExperience({ product }: { product: Product }) {
           <div>
             <div className="mb-3 flex flex-wrap items-center gap-2">
               {mf.badge ? <Badge tone="solid">{mf.badge}</Badge> : null}
-              <span className="text-[0.75rem] font-semibold tracking-[0.12em] text-fg-subtle uppercase">{product.productType}</span>
+              <span className="text-[0.75rem] font-semibold tracking-[0.12em] text-fg-subtle uppercase">
+                {product.productType}
+              </span>
             </div>
-            <h1 className="font-display text-[clamp(2.1rem,1.6rem+1.8vw,3.25rem)] leading-[1.02] tracking-[-0.015em]">{product.title}</h1>
+            <h1 className="font-display text-[clamp(2.1rem,1.6rem+1.8vw,3.25rem)] leading-[1.02] tracking-[-0.015em]">
+              {product.title}
+            </h1>
           </div>
-          <FavoriteButton handle={product.handle} title={product.title} variant="inline" className="mt-1 shrink-0" />
+          <FavoriteButton
+            handle={product.handle}
+            title={product.title}
+            variant="inline"
+            className="mt-1 shrink-0"
+          />
         </div>
         <p className="mt-3 flex items-center gap-2 text-[0.8125rem] text-fg-muted">
           <span className="flex text-fg" aria-hidden="true">
@@ -214,7 +256,14 @@ export function ProductExperience({ product }: { product: Product }) {
           <VariantPicker product={product} selected={selected} onChange={onOption} idBase={idBase} />
         </div>
 
-        {mf.volumePricing ? <VolumePricing tiers={mf.volumePricing} base={variant.price.amount} quantity={qty} className="mt-7" /> : null}
+        {mf.volumePricing ? (
+          <VolumePricing
+            tiers={mf.volumePricing}
+            base={variant.price.amount}
+            quantity={qty}
+            className="mt-7"
+          />
+        ) : null}
 
         {canPersonalize ? (
           <section
@@ -228,14 +277,21 @@ export function ProductExperience({ product }: { product: Product }) {
                 <PenLine className="size-5" strokeWidth={1.4} /> Personalízalo
               </h2>
               <label className="flex cursor-pointer items-center gap-2 text-[0.8125rem] font-semibold">
-                <input type="checkbox" role="switch" checked={personalize} onChange={(e) => setPersonalize(e.target.checked)} className="size-4 accent-[var(--fg)]" />
+                <input
+                  type="checkbox"
+                  role="switch"
+                  checked={personalize}
+                  onChange={(e) => setPersonalize(e.target.checked)}
+                  className="size-4 accent-[var(--fg)]"
+                />
                 Con diseño
               </label>
             </div>
             {personalize ? (
               <>
                 <p className="mt-1 text-[0.8125rem] text-fg-subtle">
-                  Lo ves al momento en la imagen. {touched ? "" : "Empieza escribiendo tu texto o sube tu logo."}
+                  Lo ves al momento en la imagen.{" "}
+                  {touched ? "" : "Empieza escribiendo tu texto o sube tu logo."}
                 </p>
                 <div className="mt-3">
                   <Controls compact />
@@ -248,7 +304,9 @@ export function ProductExperience({ product }: { product: Product }) {
                 </Link>
               </>
             ) : (
-              <p className="mt-2 text-[0.875rem] text-fg-muted">Sin problema: añádelo y te contactamos para preparar el diseño contigo antes de grabar.</p>
+              <p className="mt-2 text-[0.875rem] text-fg-muted">
+                Sin problema: añádelo y te contactamos para preparar el diseño contigo antes de grabar.
+              </p>
             )}
           </section>
         ) : null}
@@ -256,7 +314,11 @@ export function ProductExperience({ product }: { product: Product }) {
         <div ref={buyRef} className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <QuantityStepper value={qty} onChange={setQty} min={mf.minQuantity ?? 1} />
           {needsQuote ? (
-            <Button size="lg" className="flex-1" onClick={() => router.push(`/empresas?producto=${product.handle}&cantidad=${qty}#presupuesto`)}>
+            <Button
+              size="lg"
+              className="flex-1"
+              onClick={() => router.push(`/empresas?producto=${product.handle}&cantidad=${qty}#presupuesto`)}
+            >
               Pedir presupuesto ({qty} uds.)
             </Button>
           ) : (
@@ -266,23 +328,34 @@ export function ProductExperience({ product }: { product: Product }) {
           )}
         </div>
         {!needsQuote ? (
-          <Button variant="outline" size="lg" block className="mt-3" onClick={() => addToCart(true)} disabled={adding}>
+          <Button
+            variant="outline"
+            size="lg"
+            block
+            className="mt-3"
+            onClick={() => addToCart(true)}
+            disabled={adding}
+          >
             Comprar ahora
           </Button>
         ) : null}
 
-        <ul className="mt-8 grid gap-3 rounded-[var(--radius-lg)] bg-surface-2 p-5 text-[0.875rem]">
+        <ul className="mt-8 grid grid-cols-1 gap-3 rounded-[var(--radius-lg)] bg-surface-2 p-5 text-[0.875rem]">
           <li className="flex gap-3">
-            <Clock className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Producción en {mf.technical.productionTime}
+            <Clock className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Producción en{" "}
+            {mf.technical.productionTime}
           </li>
           <li className="flex gap-3">
-            <Truck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Envío gratis desde {formatPrice(site.demo.freeShippingThreshold)} (demo) o recogida en el taller
+            <Truck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Envío gratis desde{" "}
+            {formatPrice(site.demo.freeShippingThreshold)} (demo) o recogida en el taller
           </li>
           <li className="flex gap-3">
-            <ShieldCheck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Grabado permanente: no se borra ni se despega
+            <ShieldCheck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Grabado permanente: no se
+            borra ni se despega
           </li>
           <li className="flex gap-3">
-            <BadgeCheck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Revisamos tu diseño contigo antes de grabar
+            <BadgeCheck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Revisamos tu diseño contigo
+            antes de grabar
           </li>
         </ul>
       </div>
@@ -290,7 +363,7 @@ export function ProductExperience({ product }: { product: Product }) {
       {/* barra sticky móvil */}
       <div
         className={cn(
-          "theme-light fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/95 px-4 pt-3 backdrop-blur-xl transition-transform duration-500 ease-[var(--ease-out)] safe-bottom lg:hidden",
+          "theme-light fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/95 px-4 pt-3 safe-bottom backdrop-blur-xl transition-transform duration-500 ease-[var(--ease-out)] lg:hidden",
           showSticky ? "translate-y-0" : "translate-y-full",
         )}
         data-floating
@@ -301,7 +374,11 @@ export function ProductExperience({ product }: { product: Product }) {
             <p className="truncate text-[0.8125rem] font-semibold">{product.title}</p>
             <p className="text-[0.9375rem] font-semibold tabular-nums">{formatPrice(unit * qty)}</p>
           </div>
-          <Button tabIndex={showSticky ? 0 : -1} onClick={() => (needsQuote ? router.push("/empresas#presupuesto") : addToCart(false))} loading={adding}>
+          <Button
+            tabIndex={showSticky ? 0 : -1}
+            onClick={() => (needsQuote ? router.push("/empresas#presupuesto") : addToCart(false))}
+            loading={adding}
+          >
             {needsQuote ? "Presupuesto" : "Añadir"}
           </Button>
         </div>

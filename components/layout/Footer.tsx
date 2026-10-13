@@ -11,7 +11,7 @@ export function Footer() {
   return (
     <footer className="theme-dark grain relative overflow-hidden bg-ink text-fg">
       <div className="relative z-[2] container-x pt-20 pb-10 sm:pt-28">
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-4 text-paper" aria-label="Inicio">
               <LogoMark className="h-20" />

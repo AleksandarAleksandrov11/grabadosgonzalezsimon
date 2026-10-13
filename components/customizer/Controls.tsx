@@ -153,7 +153,7 @@ function TextPanel({ compact = false }: { compact?: boolean }) {
 
   return (
     <div className="space-y-5">
-      <div className="grid gap-3">
+      <div className="grid grid-cols-1 gap-3">
         <div>
           <label htmlFor={`${id}-l1`} className="mb-1.5 flex justify-between text-[0.8125rem] font-semibold">
             Línea 1{" "}

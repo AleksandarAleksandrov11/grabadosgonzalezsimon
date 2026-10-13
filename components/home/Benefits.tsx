@@ -114,7 +114,7 @@ export function Benefits() {
           lead="Personalización única y a medida, una amplia gama de piezas en cristal y el cuidado de un taller artesano."
         />
         <Stagger
-          className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
           stagger={0.09}
         >
           {ITEMS.map((it) => (

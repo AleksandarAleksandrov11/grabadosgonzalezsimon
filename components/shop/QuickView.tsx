@@ -46,7 +46,7 @@ function QuickViewBody({ product }: { product: Product }) {
   return (
     <>
       {
-        <div className="grid sm:grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2">
           <div className="theme-dark relative flex items-center justify-center bg-ink px-10 pt-14 pb-6 sm:rounded-l-[var(--radius-lg)] sm:py-10">
             {product.metafields.badge ? (
               <Badge tone="frost" className="absolute top-4 left-4">

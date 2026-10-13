@@ -22,7 +22,17 @@ export function Uploader({ compact = false }: { compact?: boolean }) {
     setBusy(true);
     try {
       const src = await loadImageFile(file);
-      set({ mode: "image", imageId: src.id, imageName: file.name, threshold: src.defaultThreshold, invert: false, x: 0, y: 0, scale: 1, rotation: 0 });
+      set({
+        mode: "image",
+        imageId: src.id,
+        imageName: file.name,
+        threshold: src.defaultThreshold,
+        invert: false,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+      });
       bumpImage();
     } catch (e) {
       setError(e instanceof ImageError ? e.message : "No hemos podido procesar la imagen. Prueba con otra.");
@@ -37,7 +47,17 @@ export function Uploader({ compact = false }: { compact?: boolean }) {
     const logo = DEMO_LOGOS[demoIdx % DEMO_LOGOS.length];
     try {
       const src = await loadImageUrl(logo.file, `${logo.name} (ejemplo).svg`);
-      set({ mode: "image", imageId: src.id, imageName: `${logo.name} (logo de ejemplo)`, threshold: src.defaultThreshold, invert: false, x: 0, y: 0, scale: 1, rotation: 0 });
+      set({
+        mode: "image",
+        imageId: src.id,
+        imageName: `${logo.name} (logo de ejemplo)`,
+        threshold: src.defaultThreshold,
+        invert: false,
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+      });
       bumpImage();
       setDemoIdx((n) => n + 1);
     } catch {
@@ -66,11 +86,21 @@ export function Uploader({ compact = false }: { compact?: boolean }) {
           drag ? "border-fg bg-fg/[0.06]" : "border-line-strong hover:border-fg/60",
         )}
       >
-        {busy ? <Loader2 className="size-7 animate-spin" aria-hidden="true" /> : <ImageUp className="size-7" strokeWidth={1.3} aria-hidden="true" />}
+        {busy ? (
+          <Loader2 className="size-7 animate-spin" aria-hidden="true" />
+        ) : (
+          <ImageUp className="size-7" strokeWidth={1.3} aria-hidden="true" />
+        )}
         <p className="text-[0.9375rem] font-semibold">
-          {busy ? "Procesando tu imagen…" : design.mode === "image" && design.imageName ? design.imageName : "Arrastra aquí tu logo o imagen"}
+          {busy
+            ? "Procesando tu imagen…"
+            : design.mode === "image" && design.imageName
+              ? design.imageName
+              : "Arrastra aquí tu logo o imagen"}
         </p>
-        <p className="text-[0.8125rem] text-fg-subtle">PNG, JPG, SVG o WEBP · máx. 10 MB · no se sube a ningún servidor</p>
+        <p className="text-[0.8125rem] text-fg-subtle">
+          PNG, JPG, SVG o WEBP · máx. 10 MB · no se sube a ningún servidor
+        </p>
         <button
           type="button"
           onClick={() => input.current?.click()}
@@ -91,7 +121,10 @@ export function Uploader({ compact = false }: { compact?: boolean }) {
         />
       </div>
       {error ? (
-        <p role="alert" className="rounded-[var(--radius)] border border-[#b3261e]/30 bg-[#b3261e]/5 px-3 py-2 text-[0.875rem] text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]">
+        <p
+          role="alert"
+          className="rounded-[var(--radius)] border border-[#b3261e]/30 bg-[#b3261e]/5 px-3 py-2 text-[0.875rem] text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]"
+        >
           {error}
         </p>
       ) : null}
@@ -128,11 +161,19 @@ function MaskControls() {
           onChange={(e) => set({ threshold: Number(e.target.value) }, { history: false })}
           className="range-input mt-2"
         />
-        <p className="mt-1 text-[0.75rem] text-fg-subtle">Súbelo si se pierden detalles; bájalo si aparece el fondo.</p>
+        <p className="mt-1 text-[0.75rem] text-fg-subtle">
+          Súbelo si se pierden detalles; bájalo si aparece el fondo.
+        </p>
       </div>
       <label className="flex min-h-10 cursor-pointer items-center justify-between gap-3 text-[0.875rem] font-semibold">
         Invertir (logo en negativo)
-        <input type="checkbox" role="switch" checked={design.invert} onChange={(e) => set({ invert: e.target.checked })} className="size-5 accent-[var(--fg)]" />
+        <input
+          type="checkbox"
+          role="switch"
+          checked={design.invert}
+          onChange={(e) => set({ invert: e.target.checked })}
+          className="size-5 accent-[var(--fg)]"
+        />
       </label>
     </div>
   );

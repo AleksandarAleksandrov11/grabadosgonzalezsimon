@@ -27,7 +27,7 @@ export function Intro() {
       className="theme-light relative overflow-hidden bg-paper section-y"
       aria-labelledby="intro-title"
     >
-      <div className="container-x grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+      <div className="container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           {/* revelado con clip-path */}
           <Reveal variant="clip-up" duration={1.3} className="relative">
@@ -72,7 +72,7 @@ export function Intro() {
             </div>
           </Reveal>
           <Stagger
-            className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-3"
+            className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-3"
             stagger={0.12}
           >
             {THINGS.map((t) => (

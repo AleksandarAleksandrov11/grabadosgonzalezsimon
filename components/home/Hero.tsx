@@ -35,7 +35,7 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_72%_42%,rgba(255,255,255,0.08),transparent_70%),radial-gradient(40%_40%_at_10%_90%,rgba(207,200,187,0.06),transparent_70%)]"
       />
-      <div className="relative z-[2] container-x grid flex-1 content-center items-center gap-4 pt-2 pb-20 sm:gap-6 lg:grid-cols-12 lg:gap-8 lg:pt-0 lg:pb-16">
+      <div className="relative z-[2] container-x grid flex-1 grid-cols-1 content-center items-center gap-4 pt-2 pb-20 sm:gap-6 lg:grid-cols-12 lg:gap-8 lg:pt-0 lg:pb-16">
         <div className="order-2 lg:order-1 lg:col-span-7">
           <p
             className="css-fade-up mb-5 flex items-center gap-3 eyebrow text-stone-300 sm:mb-6"

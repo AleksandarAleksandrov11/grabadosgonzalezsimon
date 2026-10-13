@@ -57,4 +57,3 @@ export function filterProducts(list: Product[], f: ProductFilters = {}): Product
   });
   return out;
 }
-

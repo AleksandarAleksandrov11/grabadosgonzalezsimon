@@ -38,7 +38,7 @@ export function CartDrawer({ giftBox }: { giftBox: LiteProduct }) {
         lines.length ? (
           <div className="space-y-4">
             <TotalsTable totals={totals} />
-            <div className="grid gap-2 pb-1">
+            <div className="grid grid-cols-1 gap-2 pb-1">
               <ButtonLink href="/checkout" onClick={close} size="lg" block data-autofocus>
                 Tramitar pedido de prueba
               </ButtonLink>
@@ -64,7 +64,7 @@ export function CartDrawer({ giftBox }: { giftBox: LiteProduct }) {
             <p className="mt-2 max-w-[28ch] text-fg-muted">
               Elige una pieza y dale tu toque: iniciales, una fecha o tu logo.
             </p>
-            <div className="mt-8 grid w-full max-w-xs gap-2">
+            <div className="mt-8 grid w-full max-w-xs grid-cols-1 gap-2">
               <ButtonLink href="/tienda" onClick={close}>
                 Ver la tienda
               </ButtonLink>

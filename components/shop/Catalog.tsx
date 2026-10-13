@@ -56,7 +56,13 @@ function parse(sp: URLSearchParams, fixedCat: CategoryHandle | null): State {
   };
 }
 
-export function Catalog({ products, fixedCategory = null }: { products: Product[]; fixedCategory?: CategoryHandle | null }) {
+export function Catalog({
+  products,
+  fixedCategory = null,
+}: {
+  products: Product[];
+  fixedCategory?: CategoryHandle | null;
+}) {
   const sp = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -108,11 +114,25 @@ export function Catalog({ products, fixedCategory = null }: { products: Product[
   const visible = results.slice(0, state.page * PAGE);
 
   const chips: { label: string; clear: () => void }[] = [];
-  if (!fixedCategory && state.cat) chips.push({ label: categories.find((c) => c.handle === state.cat)!.short, clear: () => update({ cat: null }) });
-  state.occ.forEach((o) => chips.push({ label: OCCASION_LABEL[o], clear: () => update({ occ: state.occ.filter((x) => x !== o) }) }));
+  if (!fixedCategory && state.cat)
+    chips.push({
+      label: categories.find((c) => c.handle === state.cat)!.short,
+      clear: () => update({ cat: null }),
+    });
+  state.occ.forEach((o) =>
+    chips.push({ label: OCCASION_LABEL[o], clear: () => update({ occ: state.occ.filter((x) => x !== o) }) }),
+  );
   if (state.min > 0 || state.max < PRICE_MAX)
-    chips.push({ label: `${formatPrice(state.min)} – ${formatPrice(state.max)}`, clear: () => update({ min: 0, max: PRICE_MAX }) });
-  state.pers.forEach((p) => chips.push({ label: p === "logo" ? "Con logo" : "Con texto", clear: () => update({ pers: state.pers.filter((x) => x !== p) }) }));
+    chips.push({
+      label: `${formatPrice(state.min)} – ${formatPrice(state.max)}`,
+      clear: () => update({ min: 0, max: PRICE_MAX }),
+    });
+  state.pers.forEach((p) =>
+    chips.push({
+      label: p === "logo" ? "Con logo" : "Con texto",
+      clear: () => update({ pers: state.pers.filter((x) => x !== p) }),
+    }),
+  );
   if (state.q) chips.push({ label: `«${state.q}»`, clear: () => update({ q: "" }) });
   const clearAll = () => router.replace(pathname, { scroll: false });
 
@@ -126,7 +146,10 @@ export function Catalog({ products, fixedCategory = null }: { products: Product[
       <div className="sticky top-[var(--header-h)] z-30 -mx-[var(--gutter)] border-y border-line bg-bg/92 px-[var(--gutter)] py-3 backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
           <div className="relative min-w-0 flex-1 sm:max-w-xs">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-subtle" aria-hidden="true" />
+            <Search
+              className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-fg-subtle"
+              aria-hidden="true"
+            />
             <label htmlFor="catalog-q" className="sr-only">
               Buscar en la tienda
             </label>
@@ -147,13 +170,22 @@ export function Catalog({ products, fixedCategory = null }: { products: Product[
           >
             <SlidersHorizontal className="size-4" strokeWidth={1.6} />
             Filtros
-            {chips.length ? <span className="inline-flex size-5 items-center justify-center rounded-full bg-fg text-[0.6875rem] text-bg">{chips.length}</span> : null}
+            {chips.length ? (
+              <span className="inline-flex size-5 items-center justify-center rounded-full bg-fg text-[0.6875rem] text-bg">
+                {chips.length}
+              </span>
+            ) : null}
           </button>
           <SortSelect value={state.sort} onChange={(sort) => update({ sort })} />
         </div>
         <AnimatePresence initial={false}>
           {chips.length ? (
-            <m.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+            <m.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
               <ul className="flex flex-wrap items-center gap-2 pt-3" aria-label="Filtros activos">
                 {chips.map((c) => (
                   <li key={c.label}>
@@ -168,7 +200,11 @@ export function Catalog({ products, fixedCategory = null }: { products: Product[
                   </li>
                 ))}
                 <li>
-                  <button type="button" onClick={clearAll} className="min-h-9 px-2 text-[0.8125rem] font-semibold underline underline-offset-4">
+                  <button
+                    type="button"
+                    onClick={clearAll}
+                    className="min-h-9 px-2 text-[0.8125rem] font-semibold underline underline-offset-4"
+                  >
                     Limpiar todo
                   </button>
                 </li>
@@ -189,7 +225,10 @@ export function Catalog({ products, fixedCategory = null }: { products: Product[
         <EmptyState onClear={clearAll} />
       ) : (
         <>
-          <m.ul layout className="mt-6 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+          <m.ul
+            layout
+            className="mt-6 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4"
+          >
             <AnimatePresence mode="popLayout" initial={false}>
               {visible.map((p, i) => (
                 <m.li
@@ -270,7 +309,10 @@ function SortSelect({ value, onChange }: { value: SortKey; onChange: (s: SortKey
           </option>
         ))}
       </select>
-      <ChevronDown className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2" aria-hidden="true" />
+      <ChevronDown
+        className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2"
+        aria-hidden="true"
+      />
     </div>
   );
 }
@@ -305,7 +347,13 @@ function FilterControls({
                   state.cat === c.handle ? "border-fg bg-fg text-bg" : "border-line-strong hover:border-fg",
                 )}
               >
-                <input type="radio" name={`${id}-cat`} className="sr-only" checked={state.cat === c.handle} onChange={() => update({ cat: c.handle as CategoryHandle | null })} />
+                <input
+                  type="radio"
+                  name={`${id}-cat`}
+                  className="sr-only"
+                  checked={state.cat === c.handle}
+                  onChange={() => update({ cat: c.handle as CategoryHandle | null })}
+                />
                 {c.short}
               </label>
             ))}
@@ -381,7 +429,9 @@ function FilterControls({
       <div className="space-y-7">
         {sections.map((s) => (
           <section key={s.key}>
-            <h3 className="mb-3 text-[0.8125rem] font-semibold tracking-[0.1em] text-fg-muted uppercase">{s.title}</h3>
+            <h3 className="mb-3 text-[0.8125rem] font-semibold tracking-[0.1em] text-fg-muted uppercase">
+              {s.title}
+            </h3>
             {s.body}
           </section>
         ))}
@@ -429,7 +479,11 @@ function Popover({ label, count, children }: { label: string; count: number; chi
         )}
       >
         {label}
-        {count ? <span className="inline-flex size-5 items-center justify-center rounded-full bg-fg text-[0.6875rem] text-bg">{count}</span> : null}
+        {count ? (
+          <span className="inline-flex size-5 items-center justify-center rounded-full bg-fg text-[0.6875rem] text-bg">
+            {count}
+          </span>
+        ) : null}
         <ChevronDown className={cn("size-4 transition-transform", open && "rotate-180")} />
       </button>
       <AnimatePresence>
@@ -450,7 +504,15 @@ function Popover({ label, count, children }: { label: string; count: number; chi
   );
 }
 
-function PriceRange({ min, max, onChange }: { min: number; max: number; onChange: (min: number, max: number) => void }) {
+function PriceRange({
+  min,
+  max,
+  onChange,
+}: {
+  min: number;
+  max: number;
+  onChange: (min: number, max: number) => void;
+}) {
   const [lo, setLo] = useState(min);
   const [hi, setHi] = useState(max);
   const [prev, setPrev] = useState(`${min}-${max}`);
@@ -469,7 +531,10 @@ function PriceRange({ min, max, onChange }: { min: number; max: number; onChange
       </div>
       <div className="relative mt-4 h-6">
         <div className="absolute top-1/2 h-0.5 w-full -translate-y-1/2 bg-line-strong" />
-        <div className="absolute top-1/2 h-0.5 -translate-y-1/2 bg-fg" style={{ left: `${pct(lo)}%`, right: `${100 - pct(hi)}%` }} />
+        <div
+          className="absolute top-1/2 h-0.5 -translate-y-1/2 bg-fg"
+          style={{ left: `${pct(lo)}%`, right: `${100 - pct(hi)}%` }}
+        />
         <input
           type="range"
           min={0}
@@ -503,7 +568,9 @@ function EmptyState({ onClear }: { onClear: () => void }) {
   return (
     <div className="mt-10 flex flex-col items-center rounded-[var(--radius-lg)] border border-dashed border-line-strong px-6 py-16 text-center">
       <p className="font-display text-3xl">No hemos encontrado nada así… todavía</p>
-      <p className="mt-3 max-w-md text-fg-muted">Prueba a quitar algún filtro o cuéntanos tu idea: grabamos casi cualquier pieza de cristal.</p>
+      <p className="mt-3 max-w-md text-fg-muted">
+        Prueba a quitar algún filtro o cuéntanos tu idea: grabamos casi cualquier pieza de cristal.
+      </p>
       <div className="mt-8 flex flex-wrap justify-center gap-2">
         <Button onClick={onClear}>Quitar filtros</Button>
         <ButtonLink href="/contacto" variant="outline">
@@ -513,7 +580,11 @@ function EmptyState({ onClear }: { onClear: () => void }) {
       <p className="mt-8 text-[0.875rem] text-fg-subtle">Lo más buscado:</p>
       <div className="mt-3 flex flex-wrap justify-center gap-2">
         {["copas", "vasos", "trofeos", "jarras"].map((c) => (
-          <Link key={c} href={`/tienda/${c}`} className="rounded-full border border-line-strong px-3.5 py-1.5 text-[0.875rem] hover:border-fg">
+          <Link
+            key={c}
+            href={`/tienda/${c}`}
+            className="rounded-full border border-line-strong px-3.5 py-1.5 text-[0.875rem] hover:border-fg"
+          >
             {c[0].toUpperCase() + c.slice(1)}
           </Link>
         ))}

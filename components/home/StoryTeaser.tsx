@@ -9,7 +9,7 @@ import { CountUp } from "./CountUp";
 export function StoryTeaser() {
   return (
     <section className="theme-light overflow-hidden bg-paper section-y" aria-labelledby="historia-title">
-      <div className="container-x grid items-center gap-14 lg:grid-cols-12 lg:gap-20">
+      <div className="container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1">
           <Parallax
             offset={50}

@@ -9,7 +9,7 @@ export function HomeFaq() {
   const items = faqs.filter((f) => f.home).slice(0, 5);
   return (
     <section className="theme-light border-t border-line bg-paper section-y" aria-labelledby="faq-title">
-      <div className="container-x grid gap-12 lg:grid-cols-12">
+      <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <SectionHeading
             eyebrow="Dudas frecuentes"

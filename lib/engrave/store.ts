@@ -23,7 +23,12 @@ type CustomizerState = {
   imageVersion: number;
   /** ¿el usuario ha tocado el diseño? (para decidir si añadir con diseño) */
   touched: boolean;
-  init: (opts: { glass: GlassId; productHandle?: string | null; design?: Partial<Design>; background?: PreviewBackground }) => void;
+  init: (opts: {
+    glass: GlassId;
+    productHandle?: string | null;
+    design?: Partial<Design>;
+    background?: PreviewBackground;
+  }) => void;
   /** guarda el estado actual en el historial (llamar al empezar un gesto) */
   checkpoint: () => void;
   set: (patch: Partial<Design>, opts?: { history?: boolean }) => void;
@@ -84,7 +89,8 @@ export const useCustomizer = create<CustomizerState>((set, get) => ({
     if (!future.length) return;
     set({ design: future[0], future: future.slice(1), past: [...past, design].slice(-MAX_HISTORY) });
   },
-  setGlass: (glass, productHandle) => set({ glass, ...(productHandle !== undefined ? { productHandle } : {}) }),
+  setGlass: (glass, productHandle) =>
+    set({ glass, ...(productHandle !== undefined ? { productHandle } : {}) }),
   setBackground: (background) => set({ background }),
   toggleGuides: () => set({ showGuides: !get().showGuides }),
   applyTemplate: (id) => {
@@ -102,9 +108,18 @@ const fontLabel = (f: Design["font"]) => FONT_OPTIONS.find((o) => o.id === f)?.l
 export function designAttributes(d: Design, glassLabel?: string): Attribute[] {
   const attrs: Attribute[] = [];
   if (d.mode === "text") {
-    attrs.push({ key: "Diseño", value: d.ornament !== "none" ? `Texto con ornamento (${d.ornament})` : "Texto" });
+    attrs.push({
+      key: "Diseño",
+      value: d.ornament !== "none" ? `Texto con ornamento (${d.ornament})` : "Texto",
+    });
     attrs.push({ key: "Texto", value: [d.line1.trim(), d.line2.trim()].filter(Boolean).join(" / ") || "—" });
-    attrs.push({ key: "Tipografía", value: d.line2.trim() && d.font2 !== d.font ? `${fontLabel(d.font)} + ${fontLabel(d.font2)}` : fontLabel(d.font) });
+    attrs.push({
+      key: "Tipografía",
+      value:
+        d.line2.trim() && d.font2 !== d.font
+          ? `${fontLabel(d.font)} + ${fontLabel(d.font2)}`
+          : fontLabel(d.font),
+    });
     if (d.curve !== 0) attrs.push({ key: "Curvatura", value: `${Math.round(d.curve * 100)} %` });
   } else {
     attrs.push({ key: "Diseño", value: "Logotipo / imagen" });
@@ -137,7 +152,23 @@ export function captureDesign(opts?: { width?: number; watermark?: boolean }) {
 
 /* ---------------------- compartir por URL ----------------------------- */
 
-const SHARE_KEYS: (keyof Design)[] = ["line1", "line2", "font", "font2", "line2Scale", "size", "tracking", "align", "curve", "ornament", "x", "y", "scale", "rotation", "face"];
+const SHARE_KEYS: (keyof Design)[] = [
+  "line1",
+  "line2",
+  "font",
+  "font2",
+  "line2Scale",
+  "size",
+  "tracking",
+  "align",
+  "curve",
+  "ornament",
+  "x",
+  "y",
+  "scale",
+  "rotation",
+  "face",
+];
 
 export function designToQuery(d: Design, glass: GlassId) {
   const p = new URLSearchParams();

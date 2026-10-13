@@ -46,7 +46,10 @@ export default async function CategoryPage({ params }: PageProps<"/tienda/[categ
         <nav aria-label="Categorías">
           <ul className="flex flex-wrap gap-2">
             <li>
-              <Link href="/tienda" className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-[0.875rem] text-stone-200 hover:border-paper hover:text-paper">
+              <Link
+                href="/tienda"
+                className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-[0.875rem] text-stone-200 hover:border-paper hover:text-paper"
+              >
                 Todas
               </Link>
             </li>
@@ -57,7 +60,9 @@ export default async function CategoryPage({ params }: PageProps<"/tienda/[categ
                   aria-current={k.handle === c.handle ? "page" : undefined}
                   className={cn(
                     "inline-flex min-h-11 items-center rounded-full border px-4 text-[0.875rem] transition-colors",
-                    k.handle === c.handle ? "border-paper bg-paper text-ink" : "border-white/20 text-stone-200 hover:border-paper hover:text-paper",
+                    k.handle === c.handle
+                      ? "border-paper bg-paper text-ink"
+                      : "border-white/20 text-stone-200 hover:border-paper hover:text-paper",
                   )}
                 >
                   {k.short}

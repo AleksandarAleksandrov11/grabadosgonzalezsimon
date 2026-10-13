@@ -32,7 +32,7 @@ export function QuickEngraver() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_70%_50%,rgba(255,255,255,0.07),transparent_70%)]"
       />
-      <div className="relative z-[2] container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+      <div className="relative z-[2] container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
           <SectionHeading
             eyebrow="Pruébalo aquí mismo"

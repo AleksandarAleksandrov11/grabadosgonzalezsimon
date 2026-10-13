@@ -14,7 +14,7 @@ export function FinalCTA() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_20%_40%,rgba(255,255,255,0.07),transparent_70%)]"
       />
-      <div className="relative z-[2] container-x grid gap-14 lg:grid-cols-12 lg:gap-20">
+      <div className="relative z-[2] container-x grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="lg:col-span-6">
           <Reveal variant="clip-up" duration={1.2}>
             <h2 id="cta-title" className="font-display text-display-l tracking-[-0.02em] text-paper">
@@ -26,7 +26,7 @@ export function FinalCTA() {
               Estoy a tu disposición para ayudarte en todo lo que necesites. Escríbeme, llámame o déjame un
               mensaje y te respondo tan rápido como sea posible.
             </p>
-            <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <a
                 href={whatsappLink()}
                 target="_blank"

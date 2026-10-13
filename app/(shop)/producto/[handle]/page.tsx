@@ -24,7 +24,12 @@ export async function generateMetadata({ params }: PageProps<"/producto/[handle]
   const { handle } = await params;
   const p = getProductSync(handle);
   if (!p) return {};
-  return pageMetadata({ title: p.seo.title, description: p.seo.description, path: `/producto/${p.handle}`, noIndex: p.metafields.hidden });
+  return pageMetadata({
+    title: p.seo.title,
+    description: p.seo.description,
+    path: `/producto/${p.handle}`,
+    noIndex: p.metafields.hidden,
+  });
 }
 
 export default async function ProductPage({ params }: PageProps<"/producto/[handle]">) {
@@ -34,17 +39,23 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
   const mf = product.metafields;
   const cat = categoryByHandle(mf.category);
   const all = allProducts();
-  const set = (mf.completeTheSet ?? []).map((h) => getProductSync(h)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const set = (mf.completeTheSet ?? [])
+    .map((h) => getProductSync(h))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const related = all
     .filter((p) => p.handle !== product.handle && !set.some((s) => s.handle === p.handle))
     .map((p) => ({
       p,
-      score: (p.metafields.category === mf.category ? 3 : 0) + p.tags.filter((t) => product.tags.includes(t)).length,
+      score:
+        (p.metafields.category === mf.category ? 3 : 0) +
+        p.tags.filter((t) => product.tags.includes(t)).length,
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 4)
     .map((x) => x.p);
-  const occasions = product.tags.map((t) => occasionByTag(t)).filter((o): o is NonNullable<typeof o> => Boolean(o));
+  const occasions = product.tags
+    .map((t) => occasionByTag(t))
+    .filter((o): o is NonNullable<typeof o> => Boolean(o));
   const t = mf.technical;
 
   const crumbs = [
@@ -56,7 +67,14 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
 
   return (
     <>
-      <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(crumbs.map((c) => ({ name: c.name, path: c.href ?? `/producto/${product.handle}` })))]} />
+      <JsonLd
+        data={[
+          productJsonLd(product),
+          breadcrumbJsonLd(
+            crumbs.map((c) => ({ name: c.name, path: c.href ?? `/producto/${product.handle}` })),
+          ),
+        ]}
+      />
       {/* banda oscura bajo el header */}
       <div className="theme-dark h-[calc(var(--header-h)+0.5rem)] bg-ink" aria-hidden="true" />
       <div className="theme-light bg-paper pt-6 pb-24">
@@ -64,7 +82,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
           <Breadcrumbs items={crumbs} className="mb-6" />
           <ProductExperience product={product} />
 
-          <div className="mt-20 grid gap-12 lg:grid-cols-12">
+          <div className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <h2 className="mb-4 font-display text-display-s">Todo sobre esta pieza</h2>
               <Accordion
@@ -107,11 +125,17 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
                     title: "Cuidados",
                     content: (
                       <>
-                        <p>El grabado con chorro de arena es permanente: forma parte del cristal y no se despega.</p>
                         <p>
-                          Lavado recomendado: a mano, con agua tibia y jabón neutro. <strong className="font-semibold text-fg">[VERIFICAR: ¿apto lavavajillas?]</strong>
+                          El grabado con chorro de arena es permanente: forma parte del cristal y no se
+                          despega.
                         </p>
-                        <p>Evita cambios bruscos de temperatura y estropajos abrasivos sobre la zona grabada.</p>
+                        <p>
+                          Lavado recomendado: a mano, con agua tibia y jabón neutro.{" "}
+                          <strong className="font-semibold text-fg">[VERIFICAR: ¿apto lavavajillas?]</strong>
+                        </p>
+                        <p>
+                          Evita cambios bruscos de temperatura y estropajos abrasivos sobre la zona grabada.
+                        </p>
                       </>
                     ),
                   },
@@ -120,9 +144,13 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
                     title: "Envío y devoluciones",
                     content: (
                       <>
-                        <p>Envío gratis a partir de 60 € (demo). Envío estándar 5,90 € y urgente +4,90 € (valores de ejemplo). Recogida gratuita en el taller de Madrid.</p>
                         <p>
-                          Los productos personalizados se fabrican a medida y no admiten devolución salvo defecto de fabricación o rotura en el transporte.{" "}
+                          Envío gratis a partir de 60 € (demo). Envío estándar 5,90 € y urgente +4,90 €
+                          (valores de ejemplo). Recogida gratuita en el taller de Madrid.
+                        </p>
+                        <p>
+                          Los productos personalizados se fabrican a medida y no admiten devolución salvo
+                          defecto de fabricación o rotura en el transporte.{" "}
                           {/* TODO legal: revisar condiciones de devolución con el cliente y su asesoría */}
                           <Link href="/legal/envios-y-devoluciones">Ver condiciones</Link>.
                         </p>
@@ -150,8 +178,13 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
               </ul>
               <div className="mt-8 rounded-[var(--radius-lg)] border border-line p-5">
                 <p className="font-semibold">¿Necesitas muchas unidades?</p>
-                <p className="mt-1 text-[0.9375rem] text-fg-muted">Para empresas, bodas y hostelería preparamos presupuesto con precio por volumen.</p>
-                <Link href={`/empresas?producto=${product.handle}#presupuesto`} className="mt-3 inline-flex items-center gap-1.5 text-[0.875rem] font-semibold underline underline-offset-4">
+                <p className="mt-1 text-[0.9375rem] text-fg-muted">
+                  Para empresas, bodas y hostelería preparamos presupuesto con precio por volumen.
+                </p>
+                <Link
+                  href={`/empresas?producto=${product.handle}#presupuesto`}
+                  className="mt-3 inline-flex items-center gap-1.5 text-[0.875rem] font-semibold underline underline-offset-4"
+                >
                   Pedir presupuesto <ArrowUpRight className="size-3.5" />
                 </Link>
               </div>

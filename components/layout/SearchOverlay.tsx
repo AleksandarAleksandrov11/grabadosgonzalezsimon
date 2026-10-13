@@ -139,7 +139,7 @@ export function SearchOverlay({ index }: { index: LiteProduct[] }) {
               ) : (
                 <>
                   <p className="sr-only">{results.length} resultados</p>
-                  <ul className="grid gap-2 sm:grid-cols-2">
+                  <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                     {results.map((p) => (
                       <li key={p.handle}>
                         <Link

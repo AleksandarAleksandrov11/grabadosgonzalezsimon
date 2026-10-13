@@ -13,7 +13,15 @@ import { clamp, cn } from "@/lib/utils";
  * Escenario del personalizador: [cristal trasero] [grabado en canvas] [reflejos].
  * Se arrastra para mover, se pellizca para escalar/rotar y responde al teclado.
  */
-export function Stage({ className, compact = false, label = "Vista previa del grabado" }: { className?: string; compact?: boolean; label?: string }) {
+export function Stage({
+  className,
+  compact = false,
+  label = "Vista previa del grabado",
+}: {
+  className?: string;
+  compact?: boolean;
+  label?: string;
+}) {
   const { glass, design, background, showGuides, imageVersion } = useCustomizer();
   const set = useCustomizer((s) => s.set);
   const checkpoint = useCustomizer((s) => s.checkpoint);
@@ -85,7 +93,14 @@ export function Stage({ className, compact = false, label = "Vista previa del gr
 
   /* ----------------------------- gestos ------------------------------ */
   const pointers = useRef(new Map<number, { x: number; y: number }>());
-  const gesture = useRef<{ x: number; y: number; scale: number; rotation: number; dist: number; angle: number } | null>(null);
+  const gesture = useRef<{
+    x: number;
+    y: number;
+    scale: number;
+    rotation: number;
+    dist: number;
+    angle: number;
+  } | null>(null);
 
   const zonePx = () => {
     const r = wrap.current!.getBoundingClientRect();
@@ -107,7 +122,10 @@ export function Stage({ className, compact = false, label = "Vista previa del gr
       dist: pts.length > 1 ? Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) : 0,
       angle: pts.length > 1 ? Math.atan2(pts[1].y - pts[0].y, pts[1].x - pts[0].x) : 0,
     };
-    (gesture.current as unknown as { start: { x: number; y: number } }).start = { x: e.clientX, y: e.clientY };
+    (gesture.current as unknown as { start: { x: number; y: number } }).start = {
+      x: e.clientX,
+      y: e.clientY,
+    };
   };
 
   const moveRaf = useRef(0);
@@ -169,7 +187,9 @@ export function Stage({ className, compact = false, label = "Vista previa del gr
       e.preventDefault();
       fn();
       const nd = useCustomizer.getState().design;
-      setStatus(`Posición ${Math.round(nd.x * 100)}, ${Math.round(nd.y * 100)} · escala ${Math.round(nd.scale * 100)} %`);
+      setStatus(
+        `Posición ${Math.round(nd.x * 100)}, ${Math.round(nd.y * 100)} · escala ${Math.round(nd.scale * 100)} %`,
+      );
     }
   };
 
@@ -204,7 +224,10 @@ export function Stage({ className, compact = false, label = "Vista previa del gr
           <canvas
             ref={canvas}
             aria-hidden="true"
-            className={cn("absolute transition-opacity duration-300", tone === "dark" ? "mix-blend-screen" : "mix-blend-multiply")}
+            className={cn(
+              "absolute transition-opacity duration-300",
+              tone === "dark" ? "mix-blend-screen" : "mix-blend-multiply",
+            )}
             style={{
               left: pct(zone.x, 400),
               top: pct(zone.y, 500),
@@ -219,9 +242,14 @@ export function Stage({ className, compact = false, label = "Vista previa del gr
             <div
               aria-hidden="true"
               className="pointer-events-none absolute border border-dashed border-champagne/80"
-              style={{ left: pct(zone.x, 400), top: pct(zone.y, 500), width: pct(zone.w, 400), height: pct(zone.h, 500) }}
+              style={{
+                left: pct(zone.x, 400),
+                top: pct(zone.y, 500),
+                width: pct(zone.w, 400),
+                height: pct(zone.h, 500),
+              }}
             >
-              <span className="absolute -top-6 left-0 rounded-sm bg-champagne/90 px-1.5 py-0.5 text-[0.625rem] font-semibold tracking-[0.06em] text-ink uppercase">
+              <span className="absolute -top-6 left-0 rounded-sm bg-champagne/90 px-1.5 py-0.5 text-[0.625rem] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase">
                 Zona grabable
               </span>
             </div>

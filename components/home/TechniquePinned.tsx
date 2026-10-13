@@ -154,7 +154,7 @@ function Stepper() {
         <ol className="mt-12 space-y-14">
           {TECHNIQUE_STEPS.map((s, i) => (
             <li key={s.title}>
-              <Reveal variant="up" className="grid items-center gap-6 sm:grid-cols-2">
+              <Reveal variant="up" className="grid grid-cols-1 items-center gap-6 sm:grid-cols-2">
                 <TechniqueVisual step={i} className="mx-auto w-full max-w-[240px] sm:max-w-[300px]" />
                 <div>
                   <p className="flex items-baseline gap-3">

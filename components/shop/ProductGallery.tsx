@@ -19,7 +19,15 @@ type Slide =
  * grabado de ejemplo y fotos reales. Zoom al pasar el ratón (escritorio) y
  * swipe en móvil.
  */
-export function ProductGallery({ product, live, className }: { product: Product; live?: ReactNode; className?: string }) {
+export function ProductGallery({
+  product,
+  live,
+  className,
+}: {
+  product: Product;
+  live?: ReactNode;
+  className?: string;
+}) {
   const mf = product.metafields;
   const slides: Slide[] = [
     ...(live ? [{ kind: "live" as const, label: "Tu diseño" }] : []),
@@ -27,7 +35,14 @@ export function ProductGallery({ product, live, className }: { product: Product;
     { kind: "illus", tone: "light", engraved: Boolean(mf.sampleEngraving), label: "Sobre fondo claro" },
     { kind: "illus", tone: "dark", engraved: false, label: "Sin grabar" },
     // TODO: fotos reales del cliente por producto (rellenar `images` en data/products.ts)
-    ...product.images.map((img) => ({ kind: "photo" as const, src: img.url, alt: img.altText, w: img.width, h: img.height, label: "Foto real" })),
+    ...product.images.map((img) => ({
+      kind: "photo" as const,
+      src: img.url,
+      alt: img.altText,
+      w: img.width,
+      h: img.height,
+      label: "Foto real",
+    })),
   ];
   const [i, setI] = useState(0);
   const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
@@ -51,7 +66,13 @@ export function ProductGallery({ product, live, className }: { product: Product;
         }}
       >
         <AnimatePresence mode="wait" initial={false}>
-          <m.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+          <m.div
+            key={i}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
             {cur.kind === "live" ? (
               live
             ) : (
@@ -64,13 +85,18 @@ export function ProductGallery({ product, live, className }: { product: Product;
                 onPointerMove={(e) => {
                   if (e.pointerType !== "mouse") return;
                   const r = e.currentTarget.getBoundingClientRect();
-                  setZoom({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+                  setZoom({
+                    x: ((e.clientX - r.left) / r.width) * 100,
+                    y: ((e.clientY - r.top) / r.height) * 100,
+                  });
                 }}
                 onPointerLeave={() => setZoom(null)}
               >
                 <div
                   className="absolute inset-0 transition-transform duration-300 ease-out"
-                  style={zoom ? { transform: "scale(1.9)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
+                  style={
+                    zoom ? { transform: "scale(1.9)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined
+                  }
                 >
                   {cur.kind === "illus" ? (
                     <div className="absolute inset-[4%]">
@@ -83,7 +109,13 @@ export function ProductGallery({ product, live, className }: { product: Product;
                       />
                     </div>
                   ) : (
-                    <Image src={cur.src} alt={cur.alt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
+                    <Image
+                      src={cur.src}
+                      alt={cur.alt}
+                      fill
+                      sizes="(min-width: 1024px) 55vw, 100vw"
+                      className="object-cover"
+                    />
                   )}
                 </div>
                 <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-black/50 px-2.5 py-1 text-[0.6875rem] font-semibold text-paper backdrop-blur">
@@ -94,11 +126,11 @@ export function ProductGallery({ product, live, className }: { product: Product;
           </m.div>
         </AnimatePresence>
         {slides.length > 1 ? (
-          <div className="pointer-events-none absolute inset-x-2 top-1/2 flex -translate-y-1/2 justify-between">
+          <div className="gallery-arrows pointer-events-none absolute inset-x-2 top-1/2 flex -translate-y-1/2 justify-between">
             <button
               type="button"
               onClick={() => go(-1)}
-              className="pointer-events-auto tap inline-flex items-center justify-center rounded-full bg-black/35 text-paper backdrop-blur hover:bg-black/55"
+              className="pointer-events-auto inline-flex tap items-center justify-center rounded-full bg-black/35 text-paper backdrop-blur hover:bg-black/55"
               aria-label="Imagen anterior"
             >
               <ChevronLeft className="size-5" />
@@ -106,7 +138,7 @@ export function ProductGallery({ product, live, className }: { product: Product;
             <button
               type="button"
               onClick={() => go(1)}
-              className="pointer-events-auto tap inline-flex items-center justify-center rounded-full bg-black/35 text-paper backdrop-blur hover:bg-black/55"
+              className="pointer-events-auto inline-flex tap items-center justify-center rounded-full bg-black/35 text-paper backdrop-blur hover:bg-black/55"
               aria-label="Imagen siguiente"
             >
               <ChevronRight className="size-5" />
@@ -114,7 +146,10 @@ export function ProductGallery({ product, live, className }: { product: Product;
           </div>
         ) : null}
       </div>
-      <ul className="scrollbar-none flex gap-2 overflow-x-auto" aria-label="Imágenes del producto">
+      <ul
+        className="gallery-thumbs scrollbar-none flex gap-2 overflow-x-auto"
+        aria-label="Imágenes del producto"
+      >
         {slides.map((s, k) => (
           <li key={k} className="shrink-0">
             <button
@@ -127,15 +162,27 @@ export function ProductGallery({ product, live, className }: { product: Product;
                 k === i ? "border-fg" : "border-transparent opacity-70 hover:opacity-100",
               )}
             >
-              <span className={cn("block aspect-[4/5]", s.kind === "illus" && s.tone === "light" ? "bg-[#efeee9]" : "bg-ink")}>
+              <span
+                className={cn(
+                  "block aspect-[4/5]",
+                  s.kind === "illus" && s.tone === "light" ? "bg-[#efeee9]" : "bg-ink",
+                )}
+              >
                 {s.kind === "photo" ? (
                   <Image src={s.src} alt="" fill sizes="80px" className="object-cover" />
                 ) : (
-                  <Glass id={mf.illustration} tone={s.kind === "illus" ? s.tone : "dark"} engraving={s.kind === "illus" && s.engraved ? mf.sampleEngraving : null} className="size-full p-1" />
+                  <Glass
+                    id={mf.illustration}
+                    tone={s.kind === "illus" ? s.tone : "dark"}
+                    engraving={s.kind === "illus" && s.engraved ? mf.sampleEngraving : null}
+                    className="size-full p-1"
+                  />
                 )}
               </span>
               {s.kind === "live" ? (
-                <span className="absolute inset-x-0 bottom-0 bg-champagne py-0.5 text-center text-[0.5625rem] font-bold tracking-[0.06em] text-ink uppercase">Tu diseño</span>
+                <span className="absolute inset-x-0 bottom-0 bg-champagne py-0.5 text-center text-[0.5625rem] font-bold tracking-[0.06em] text-ink uppercase">
+                  Tu diseño
+                </span>
               ) : null}
             </button>
           </li>

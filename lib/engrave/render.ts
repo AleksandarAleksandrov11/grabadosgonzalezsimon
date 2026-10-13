@@ -39,7 +39,7 @@ function noise() {
   // ruido con algo de agrupación (granos de arena de 1–2 px)
   for (let i = 0; i < img.data.length; i += 4) {
     const r = Math.random();
-    const v = r < 0.55 ? 0 : r < 0.85 ? 90 : 200;
+    const v = r < 0.6 ? 0 : r < 0.9 ? 70 : 170;
     img.data[i] = img.data[i + 1] = img.data[i + 2] = 0;
     img.data[i + 3] = v;
   }
@@ -262,7 +262,7 @@ function warpCylinder(src: HTMLCanvasElement, curvature: number, out: HTMLCanvas
 function frost(ctx: CanvasRenderingContext2D, W: number, H: number, tone: GlassTone, grain = 1) {
   // grano: elimina alfa de forma aleatoria (arena)
   ctx.globalCompositeOperation = "destination-out";
-  ctx.globalAlpha = 0.42 * grain;
+  ctx.globalAlpha = 0.3 * grain;
   const pat = ctx.createPattern(noise(), "repeat");
   if (pat) {
     ctx.fillStyle = pat;
@@ -439,7 +439,10 @@ export async function composePreview({
   const gw = W - ox * 2;
   const gh = H - oy * 2;
   const k = gw / 400;
-  const [back, front] = await Promise.all([svgToImage(backSvg, Math.round(gw), Math.round(gh)), svgToImage(frontSvg, Math.round(gw), Math.round(gh))]);
+  const [back, front] = await Promise.all([
+    svgToImage(backSvg, Math.round(gw), Math.round(gh)),
+    svgToImage(frontSvg, Math.round(gw), Math.round(gh)),
+  ]);
   ctx.drawImage(back, ox, oy, gw, gh);
   if (engraving && engraving.width > 1) {
     const z = PIECES[glass].zone;

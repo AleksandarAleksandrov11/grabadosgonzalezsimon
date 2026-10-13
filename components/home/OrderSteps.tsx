@@ -72,7 +72,7 @@ export function OrderSteps() {
               transition={{ duration: 1.6, ease: [0.65, 0, 0.35, 1] }}
             />
           </svg>
-          <ol className="relative grid gap-10 lg:grid-cols-4 lg:gap-6">
+          <ol className="relative grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-6">
             {STEPS.map((s, i) => (
               <m.li
                 key={s.title}

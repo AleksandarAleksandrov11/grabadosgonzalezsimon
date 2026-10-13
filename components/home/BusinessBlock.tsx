@@ -21,7 +21,7 @@ export function BusinessBlock() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_50%_at_30%_60%,rgba(255,255,255,0.07),transparent_70%)]"
       />
-      <div className="relative z-[2] container-x grid items-center gap-14 lg:grid-cols-12">
+      <div className="relative z-[2] container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-12">
         <div className="order-2 lg:order-1 lg:col-span-7">
           <Stagger className="grid grid-cols-3 items-end gap-2 sm:gap-6" stagger={0.15}>
             {[
