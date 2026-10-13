@@ -393,15 +393,19 @@ html.lenis body {
   left: 0.75rem;
   z-index: 100;
   transform: translateY(-200%);
+  opacity: 0;
   background: var(--paper);
   color: var(--ink);
   padding: 0.75rem 1rem;
   font-weight: 600;
   border-radius: var(--radius);
-  transition: transform 0.2s var(--ease-out);
+  transition:
+    transform 0.2s var(--ease-out),
+    opacity 0.2s;
 }
 .skip-link:focus {
   transform: translateY(0);
+  opacity: 1;
 }
 
 /* Reflejo que recorre los botones (luz sobre cristal) */
@@ -541,6 +545,11 @@ html.lenis body {
     --fg-subtle: #555;
     --line: #ccc;
     background: #fff !important;
+    color: #000 !important;
+  }
+  .theme-dark .text-paper,
+  .theme-dark .text-stone-300,
+  .theme-dark .text-champagne {
     color: #000 !important;
   }
   a {

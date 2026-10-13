@@ -33,7 +33,7 @@ export function PaymentIcons({ className }: { className?: string }) {
       {items.map((t) => (
         <li
           key={t}
-          className="inline-flex h-7 items-center gap-1.5 rounded-[4px] border border-white/15 px-2.5 text-[0.6875rem] font-semibold tracking-[0.04em] text-stone-300"
+          className="inline-flex h-7 items-center gap-1.5 rounded-[4px] border border-line-strong px-2.5 text-[0.6875rem] font-semibold tracking-[0.04em] text-fg-muted"
         >
           {t === "Tarjeta" ? (
             <svg

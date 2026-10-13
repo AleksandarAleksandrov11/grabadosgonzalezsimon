@@ -54,10 +54,33 @@ export function plural(n: number, one: string, many: string) {
 
 const dateFmt = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "long", year: "numeric" });
 export function formatDate(d: string | number | Date) {
+  // «AAAA-MM-DD» se interpreta como fecha local (no UTC) para no restar un día
+  if (typeof d === "string" && /^\d{4}-\d{2}-\d{2}$/.test(d)) {
+    const [y, m, day] = d.split("-").map(Number);
+    return dateFmt.format(new Date(y, m - 1, day));
+  }
   return dateFmt.format(new Date(d));
 }
 
 /** IDs válidos para SVG a partir de React.useId() */
 export function svgId(id: string) {
   return id.replace(/[^a-zA-Z0-9_-]/g, "");
+}
+
+/** Suma días laborables (lunes a viernes) a una fecha. */
+export function addBusinessDays(from: Date, days: number) {
+  const d = new Date(from);
+  let left = days;
+  while (left > 0) {
+    d.setDate(d.getDate() + 1);
+    const wd = d.getDay();
+    if (wd !== 0 && wd !== 6) left--;
+  }
+  return d;
+}
+
+/** Fecha local en formato AAAA-MM-DD (para inputs type="date"). */
+export function toISODate(d: Date) {
+  const p = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }

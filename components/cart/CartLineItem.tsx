@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Trash2 } from "lucide-react";
+import { Copy, Trash2 } from "lucide-react";
 import { Glass } from "@/components/glassware/Glass";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { lineTotal, tierFor, unitPriceFor } from "@/lib/commerce/pricing";
 import type { CartLine } from "@/lib/commerce/types";
-import { useCart } from "@/lib/store/cart";
+import { designToQuery } from "@/lib/engrave/store";
+import type { Design } from "@/lib/engrave/types";
+import { attr, useCart } from "@/lib/store/cart";
 import { toast } from "@/lib/store/toast";
 import { cn, formatPrice } from "@/lib/utils";
 
@@ -41,6 +43,21 @@ export function LineThumb({
       )}
     </div>
   );
+}
+
+/** Enlace al estudio con el mismo diseño de texto (las imágenes no se guardan en el carrito). */
+function reuseHref(line: CartLine) {
+  const raw = attr(line.attributes, "_design");
+  if (!raw) return null;
+  try {
+    const d = JSON.parse(raw) as Design;
+    if (d.mode !== "text") return null;
+    const q = new URLSearchParams(designToQuery(d, line.illustration));
+    q.delete("pieza");
+    return `/personaliza?${q.toString()}`;
+  } catch {
+    return null;
+  }
 }
 
 export function CartLineItem({ line, compact = false }: { line: CartLine; compact?: boolean }) {
@@ -109,6 +126,14 @@ export function CartLineItem({ line, compact = false }: { line: CartLine; compac
             <Trash2 className="size-4" strokeWidth={1.5} />
           </button>
         </div>
+        {!compact && reuseHref(line) ? (
+          <Link
+            href={reuseHref(line)!}
+            className="mt-2 inline-flex items-center gap-1.5 self-start text-[0.8125rem] font-semibold underline-offset-4 hover:underline"
+          >
+            <Copy className="size-3.5" strokeWidth={1.6} /> Usar este diseño en otra pieza
+          </Link>
+        ) : null}
         {line.minQuantity && line.minQuantity > 1 ? (
           <p className="mt-1 text-[0.75rem] text-fg-subtle">Pedido mínimo: {line.minQuantity} uds.</p>
         ) : null}

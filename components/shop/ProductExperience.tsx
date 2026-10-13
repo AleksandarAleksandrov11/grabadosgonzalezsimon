@@ -90,14 +90,12 @@ export function ProductExperience({ product }: { product: Product }) {
   // inicializar el personalizador con la pieza del producto
   useEffect(() => {
     if (!canPersonalize) return;
-    useCustomizer
-      .getState()
-      .init({
-        glass,
-        productHandle: product.handle,
-        design: initialDesign(mf.sampleEngraving),
-        background: "negro",
-      });
+    useCustomizer.getState().init({
+      glass,
+      productHandle: product.handle,
+      design: initialDesign(mf.sampleEngraving),
+      background: "negro",
+    });
     useCustomizer.setState({ touched: false });
   }, [canPersonalize, glass, product.handle, mf.sampleEngraving]);
 

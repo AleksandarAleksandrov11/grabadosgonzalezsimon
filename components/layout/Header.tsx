@@ -76,7 +76,9 @@ export function Header() {
     <header
       className={cn(
         "theme-dark sticky top-0 z-50 h-[var(--header-h)] text-fg transition-[transform,background-color,border-color] duration-500 ease-[var(--ease-out)]",
-        hidden && !megaOpen && !menuOpen ? "-translate-y-full" : "translate-y-0",
+        hidden && !megaOpen && !menuOpen && !pathname.startsWith("/checkout")
+          ? "-translate-y-full"
+          : "translate-y-0",
         solid
           ? "border-b border-white/10 bg-ink/72 backdrop-blur-xl backdrop-saturate-150"
           : "border-b border-transparent bg-transparent",
