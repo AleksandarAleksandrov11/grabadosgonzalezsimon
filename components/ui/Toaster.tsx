@@ -12,7 +12,7 @@ export function Toaster() {
     <div
       aria-live="polite"
       aria-atomic="false"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[85] flex flex-col items-center gap-2 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:items-end sm:pr-6"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[85] flex flex-col items-center gap-2 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] sm:top-auto sm:right-auto sm:bottom-0 sm:items-start sm:pt-0 sm:pb-6 sm:pl-6"
       data-floating
     >
       <AnimatePresence initial={false}>

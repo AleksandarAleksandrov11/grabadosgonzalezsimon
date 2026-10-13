@@ -555,15 +555,4 @@ export const occasions: Occasion[] = [
 export const occasionBySlug = (slug: string) => occasions.find((o) => o.slug === slug) ?? null;
 export const occasionByTag = (tag: string) => occasions.find((o) => o.tag === tag) ?? null;
 
-export const OCCASION_LABEL: Record<OccasionTag, string> = {
-  boda: "Bodas",
-  comunion: "Comuniones",
-  bautizo: "Bautizos",
-  aniversario: "Aniversarios",
-  regalo: "Regalos",
-  empresa: "Empresas",
-  hosteleria: "Hostelería",
-  trofeo: "Trofeos",
-  jubilacion: "Jubilaciones",
-  navidad: "Navidad",
-};
+export { OCCASION_LABEL } from "./occasion-labels";

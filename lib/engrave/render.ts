@@ -412,6 +412,8 @@ export async function composePreview({
   background,
   width = 800,
   watermark = true,
+  mirrored = false,
+  inset = 0.04,
 }: {
   backSvg: SVGSVGElement;
   frontSvg: SVGSVGElement;
@@ -420,6 +422,10 @@ export async function composePreview({
   background: PreviewBackground;
   width?: number;
   watermark?: boolean;
+  /** cara trasera: grabado visto a través del cristal */
+  mirrored?: boolean;
+  /** margen interior del cristal dentro del lienzo (igual que en el escenario) */
+  inset?: number;
 }) {
   const W = width;
   const H = Math.round(width * 1.25);
@@ -428,17 +434,31 @@ export async function composePreview({
   c.height = H;
   const ctx = c.getContext("2d")!;
   paintBackground(ctx, background, W, H);
-  const k = W / 400;
-  const [back, front] = await Promise.all([svgToImage(backSvg, W, H), svgToImage(frontSvg, W, H)]);
-  ctx.drawImage(back, 0, 0, W, H);
-  if (engraving) {
+  const ox = W * inset;
+  const oy = H * inset;
+  const gw = W - ox * 2;
+  const gh = H - oy * 2;
+  const k = gw / 400;
+  const [back, front] = await Promise.all([svgToImage(backSvg, Math.round(gw), Math.round(gh)), svgToImage(frontSvg, Math.round(gw), Math.round(gh))]);
+  ctx.drawImage(back, ox, oy, gw, gh);
+  if (engraving && engraving.width > 1) {
     const z = PIECES[glass].zone;
     const tone = BACKGROUNDS.find((b) => b.id === background)!.tone;
+    ctx.save();
     ctx.globalCompositeOperation = tone === "dark" ? "screen" : "multiply";
-    ctx.drawImage(engraving, z.x * k, z.y * k, z.w * k, z.h * k);
-    ctx.globalCompositeOperation = "source-over";
+    const zx = ox + z.x * k;
+    const zy = oy + z.y * k;
+    const zw = z.w * k;
+    const zh = z.h * k;
+    if (mirrored) {
+      ctx.globalAlpha = 0.55;
+      ctx.translate(zx + zw / 2, zy + zh / 2);
+      ctx.scale(-0.94, 0.94);
+      ctx.drawImage(engraving, -zw / 2, -zh / 2, zw, zh);
+    } else ctx.drawImage(engraving, zx, zy, zw, zh);
+    ctx.restore();
   }
-  ctx.drawImage(front, 0, 0, W, H);
+  ctx.drawImage(front, ox, oy, gw, gh);
   if (watermark) {
     const dark = background === "negro";
     ctx.font = `600 ${Math.round(W * 0.018)}px system-ui, sans-serif`;
