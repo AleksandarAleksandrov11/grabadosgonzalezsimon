@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { BadgeCheck, Clock, PenLine, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
-import { Glass } from "@/components/glassware/Glass";
 import { ProductGallery } from "./ProductGallery";
 import { VariantPicker } from "./VariantPicker";
 import { VolumePricing } from "./VolumePricing";
