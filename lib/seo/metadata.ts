@@ -13,7 +13,14 @@ type PageMetaInput = {
 };
 
 /** Metadata coherente por página: title, description, canonical, OG y Twitter. */
-export function pageMetadata({ title, description, path, image, noIndex, absoluteTitle }: PageMetaInput): Metadata {
+export function pageMetadata({
+  title,
+  description,
+  path,
+  image,
+  noIndex,
+  absoluteTitle,
+}: PageMetaInput): Metadata {
   const url = path === "/" ? "/" : path;
   return {
     title: absoluteTitle ? { absolute: title } : title,

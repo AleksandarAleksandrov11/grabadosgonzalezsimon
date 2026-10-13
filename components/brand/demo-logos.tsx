@@ -7,9 +7,24 @@
 export type DemoLogoId = "bodega" | "club" | "cafe";
 
 export const DEMO_LOGOS: { id: DemoLogoId; name: string; file: string; description: string }[] = [
-  { id: "bodega", name: "Bodega Ejemplo", file: "/images/demo-logos/bodega-ejemplo.svg", description: "Sello circular con racimo" },
-  { id: "club", name: "Club Deportivo Demo", file: "/images/demo-logos/club-deportivo-demo.svg", description: "Escudo deportivo" },
-  { id: "cafe", name: "Café Muestra", file: "/images/demo-logos/cafe-muestra.svg", description: "Logotipo de cafetería" },
+  {
+    id: "bodega",
+    name: "Bodega Ejemplo",
+    file: "/images/demo-logos/bodega-ejemplo.svg",
+    description: "Sello circular con racimo",
+  },
+  {
+    id: "club",
+    name: "Club Deportivo Demo",
+    file: "/images/demo-logos/club-deportivo-demo.svg",
+    description: "Escudo deportivo",
+  },
+  {
+    id: "cafe",
+    name: "Café Muestra",
+    file: "/images/demo-logos/cafe-muestra.svg",
+    description: "Logotipo de cafetería",
+  },
 ];
 
 const BODEGA =

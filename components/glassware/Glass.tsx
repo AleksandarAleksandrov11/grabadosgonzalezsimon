@@ -67,6 +67,8 @@ type Props = {
   title?: string;
   /** muestra la zona grabable (guía) */
   showZone?: boolean;
+  /** clases para el grupo del grabado (p. ej. aparecer al hover) */
+  engravingClassName?: string;
   children?: ReactNode;
 };
 
@@ -124,6 +126,7 @@ export function Glass({
   className,
   title,
   showZone,
+  engravingClassName,
   children,
 }: Props) {
   const uid = svgId(useId());
@@ -138,7 +141,17 @@ export function Glass({
       focusable="false"
     >
       <Defs uid={uid} pal={pal} tone={tone} />
-      <Piece id={id} uid={uid} kid={uid} pal={pal} tone={tone} layer={layer} engraving={engraving} showZone={showZone} />
+      <Piece
+        id={id}
+        uid={uid}
+        kid={uid}
+        pal={pal}
+        tone={tone}
+        layer={layer}
+        engraving={engraving}
+        showZone={showZone}
+        engravingClassName={engravingClassName}
+      />
       {children}
     </svg>
   );
@@ -154,6 +167,7 @@ function Piece({
   layer,
   engraving,
   showZone,
+  engravingClassName,
 }: {
   id: GlassId;
   /** prefijo de los <defs> compartidos */
@@ -165,6 +179,7 @@ function Piece({
   layer: GlassLayer;
   engraving?: StaticEngraving | null;
   showZone?: boolean;
+  engravingClassName?: string;
 }) {
   const spec = PIECES[id];
   const back = layer === "all" || layer === "back";
@@ -180,7 +195,16 @@ function Piece({
               it.rotate ?? 0
             }) translate(${-CX} ${-GROUND})`}
           >
-            <Piece id={it.id} uid={uid} kid={`${kid}c${i}`} pal={pal} tone={tone} layer={layer} engraving={engraving} />
+            <Piece
+              id={it.id}
+              uid={uid}
+              kid={`${kid}c${i}`}
+              pal={pal}
+              tone={tone}
+              layer={layer}
+              engraving={engraving}
+              engravingClassName={engravingClassName}
+            />
           </g>
         ))}
       </g>
@@ -194,7 +218,11 @@ function Piece({
       {back && spec.kind === "vessel" && <VesselBack spec={spec} uid={uid} pal={pal} />}
       {back && spec.kind === "stem" && <StemBack spec={spec} uid={uid} pal={pal} />}
       {back && spec.kind === "panel" && <PanelBack spec={spec} uid={uid} pal={pal} tone={tone} />}
-      {layer === "all" && engraving ? <EngravingArt id={id} uid={uid} kid={kid} pal={pal} art={engraving} /> : null}
+      {layer === "all" && engraving ? (
+        <g className={engravingClassName}>
+          <EngravingArt id={id} uid={uid} kid={kid} pal={pal} art={engraving} />
+        </g>
+      ) : null}
       {showZone ? <ZoneGuide id={id} /> : null}
       {front && spec.kind === "vessel" && <VesselFront spec={spec} uid={uid} pal={pal} tone={tone} />}
       {front && spec.kind === "stem" && <StemFront spec={spec} uid={uid} pal={pal} tone={tone} />}
@@ -362,7 +390,13 @@ function VesselBack({ spec, uid, pal }: { spec: VesselSpec; uid: string; pal: Pa
       />
       <path d={basePath} fill={`url(#${uid}-base)`} />
       {/* boca (mitad trasera) */}
-      <path d={arc(CX, top, rTop, rTop * PERSP, "back")} fill="none" stroke={S} strokeOpacity={pal.rimBack} strokeWidth="1.2" />
+      <path
+        d={arc(CX, top, rTop, rTop * PERSP, "back")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.rimBack}
+        strokeWidth="1.2"
+      />
       <path
         d={arc(CX, top + 1.5, rTop - spec.wall * 0.8, (rTop - spec.wall * 0.8) * PERSP, "back")}
         fill="none"
@@ -390,16 +424,48 @@ function VesselFront({ spec, uid, pal, tone }: { spec: VesselSpec; uid: string; 
   return (
     <g>
       {/* contorno */}
-      <path d={left} fill="none" stroke={S} strokeOpacity={pal.edge} strokeWidth="1.5" strokeLinecap="round" />
-      <path d={right} fill="none" stroke={S} strokeOpacity={pal.edge} strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d={left}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d={right}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
       {tone === "light" ? (
         <>
-          <path d={offsetSide(p, -1, 2, top + 4, bot - 3)} fill="none" stroke="#fff" strokeOpacity="0.9" strokeWidth="1" />
-          <path d={offsetSide(p, 1, 2, top + 4, bot - 3)} fill="none" stroke="#fff" strokeOpacity="0.7" strokeWidth="1" />
+          <path
+            d={offsetSide(p, -1, 2, top + 4, bot - 3)}
+            fill="none"
+            stroke="#fff"
+            strokeOpacity="0.9"
+            strokeWidth="1"
+          />
+          <path
+            d={offsetSide(p, 1, 2, top + 4, bot - 3)}
+            fill="none"
+            stroke="#fff"
+            strokeOpacity="0.7"
+            strokeWidth="1"
+          />
         </>
       ) : null}
       {/* base */}
-      <path d={arc(CX, bot, rBot, rBot * PERSP, "front")} fill="none" stroke={S} strokeOpacity={pal.edge} strokeWidth="1.4" />
+      <path
+        d={arc(CX, bot, rBot, rBot * PERSP, "front")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.4"
+      />
       <path
         d={arc(CX, bot - 4, rBot * 0.92, rBot * 0.92 * PERSP, "front")}
         fill="none"
@@ -414,7 +480,13 @@ function VesselFront({ spec, uid, pal, tone }: { spec: VesselSpec; uid: string; 
       <path d={band(p, 0.76, 0.88, hlTop + 10, hlBot - 4)} fill={`url(#${uid}-hls)`} />
       <path d={band(p, 0.84, 0.88, hlTop + 18, top + h * 0.62)} fill={`url(#${uid}-hl)`} opacity="0.75" />
       {/* boca (mitad delantera) */}
-      <path d={arc(CX, top, rTop, rTop * PERSP, "front")} fill="none" stroke={S} strokeOpacity={pal.rimFront} strokeWidth="1.6" />
+      <path
+        d={arc(CX, top, rTop, rTop * PERSP, "front")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.rimFront}
+        strokeWidth="1.6"
+      />
       <path
         d={arc(CX, top + 2.2, rTop - 1.5, (rTop - 1.5) * PERSP, "front")}
         fill="none"
@@ -423,7 +495,14 @@ function VesselFront({ spec, uid, pal, tone }: { spec: VesselSpec; uid: string; 
         strokeWidth="0.9"
       />
       {/* destello en el borde */}
-      <ellipse cx={CX - rTop * 0.55} cy={top + rTop * PERSP * 0.83} rx={rTop * 0.14} ry="1.4" fill="#fff" opacity={tone === "dark" ? 0.75 : 0.95} />
+      <ellipse
+        cx={CX - rTop * 0.55}
+        cy={top + rTop * PERSP * 0.83}
+        rx={rTop * 0.14}
+        ry="1.4"
+        fill="#fff"
+        opacity={tone === "dark" ? 0.75 : 0.95}
+      />
       {spec.handle ? <Handle spec={spec} p={p} pal={pal} uid={uid} part="front" /> : null}
       {spec.spout ? <Spout p={p} pal={pal} uid={uid} /> : null}
     </g>
@@ -503,15 +582,43 @@ function Handle({
   if (part === "back") {
     return (
       <g>
-        <path d={d} fill="none" stroke={pal.bodyColor} strokeOpacity={0.09} strokeWidth="22" strokeLinecap="round" />
+        <path
+          d={d}
+          fill="none"
+          stroke={pal.bodyColor}
+          strokeOpacity={0.09}
+          strokeWidth="22"
+          strokeLinecap="round"
+        />
       </g>
     );
   }
   return (
     <g>
-      <path d={d} fill="none" stroke={pal.stroke} strokeOpacity={pal.edge * 0.8} strokeWidth="1.3" transform="translate(0 -9)" />
-      <path d={d} fill="none" stroke={pal.stroke} strokeOpacity={pal.edge * 0.8} strokeWidth="1.3" transform="translate(9 8)" />
-      <path d={d} fill="none" stroke={`url(#${uid}-hl)`} strokeOpacity="0.9" strokeWidth="2" transform="translate(2 -4)" />
+      <path
+        d={d}
+        fill="none"
+        stroke={pal.stroke}
+        strokeOpacity={pal.edge * 0.8}
+        strokeWidth="1.3"
+        transform="translate(0 -9)"
+      />
+      <path
+        d={d}
+        fill="none"
+        stroke={pal.stroke}
+        strokeOpacity={pal.edge * 0.8}
+        strokeWidth="1.3"
+        transform="translate(9 8)"
+      />
+      <path
+        d={d}
+        fill="none"
+        stroke={`url(#${uid}-hl)`}
+        strokeOpacity="0.9"
+        strokeWidth="2"
+        transform="translate(2 -4)"
+      />
     </g>
   );
 }
@@ -523,7 +630,16 @@ function Spout({ p, pal }: { p: SampledProfile; pal: Pal; uid: string }) {
   const d = `M${fmt(x + 18)} ${fmt(top - 1)}C${fmt(x + 4)} ${fmt(top - 4)} ${fmt(x - 14)} ${fmt(top - 14)} ${fmt(
     x - 24,
   )} ${fmt(top - 16)}C${fmt(x - 16)} ${fmt(top - 4)} ${fmt(x - 6)} ${fmt(top + 8)} ${fmt(x + 2)} ${fmt(top + 22)}`;
-  return <path d={d} fill={pal.bodyColor} fillOpacity={0.06} stroke={pal.stroke} strokeOpacity={pal.edge} strokeWidth="1.3" />;
+  return (
+    <path
+      d={d}
+      fill={pal.bodyColor}
+      fillOpacity={0.06}
+      stroke={pal.stroke}
+      strokeOpacity={pal.edge}
+      strokeWidth="1.3"
+    />
+  );
 }
 
 function Stopper({ p, pal, uid }: { p: SampledProfile; pal: Pal; uid: string }) {
@@ -537,9 +653,33 @@ function Stopper({ p, pal, uid }: { p: SampledProfile; pal: Pal; uid: string }) 
         strokeOpacity={pal.edge * 0.7}
         strokeWidth="1"
       />
-      <circle cx={CX} cy={top - 34} r="25" fill={`url(#${uid}-body)`} stroke={pal.stroke} strokeOpacity={pal.edge} strokeWidth="1.4" />
-      <path d={`M${CX - 16} ${top - 46}A18 18 0 0 1 ${CX - 2} ${top - 55}`} stroke="#fff" strokeOpacity="0.7" strokeWidth="2" fill="none" strokeLinecap="round" />
-      <ellipse cx={CX} cy={top - 12} rx="20" ry="3.5" fill="none" stroke={pal.stroke} strokeOpacity={pal.edge * 0.8} strokeWidth="1.2" />
+      <circle
+        cx={CX}
+        cy={top - 34}
+        r="25"
+        fill={`url(#${uid}-body)`}
+        stroke={pal.stroke}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.4"
+      />
+      <path
+        d={`M${CX - 16} ${top - 46}A18 18 0 0 1 ${CX - 2} ${top - 55}`}
+        stroke="#fff"
+        strokeOpacity="0.7"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <ellipse
+        cx={CX}
+        cy={top - 12}
+        rx="20"
+        ry="3.5"
+        fill="none"
+        stroke={pal.stroke}
+        strokeOpacity={pal.edge * 0.8}
+        strokeWidth="1.2"
+      />
     </g>
   );
 }
@@ -569,7 +709,13 @@ function StemBack({ spec, uid, pal }: { spec: StemSpec; uid: string; pal: Pal })
       <GroundShadow uid={uid} rx={rx * 0.8} y={y + 4} />
       {/* pie */}
       <ellipse cx={CX} cy={y} rx={rx} ry={rx * 0.17} fill={`url(#${uid}-body)`} />
-      <path d={arc(CX, y, rx, rx * 0.17, "back")} fill="none" stroke={S} strokeOpacity={pal.rimBack} strokeWidth="1.1" />
+      <path
+        d={arc(CX, y, rx, rx * 0.17, "back")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.rimBack}
+        strokeWidth="1.1"
+      />
       {/* tallo */}
       <path d={stemPath(spec)} fill={`url(#${uid}-stem)`} />
       {/* cáliz */}
@@ -588,7 +734,13 @@ function StemBack({ spec, uid, pal }: { spec: StemSpec; uid: string; pal: Pal })
         strokeOpacity={pal.inner}
         strokeWidth="1"
       />
-      <path d={arc(CX, top, rTop, rTop * PERSP, "back")} fill="none" stroke={S} strokeOpacity={pal.rimBack} strokeWidth="1.2" />
+      <path
+        d={arc(CX, top, rTop, rTop * PERSP, "back")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.rimBack}
+        strokeWidth="1.2"
+      />
     </g>
   );
 }
@@ -605,17 +757,54 @@ function StemFront({ spec, uid, pal, tone }: { spec: StemSpec; uid: string; pal:
   const { top: st, bottom: sb, r } = spec.stem;
   return (
     <g>
-      <path d={left} fill="none" stroke={S} strokeOpacity={pal.edge} strokeWidth="1.5" strokeLinecap="round" />
-      <path d={right} fill="none" stroke={S} strokeOpacity={pal.edge} strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d={left}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d={right}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
       {tone === "light" ? (
-        <path d={offsetSide(p, -1, 2, top + 4, bot - 20)} fill="none" stroke="#fff" strokeOpacity="0.9" strokeWidth="1" />
+        <path
+          d={offsetSide(p, -1, 2, top + 4, bot - 20)}
+          fill="none"
+          stroke="#fff"
+          strokeOpacity="0.9"
+          strokeWidth="1"
+        />
       ) : null}
       {/* tallo: bordes y brillo */}
       <path d={stemPath(spec)} fill="none" stroke={S} strokeOpacity={pal.edge * 0.7} strokeWidth="1" />
-      <path d={`M${CX + r * 0.25} ${st + 14}L${CX + r * 0.25} ${sb - 22}`} stroke="#fff" strokeOpacity={tone === "dark" ? 0.6 : 0.9} strokeWidth="1.1" />
+      <path
+        d={`M${CX + r * 0.25} ${st + 14}L${CX + r * 0.25} ${sb - 22}`}
+        stroke="#fff"
+        strokeOpacity={tone === "dark" ? 0.6 : 0.9}
+        strokeWidth="1.1"
+      />
       {/* pie */}
-      <path d={arc(CX, y, rx, rx * 0.17, "front")} fill="none" stroke={S} strokeOpacity={pal.rimFront * 0.9} strokeWidth="1.5" />
-      <path d={arc(CX, y + 3, rx - 1, (rx - 1) * 0.17, "front")} fill="none" stroke={S} strokeOpacity={pal.edge * 0.6} strokeWidth="1" />
+      <path
+        d={arc(CX, y, rx, rx * 0.17, "front")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.rimFront * 0.9}
+        strokeWidth="1.5"
+      />
+      <path
+        d={arc(CX, y + 3, rx - 1, (rx - 1) * 0.17, "front")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.edge * 0.6}
+        strokeWidth="1"
+      />
       <path
         d={arc(CX, y - 1.5, rx * 0.86, rx * 0.86 * 0.17, "front")}
         fill="none"
@@ -630,7 +819,13 @@ function StemFront({ spec, uid, pal, tone }: { spec: StemSpec; uid: string; pal:
       <path d={band(p, 0.74, 0.88, top + h * 0.1, top + h * 0.74)} fill={`url(#${uid}-hls)`} />
       <path d={band(p, 0.83, 0.88, top + h * 0.14, top + h * 0.5)} fill={`url(#${uid}-hl)`} opacity="0.8" />
       {/* boca */}
-      <path d={arc(CX, top, rTop, rTop * PERSP, "front")} fill="none" stroke={S} strokeOpacity={pal.rimFront} strokeWidth="1.5" />
+      <path
+        d={arc(CX, top, rTop, rTop * PERSP, "front")}
+        fill="none"
+        stroke={S}
+        strokeOpacity={pal.rimFront}
+        strokeWidth="1.5"
+      />
       <path
         d={arc(CX, top + 2, rTop - 1.5, (rTop - 1.5) * PERSP, "front")}
         fill="none"
@@ -638,7 +833,14 @@ function StemFront({ spec, uid, pal, tone }: { spec: StemSpec; uid: string; pal:
         strokeOpacity={tone === "dark" ? 0.3 : 0.85}
         strokeWidth="0.9"
       />
-      <ellipse cx={CX - rTop * 0.55} cy={top + rTop * PERSP * 0.83} rx={rTop * 0.14} ry="1.3" fill="#fff" opacity={tone === "dark" ? 0.75 : 0.95} />
+      <ellipse
+        cx={CX - rTop * 0.55}
+        cy={top + rTop * PERSP * 0.83}
+        rx={rTop * 0.14}
+        ry="1.3"
+        fill="#fff"
+        opacity={tone === "dark" ? 0.75 : 0.95}
+      />
     </g>
   );
 }
@@ -652,7 +854,12 @@ function Plinth({ uid, b, tone }: { uid: string; b: PanelSpec["base"]; tone: Gla
       <ellipse cx={CX} cy={b.y + b.h + 2} rx={b.w * 0.62} ry="10" fill={`url(#${uid}-shadow)`} />
       <rect x={b.x} y={b.y} width={b.w} height={b.h} rx="2" fill={`url(#${uid}-plinth)`} />
       <rect x={b.x} y={b.y} width={b.w} height={b.h} rx="2" fill={`url(#${uid}-plinthSide)`} />
-      <path d={`M${b.x + 2} ${b.y + 0.6}H${b.x + b.w - 2}`} stroke="#fff" strokeOpacity={tone === "dark" ? 0.38 : 0.3} strokeWidth="1" />
+      <path
+        d={`M${b.x + 2} ${b.y + 0.6}H${b.x + b.w - 2}`}
+        stroke="#fff"
+        strokeOpacity={tone === "dark" ? 0.38 : 0.3}
+        strokeWidth="1"
+      />
       {/* placa metálica de la peana */}
       <rect
         x={CX - b.w * 0.28}
@@ -699,12 +906,38 @@ function PanelFront({ spec, uid, kid, pal }: { spec: PanelSpec; uid: string; kid
         <path d={spec.body} />
       </clipPath>
       {/* biselado: banda entre el contorno y el bisel */}
-      <path d={`${spec.body} ${spec.bevel}`} fillRule="evenodd" fill="#fff" fillOpacity={pal === PAL.dark ? 0.07 : 0.35} />
-      <path d={spec.bevel} fill="none" stroke={pal.stroke} strokeOpacity={pal.edgeSoft * 1.3} strokeWidth="0.9" />
+      <path
+        d={`${spec.body} ${spec.bevel}`}
+        fillRule="evenodd"
+        fill="#fff"
+        fillOpacity={pal === PAL.dark ? 0.07 : 0.35}
+      />
+      <path
+        d={spec.bevel}
+        fill="none"
+        stroke={pal.stroke}
+        strokeOpacity={pal.edgeSoft * 1.3}
+        strokeWidth="0.9"
+      />
       {/* brillo diagonal */}
       <rect x="0" y="0" width="400" height="460" fill={`url(#${uid}-sheen)`} clipPath={`url(#${clip})`} />
-      <path d={spec.body} fill="none" stroke={pal.stroke} strokeOpacity={pal.edge} strokeWidth="1.5" strokeLinejoin="round" />
-      <path d={spec.body} fill="none" stroke="#fff" strokeOpacity={pal === PAL.dark ? 0.2 : 0.8} strokeWidth="0.8" transform="translate(1.2 1.2)" clipPath={`url(#${clip})`} />
+      <path
+        d={spec.body}
+        fill="none"
+        stroke={pal.stroke}
+        strokeOpacity={pal.edge}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d={spec.body}
+        fill="none"
+        stroke="#fff"
+        strokeOpacity={pal === PAL.dark ? 0.2 : 0.8}
+        strokeWidth="0.8"
+        transform="translate(1.2 1.2)"
+        clipPath={`url(#${clip})`}
+      />
     </g>
   );
 }
@@ -729,11 +962,32 @@ function GiftBox({ uid, tone }: { uid: string; tone: GlassTone }) {
       {/* lazo */}
       <path d="M200 182C170 140 112 136 118 166C124 192 176 186 200 182Z" fill="#CFC8BB" fillOpacity="0.9" />
       <path d="M200 182C230 140 288 136 282 166C276 192 224 186 200 182Z" fill="#CFC8BB" fillOpacity="0.8" />
-      <path d="M200 182C186 200 176 224 168 246M200 182C214 200 226 224 236 246" stroke="#CFC8BB" strokeWidth="9" fill="none" strokeOpacity="0.85" strokeLinecap="round" />
+      <path
+        d="M200 182C186 200 176 224 168 246M200 182C214 200 226 224 236 246"
+        stroke="#CFC8BB"
+        strokeWidth="9"
+        fill="none"
+        strokeOpacity="0.85"
+        strokeLinecap="round"
+      />
       <ellipse cx="200" cy="181" rx="13" ry="10" fill="#CFC8BB" />
-      <path d="M132 160C150 150 176 160 192 176" stroke="#fff" strokeOpacity="0.45" strokeWidth="1.4" fill="none" />
+      <path
+        d="M132 160C150 150 176 160 192 176"
+        stroke="#fff"
+        strokeOpacity="0.45"
+        strokeWidth="1.4"
+        fill="none"
+      />
       {/* monograma estampado */}
-      <text x="120" y="360" fontFamily="var(--font-cormorant), serif" fontStyle="italic" fontSize="36" fill="#CFC8BB" fillOpacity="0.5">
+      <text
+        x="120"
+        y="360"
+        fontFamily="var(--font-cormorant), serif"
+        fontStyle="italic"
+        fontSize="36"
+        fill="#CFC8BB"
+        fillOpacity="0.5"
+      >
         GS
       </text>
     </g>
@@ -792,7 +1046,10 @@ function EngravingArt({
     const s = art.scale ?? 0.82;
     const size = Math.min(z.w, z.h) * s;
     content = (
-      <g transform={`translate(${cx - size / 2} ${z.y + z.h / 2 - size / 2}) scale(${size / 400})`} fill={pal.engraveFill}>
+      <g
+        transform={`translate(${cx - size / 2} ${z.y + z.h / 2 - size / 2}) scale(${size / 400})`}
+        fill={pal.engraveFill}
+      >
         <DemoLogoArt logo={art.logo} />
       </g>
     );

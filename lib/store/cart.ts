@@ -54,7 +54,9 @@ export const useCart = create<CartState>()(
         const min = line.minQuantity ?? 1;
         if (existing) {
           set({
-            lines: lines.map((l) => (l.id === id ? { ...l, quantity: l.quantity + quantity, preview: line.preview ?? l.preview } : l)),
+            lines: lines.map((l) =>
+              l.id === id ? { ...l, quantity: l.quantity + quantity, preview: line.preview ?? l.preview } : l,
+            ),
           });
         } else {
           set({ lines: [...lines, { ...line, id, quantity: Math.max(min, quantity), addedAt: Date.now() }] });
@@ -63,7 +65,9 @@ export const useCart = create<CartState>()(
       },
       setQuantity: (id, quantity) =>
         set({
-          lines: get().lines.map((l) => (l.id === id ? { ...l, quantity: Math.max(l.minQuantity ?? 1, Math.min(9999, quantity)) } : l)),
+          lines: get().lines.map((l) =>
+            l.id === id ? { ...l, quantity: Math.max(l.minQuantity ?? 1, Math.min(9999, quantity)) } : l,
+          ),
         }),
       remove: (id) => {
         const lines = get().lines;

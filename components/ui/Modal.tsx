@@ -19,7 +19,16 @@ type ModalProps = {
   theme?: "light" | "dark";
 };
 
-export function Modal({ open, onClose, title, hideTitle, children, className, size = "lg", theme = "light" }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  title,
+  hideTitle,
+  children,
+  className,
+  size = "lg",
+  theme = "light",
+}: ModalProps) {
   const mounted = useMounted();
   const ref = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -29,7 +38,10 @@ export function Modal({ open, onClose, title, hideTitle, children, className, si
   return createPortal(
     <AnimatePresence>
       {open ? (
-        <div className="fixed inset-0 z-[75] flex items-end justify-center sm:items-center sm:p-6" data-floating>
+        <div
+          className="fixed inset-0 z-[75] flex items-end justify-center sm:items-center sm:p-6"
+          data-floating
+        >
           <m.div
             className="absolute inset-0 bg-ink/60 backdrop-blur-[4px]"
             initial={{ opacity: 0 }}
@@ -58,14 +70,19 @@ export function Modal({ open, onClose, title, hideTitle, children, className, si
             exit={{ opacity: 0, y: 30, scale: 0.98 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className={cn("sticky top-0 z-10 flex items-center justify-between gap-4 bg-bg/90 px-5 py-3 backdrop-blur", hideTitle && "absolute inset-x-0 bg-transparent backdrop-blur-none")}>
+            <div
+              className={cn(
+                "sticky top-0 z-10 flex items-center justify-between gap-4 bg-bg/90 px-5 py-3 backdrop-blur",
+                hideTitle && "absolute inset-x-0 bg-transparent backdrop-blur-none",
+              )}
+            >
               <h2 id={titleId} className={cn("font-display text-2xl leading-tight", hideTitle && "sr-only")}>
                 {title}
               </h2>
               <button
                 type="button"
                 onClick={onClose}
-                className="tap ml-auto inline-flex items-center justify-center rounded-full bg-bg/70 text-fg backdrop-blur transition-colors hover:bg-fg/10"
+                className="ml-auto inline-flex tap items-center justify-center rounded-full bg-bg/70 text-fg backdrop-blur transition-colors hover:bg-fg/10"
                 aria-label="Cerrar"
               >
                 <X className="size-5" strokeWidth={1.5} />

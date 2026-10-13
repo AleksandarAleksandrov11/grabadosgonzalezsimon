@@ -144,10 +144,22 @@ const ESTUCHE: OptionDef = {
   values: [{ label: "Sin estuche" }, { label: "Con estuche regalo", delta: 4.9 }],
 };
 
-const P_GLASS: Personalization = { types: ["texto", "iniciales", "fecha", "logo"], maxChars: 22, maxLines: 2, faces: 2, engraveOn: "tubo" };
-const pers = (engraveOn: GlassId, over: Partial<Personalization> = {}): Personalization => ({ ...P_GLASS, engraveOn, ...over });
+const P_GLASS: Personalization = {
+  types: ["texto", "iniciales", "fecha", "logo"],
+  maxChars: 22,
+  maxLines: 2,
+  faces: 2,
+  engraveOn: "tubo",
+};
+const pers = (engraveOn: GlassId, over: Partial<Personalization> = {}): Personalization => ({
+  ...P_GLASS,
+  engraveOn,
+  ...over,
+});
 
-const tech = (t: Partial<TechnicalDetails> & Pick<TechnicalDetails, "dimensions" | "engravingArea">): TechnicalDetails => ({
+const tech = (
+  t: Partial<TechnicalDetails> & Pick<TechnicalDetails, "dimensions" | "engravingArea">,
+): TechnicalDetails => ({
   material: "Cristal transparente de alta calidad",
   productionTime: PRODUCTION,
   ...t,
@@ -165,7 +177,10 @@ export const products: Product[] = [
     occasions: ["regalo", "aniversario", "jubilacion", "navidad", "empresa"],
     price: 14.9,
     options: [
-      { name: "Modelo", values: [{ label: "Tallado clásico 30 cl" }, { label: "Tallado diamante 32 cl", delta: 2 }] },
+      {
+        name: "Modelo",
+        values: [{ label: "Tallado clásico 30 cl" }, { label: "Tallado diamante 32 cl", delta: 2 }],
+      },
       ACABADO(),
       ESTUCHE,
     ],
@@ -178,9 +193,16 @@ export const products: Product[] = [
       "Grabo en él unas iniciales, un nombre, una fecha o un pequeño escudo con chorro de arena. El resultado es un esmerilado blanco, fino y permanente: no es una pegatina ni una impresión, es el propio cristal trabajado.",
     ],
     illustration: "whisky-tallado",
-    sample: { kind: "text", lines: [{ text: "J · M", font: "roman", size: 0.36, weight: 600, tracking: 0.08 }] },
+    sample: {
+      kind: "text",
+      lines: [{ text: "J · M", font: "roman", size: 0.36, weight: 600, tracking: 0.08 }],
+    },
     personalization: pers("whisky-tallado"),
-    technical: tech({ dimensions: "Ø 8,5 × 9,5 cm aprox. (medida orientativa)", capacity: "30–32 cl", engravingArea: "Hasta 6 × 4 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 8,5 × 9,5 cm aprox. (medida orientativa)",
+      capacity: "30–32 cl",
+      engravingArea: "Hasta 6 × 4 cm por cara",
+    }),
     createdAt: "2026-02-10",
     featuredRank: 1,
     completeTheSet: ["set-regalo-decantador-whisky", "vaso-old-fashioned", "estuche-regalo"],
@@ -209,7 +231,11 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("old-fashioned"),
-    technical: tech({ dimensions: "Ø 9 × 9 cm aprox. (medida orientativa)", capacity: "33 cl", engravingArea: "Hasta 7 × 5 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 9 × 9 cm aprox. (medida orientativa)",
+      capacity: "33 cl",
+      engravingArea: "Hasta 7 × 5 cm por cara",
+    }),
     createdAt: "2026-03-02",
     featuredRank: 9,
     completeTheSet: ["vaso-whisky-tallado", "estuche-regalo"],
@@ -233,7 +259,11 @@ export const products: Product[] = [
     sample: { kind: "logo", logo: "cafe", scale: 0.88 },
     personalization: pers("tubo"),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 6,5 × 15 cm aprox. (medida orientativa)", capacity: "30–36 cl", engravingArea: "Hasta 5 × 9 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 6,5 × 15 cm aprox. (medida orientativa)",
+      capacity: "30–36 cl",
+      engravingArea: "Hasta 5 × 9 cm por cara",
+    }),
     createdAt: "2026-01-18",
     featuredRank: 3,
     // Foto real del taller (trabajo del cliente). TODO: confirmar permiso para mostrar logos de terceros.
@@ -272,7 +302,11 @@ export const products: Product[] = [
     },
     personalization: pers("agua"),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 7,5 × 11 cm aprox. (medida orientativa)", capacity: "27 cl", engravingArea: "Hasta 6 × 6 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 7,5 × 11 cm aprox. (medida orientativa)",
+      capacity: "27 cl",
+      engravingArea: "Hasta 6 × 6 cm por cara",
+    }),
     createdAt: "2026-04-05",
     featuredRank: 12,
   }),
@@ -297,7 +331,11 @@ export const products: Product[] = [
     sample: { kind: "logo", logo: "bodega", scale: 0.86 },
     personalization: pers("copa-vino"),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 9,5 × 22 cm aprox. (medida orientativa)", capacity: "47 cl", engravingArea: "Hasta 6 × 5 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 9,5 × 22 cm aprox. (medida orientativa)",
+      capacity: "47 cl",
+      engravingArea: "Hasta 6 × 5 cm por cara",
+    }),
     createdAt: "2026-02-22",
     featuredRank: 2,
     completeTheSet: ["copa-vino-blanco-grabada", "jarra-agua-sangria", "estuche-regalo"],
@@ -327,7 +365,11 @@ export const products: Product[] = [
     },
     personalization: pers("copa-blanco"),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 8 × 21 cm aprox. (medida orientativa)", capacity: "35 cl", engravingArea: "Hasta 5 × 4,5 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 8 × 21 cm aprox. (medida orientativa)",
+      capacity: "35 cl",
+      engravingArea: "Hasta 5 × 4,5 cm por cara",
+    }),
     createdAt: "2026-03-14",
     featuredRank: 10,
     completeTheSet: ["copa-vino-tinto-grabada", "estuche-regalo"],
@@ -357,7 +399,11 @@ export const products: Product[] = [
     },
     personalization: pers("copa-cava", { maxChars: 14 }),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 7 × 24 cm aprox. (medida orientativa)", capacity: "21 cl", engravingArea: "Hasta 3,5 × 7 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 7 × 24 cm aprox. (medida orientativa)",
+      capacity: "21 cl",
+      engravingArea: "Hasta 3,5 × 7 cm por cara",
+    }),
     createdAt: "2026-01-30",
     featuredRank: 6,
     completeTheSet: ["pack-copas-brindis-boda", "estuche-regalo"],
@@ -381,7 +427,11 @@ export const products: Product[] = [
     sample: { kind: "text", lines: [{ text: "Salud", font: "script", size: 0.42 }] },
     personalization: pers("copa-balon"),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 11 × 20 cm aprox. (medida orientativa)", capacity: "70 cl", engravingArea: "Hasta 8 × 6 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 11 × 20 cm aprox. (medida orientativa)",
+      capacity: "70 cl",
+      engravingArea: "Hasta 8 × 6 cm por cara",
+    }),
     createdAt: "2026-05-12",
     featuredRank: 7,
   }),
@@ -415,7 +465,11 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("copa-cava", { maxChars: 14 }),
-    technical: tech({ dimensions: "2 copas · Ø 7 × 24 cm aprox. (medida orientativa)", capacity: "21 cl cada una", engravingArea: "Hasta 3,5 × 7 cm por copa" }),
+    technical: tech({
+      dimensions: "2 copas · Ø 7 × 24 cm aprox. (medida orientativa)",
+      capacity: "21 cl cada una",
+      engravingArea: "Hasta 3,5 × 7 cm por copa",
+    }),
     createdAt: "2026-04-20",
     featuredRank: 4,
     completeTheSet: ["jarron-boca-ancha-centro-mesa", "pack-boda-invitados-copas", "estuche-regalo"],
@@ -441,7 +495,11 @@ export const products: Product[] = [
     sample: { kind: "logo", logo: "club", scale: 0.78 },
     personalization: pers("jarra-cerveza", { faces: 1 }),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Ø 8,5 × 16 cm aprox. (medida orientativa)", capacity: "0,5 L / 1 L", engravingArea: "Hasta 7 × 9 cm (cara frontal)" }),
+    technical: tech({
+      dimensions: "Ø 8,5 × 16 cm aprox. (medida orientativa)",
+      capacity: "0,5 L / 1 L",
+      engravingArea: "Hasta 7 × 9 cm (cara frontal)",
+    }),
     createdAt: "2026-03-28",
     featuredRank: 5,
   }),
@@ -469,7 +527,11 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("jarra-agua", { faces: 1 }),
-    technical: tech({ dimensions: "Ø 10 × 23 cm aprox. (medida orientativa)", capacity: "1 L / 1,5 L", engravingArea: "Hasta 8 × 8 cm (cara frontal)" }),
+    technical: tech({
+      dimensions: "Ø 10 × 23 cm aprox. (medida orientativa)",
+      capacity: "1 L / 1,5 L",
+      engravingArea: "Hasta 8 × 8 cm (cara frontal)",
+    }),
     createdAt: "2026-06-03",
     featuredRank: 14,
     completeTheSet: ["copa-vino-tinto-grabada", "vaso-agua-grabado"],
@@ -500,7 +562,10 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("jarron-cilindrico", { maxChars: 28 }),
-    technical: tech({ dimensions: "Ø 10 × 25/30 cm aprox. (medida orientativa)", engravingArea: "Hasta 10 × 14 cm por cara" }),
+    technical: tech({
+      dimensions: "Ø 10 × 25/30 cm aprox. (medida orientativa)",
+      engravingArea: "Hasta 10 × 14 cm por cara",
+    }),
     createdAt: "2026-02-02",
     featuredRank: 11,
   }),
@@ -524,7 +589,10 @@ export const products: Product[] = [
     sample: { kind: "text", lines: [{ text: "C & J", font: "script", size: 0.34 }] },
     personalization: pers("jarron-boca-ancha", { maxChars: 24 }),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ dimensions: "Boca Ø 16 × 20/26 cm aprox. (medida orientativa)", engravingArea: "Hasta 12 × 10 cm por cara" }),
+    technical: tech({
+      dimensions: "Boca Ø 16 × 20/26 cm aprox. (medida orientativa)",
+      engravingArea: "Hasta 12 × 10 cm por cara",
+    }),
     createdAt: "2026-07-01",
     featuredRank: 8,
   }),
@@ -537,7 +605,10 @@ export const products: Product[] = [
     category: "metopas-y-placas",
     occasions: ["trofeo", "jubilacion", "empresa", "aniversario", "regalo"],
     price: 49.9,
-    options: [{ name: "Tamaño", values: [{ label: "15 × 20 cm" }, { label: "20 × 30 cm", delta: 15 }] }, ESTUCHE],
+    options: [
+      { name: "Tamaño", values: [{ label: "15 × 20 cm" }, { label: "20 × 30 cm", delta: 15 }] },
+      ESTUCHE,
+    ],
     tagline: "El reconocimiento que se queda en la vitrina.",
     description:
       "Metopa de cristal grueso con peana negra. Para homenajes, aniversarios de empresa, premios y reconocimientos con escudo o logotipo.",
@@ -549,7 +620,11 @@ export const products: Product[] = [
     sample: { kind: "logo", logo: "club", scale: 0.86 },
     personalization: pers("metopa", { maxChars: 36, faces: 1 }),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ material: "Cristal grueso biselado y peana negra", dimensions: "15 × 20 cm o 20 × 30 cm (cristal), grosor aprox. 1,5 cm", engravingArea: "Toda la superficie frontal" }),
+    technical: tech({
+      material: "Cristal grueso biselado y peana negra",
+      dimensions: "15 × 20 cm o 20 × 30 cm (cristal), grosor aprox. 1,5 cm",
+      engravingArea: "Toda la superficie frontal",
+    }),
     createdAt: "2026-01-12",
     featuredRank: 13,
   }),
@@ -560,7 +635,10 @@ export const products: Product[] = [
     category: "metopas-y-placas",
     occasions: ["trofeo", "jubilacion", "empresa", "aniversario"],
     price: 44.9,
-    options: [{ name: "Tamaño", values: [{ label: "20 × 15 cm" }, { label: "30 × 20 cm", delta: 14 }] }, ESTUCHE],
+    options: [
+      { name: "Tamaño", values: [{ label: "20 × 15 cm" }, { label: "30 × 20 cm", delta: 14 }] },
+      ESTUCHE,
+    ],
     tagline: "Las palabras justas, grabadas en cristal.",
     description:
       "Placa horizontal de cristal con soporte, para dedicatorias, inauguraciones, aniversarios y agradecimientos.",
@@ -578,7 +656,11 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("placa", { maxChars: 40, faces: 1 }),
-    technical: tech({ material: "Cristal grueso biselado con soporte", dimensions: "20 × 15 cm o 30 × 20 cm aprox.", engravingArea: "Toda la superficie frontal" }),
+    technical: tech({
+      material: "Cristal grueso biselado con soporte",
+      dimensions: "20 × 15 cm o 30 × 20 cm aprox.",
+      engravingArea: "Toda la superficie frontal",
+    }),
     createdAt: "2026-05-30",
     featuredRank: 16,
   }),
@@ -608,7 +690,11 @@ export const products: Product[] = [
     },
     personalization: pers("trofeo-llama", { maxChars: 18, faces: 1 }),
     volumePricing: STANDARD_TIERS,
-    technical: tech({ material: "Cristal grueso y peana negra", dimensions: "22 o 28 cm de altura aprox.", engravingArea: "Hasta 6 × 10 cm" }),
+    technical: tech({
+      material: "Cristal grueso y peana negra",
+      dimensions: "22 o 28 cm de altura aprox.",
+      engravingArea: "Hasta 6 × 10 cm",
+    }),
     createdAt: "2026-08-15",
     featuredRank: 15,
   }),
@@ -636,7 +722,11 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("trofeo-obelisco", { maxChars: 18, faces: 1 }),
-    technical: tech({ material: "Cristal grueso, peana negra y estuche de presentación", dimensions: "24 o 30 cm de altura aprox.", engravingArea: "Hasta 6 × 14 cm" }),
+    technical: tech({
+      material: "Cristal grueso, peana negra y estuche de presentación",
+      dimensions: "24 o 30 cm de altura aprox.",
+      engravingArea: "Hasta 6 × 14 cm",
+    }),
     createdAt: "2026-06-21",
     featuredRank: 17,
   }),
@@ -667,7 +757,11 @@ export const products: Product[] = [
       ],
     },
     personalization: pers("agua"),
-    technical: tech({ dimensions: "12 vasos · Ø 7,5 × 11 cm aprox. (medida orientativa)", capacity: "27 cl cada uno", engravingArea: "Hasta 6 × 6 cm por vaso" }),
+    technical: tech({
+      dimensions: "12 vasos · Ø 7,5 × 11 cm aprox. (medida orientativa)",
+      capacity: "27 cl cada uno",
+      engravingArea: "Hasta 6 × 6 cm por vaso",
+    }),
     createdAt: "2026-03-08",
     featuredRank: 18,
   }),
@@ -682,7 +776,11 @@ export const products: Product[] = [
     options: [
       {
         name: "Modelo",
-        values: [{ label: "Copa de vino" }, { label: "Flauta de cava" }, { label: "Copa de balón", delta: 1.5 }],
+        values: [
+          { label: "Copa de vino" },
+          { label: "Flauta de cava" },
+          { label: "Copa de balón", delta: 1.5 },
+        ],
       },
     ],
     badge: "Ideal bodas",
@@ -709,7 +807,10 @@ export const products: Product[] = [
       { min: 100, max: 199, discount: 0.15 },
       { min: 200, max: null, discount: 0.15, quote: true },
     ],
-    technical: tech({ dimensions: "Según modelo (medidas orientativas)", engravingArea: "Hasta 6 × 5 cm por copa" }),
+    technical: tech({
+      dimensions: "Según modelo (medidas orientativas)",
+      engravingArea: "Hasta 6 × 5 cm por copa",
+    }),
     createdAt: "2026-09-01",
     featuredRank: 19,
   }),
@@ -750,7 +851,10 @@ export const products: Product[] = [
       { min: 100, max: 249, discount: 0.18 },
       { min: 250, max: null, discount: 0.18, quote: true },
     ],
-    technical: tech({ dimensions: "Según pieza elegida (medidas orientativas)", engravingArea: "Adaptada a cada pieza" }),
+    technical: tech({
+      dimensions: "Según pieza elegida (medidas orientativas)",
+      engravingArea: "Adaptada a cada pieza",
+    }),
     createdAt: "2026-08-02",
     featuredRank: 20,
   }),
@@ -773,7 +877,10 @@ export const products: Product[] = [
     illustration: "set-whisky",
     sample: { kind: "text", lines: [{ text: "R G", font: "roman", size: 0.3, weight: 600, tracking: 0.1 }] },
     personalization: pers("decantador", { faces: 1 }),
-    technical: tech({ dimensions: "Decantador 75 cl aprox. + 2 vasos de 30 cl (medidas orientativas)", engravingArea: "Hasta 7 × 5 cm en cada pieza" }),
+    technical: tech({
+      dimensions: "Decantador 75 cl aprox. + 2 vasos de 30 cl (medidas orientativas)",
+      engravingArea: "Hasta 7 × 5 cm en cada pieza",
+    }),
     createdAt: "2026-09-20",
     featuredRank: 21,
   }),
@@ -791,7 +898,12 @@ export const products: Product[] = [
     body: ["Estuche rígido negro con interior protegido y lazo champán. Llega montado y listo para regalar."],
     illustration: "estuche",
     personalization: { types: [], maxChars: 0, maxLines: 1, faces: 1, engraveOn: "estuche" },
-    technical: tech({ material: "Cartón rígido forrado", dimensions: "Adaptado a cada pieza", engravingArea: "No aplica", productionTime: "Inmediato" }),
+    technical: tech({
+      material: "Cartón rígido forrado",
+      dimensions: "Adaptado a cada pieza",
+      engravingArea: "No aplica",
+      productionTime: "Inmediato",
+    }),
     createdAt: "2026-01-01",
     hidden: true,
   }),

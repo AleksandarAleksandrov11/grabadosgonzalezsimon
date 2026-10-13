@@ -33,7 +33,11 @@ export const useDesigns = create<DesignsState>()(
     (set, get) => ({
       designs: [],
       save: (d) => {
-        const item: SavedDesign = { ...d, id: `d${Date.now().toString(36)}`, createdAt: new Date().toISOString() };
+        const item: SavedDesign = {
+          ...d,
+          id: `d${Date.now().toString(36)}`,
+          createdAt: new Date().toISOString(),
+        };
         set({ designs: [item, ...get().designs].slice(0, MAX) });
         return item;
       },

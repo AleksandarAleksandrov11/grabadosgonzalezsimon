@@ -13,16 +13,22 @@ export function filterProducts(list: Product[], f: ProductFilters = {}): Product
   let out = f.includeHidden ? list : list.filter((p) => !p.metafields.hidden);
   if (f.category) {
     out = out.filter((p) =>
-      f.category === "packs" ? p.metafields.category === "packs" || p.tags.includes("pack") : p.metafields.category === f.category,
+      f.category === "packs"
+        ? p.metafields.category === "packs" || p.tags.includes("pack")
+        : p.metafields.category === f.category,
     );
   }
   if (f.occasions?.length) out = out.filter((p) => f.occasions!.some((o) => p.tags.includes(o)));
-  if (typeof f.priceMin === "number") out = out.filter((p) => p.priceRange.minVariantPrice.amount >= f.priceMin!);
-  if (typeof f.priceMax === "number") out = out.filter((p) => p.priceRange.minVariantPrice.amount <= f.priceMax!);
+  if (typeof f.priceMin === "number")
+    out = out.filter((p) => p.priceRange.minVariantPrice.amount >= f.priceMin!);
+  if (typeof f.priceMax === "number")
+    out = out.filter((p) => p.priceRange.minVariantPrice.amount <= f.priceMax!);
   if (f.personalization?.length) {
     out = out.filter((p) =>
       f.personalization!.every((t) =>
-        t === "logo" ? p.metafields.personalization.types.includes("logo") : p.metafields.personalization.types.includes("texto"),
+        t === "logo"
+          ? p.metafields.personalization.types.includes("logo")
+          : p.metafields.personalization.types.includes("texto"),
       ),
     );
   }
@@ -31,7 +37,14 @@ export function filterProducts(list: Product[], f: ProductFilters = {}): Product
     const terms = q.split(/\s+/).filter(Boolean);
     out = out.filter((p) => {
       const hay = normalize(
-        [p.title, p.description, p.productType, p.tags.join(" "), p.metafields.tagline, p.metafields.category].join(" "),
+        [
+          p.title,
+          p.description,
+          p.productType,
+          p.tags.join(" "),
+          p.metafields.tagline,
+          p.metafields.category,
+        ].join(" "),
       );
       return terms.every((t) => hay.includes(t));
     });

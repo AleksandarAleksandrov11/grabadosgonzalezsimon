@@ -3,7 +3,15 @@ import type { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { cn, formatPrice } from "@/lib/utils";
 
-export function Badge({ children, className, tone = "default" }: { children: ReactNode; className?: string; tone?: "default" | "solid" | "frost" }) {
+export function Badge({
+  children,
+  className,
+  tone = "default",
+}: {
+  children: ReactNode;
+  className?: string;
+  tone?: "default" | "solid" | "frost";
+}) {
   return (
     <span
       className={cn(
@@ -39,7 +47,7 @@ export function SectionHeading({
   return (
     <div className={cn("flex flex-col gap-5", align === "center" && "items-center text-center", className)}>
       {eyebrow ? (
-        <p className="eyebrow flex items-center gap-3">
+        <p className="flex items-center gap-3 eyebrow">
           <span className="h-px w-8 bg-current opacity-60" aria-hidden="true" />
           {eyebrow}
         </p>
@@ -56,12 +64,20 @@ export function SectionHeading({
       >
         {title}
       </Tag>
-      {lead ? <p className={cn("text-lead max-w-[58ch] text-fg-muted", align === "center" && "mx-auto")}>{lead}</p> : null}
+      {lead ? (
+        <p className={cn("max-w-[58ch] text-lead text-fg-muted", align === "center" && "mx-auto")}>{lead}</p>
+      ) : null}
     </div>
   );
 }
 
-export function Breadcrumbs({ items, className }: { items: { name: string; href?: string }[]; className?: string }) {
+export function Breadcrumbs({
+  items,
+  className,
+}: {
+  items: { name: string; href?: string }[];
+  className?: string;
+}) {
   return (
     <nav aria-label="Migas de pan" className={cn("text-[0.8125rem] text-fg-subtle", className)}>
       <ol className="flex flex-wrap items-center gap-1.5">
@@ -76,7 +92,9 @@ export function Breadcrumbs({ items, className }: { items: { name: string; href?
                 {it.name}
               </span>
             )}
-            {i < items.length - 1 ? <ChevronRight className="size-3.5 opacity-60" aria-hidden="true" /> : null}
+            {i < items.length - 1 ? (
+              <ChevronRight className="size-3.5 opacity-60" aria-hidden="true" />
+            ) : null}
           </li>
         ))}
       </ol>
@@ -100,15 +118,26 @@ export function Price({
   return (
     <span className={cn("inline-flex flex-wrap items-baseline gap-x-2", className)}>
       {from ? <span className="text-[0.75em] font-normal text-fg-subtle">desde</span> : null}
-      <span className={cn("font-semibold tabular-nums", size === "lg" && "font-display text-[2rem] font-medium", size === "sm" && "text-[0.9375rem]")}>
+      <span
+        className={cn(
+          "font-semibold tabular-nums",
+          size === "lg" && "font-display text-[2rem] font-medium",
+          size === "sm" && "text-[0.9375rem]",
+        )}
+      >
         {formatPrice(amount)}
       </span>
       {compareAt && compareAt > amount ? (
         <>
-          <s className="text-[0.85em] text-fg-subtle tabular-nums" aria-label={`Antes ${formatPrice(compareAt)}`}>
+          <s
+            className="text-[0.85em] text-fg-subtle tabular-nums"
+            aria-label={`Antes ${formatPrice(compareAt)}`}
+          >
             {formatPrice(compareAt)}
           </s>
-          <span className="text-[0.75em] font-semibold text-fg">−{Math.round((1 - amount / compareAt) * 100)}%</span>
+          <span className="text-[0.75em] font-semibold text-fg">
+            −{Math.round((1 - amount / compareAt) * 100)}%
+          </span>
         </>
       ) : null}
     </span>

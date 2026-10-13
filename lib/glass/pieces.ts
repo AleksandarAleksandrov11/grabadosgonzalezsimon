@@ -354,8 +354,7 @@ export const PIECES: Record<GlassId, GlassSpec> = {
     label: "Trofeo llama",
     kind: "panel",
     shape: "flame",
-    body:
-      "M134 396C126 330 138 270 162 214C184 162 210 120 222 52C246 104 270 158 272 222C274 290 266 340 266 396Z",
+    body: "M134 396C126 330 138 270 162 214C184 162 210 120 222 52C246 104 270 158 272 222C274 290 266 340 266 396Z",
     bevel:
       "M148 384C142 326 152 274 174 222C192 178 212 144 222 96C238 138 256 182 258 230C260 290 254 336 254 384Z",
     base: { x: 108, y: 396, w: 184, h: 56 },
@@ -382,8 +381,8 @@ export const PIECES: Record<GlassId, GlassSpec> = {
     label: "Pack copas de brindis",
     kind: "composite",
     items: [
-      { id: "copa-cava", x: -62, y: 18, scale: 0.92, rotate: 9 },
-      { id: "copa-cava", x: 62, y: 18, scale: 0.92, rotate: -9 },
+      { id: "copa-cava", x: -74, y: 14, scale: 0.9, rotate: 7 },
+      { id: "copa-cava", x: 74, y: 14, scale: 0.9, rotate: -7 },
     ],
     engraveOn: "copa-cava",
     zone: { x: 0, y: 0, w: 0, h: 0 },

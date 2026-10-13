@@ -23,7 +23,11 @@ export function QuantityStepper({
   const h = size === "sm" ? "h-10" : "h-12";
   return (
     <div
-      className={cn("inline-flex items-stretch rounded-[var(--radius)] border border-line-strong", h, className)}
+      className={cn(
+        "inline-flex items-stretch rounded-[var(--radius)] border border-line-strong",
+        h,
+        className,
+      )}
       role="group"
       aria-label={label}
     >
@@ -32,7 +36,10 @@ export function QuantityStepper({
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
         aria-label="Quitar una unidad"
-        className={cn("inline-flex items-center justify-center text-fg transition-colors hover:bg-fg/6 disabled:opacity-35", size === "sm" ? "w-10" : "w-12")}
+        className={cn(
+          "inline-flex items-center justify-center text-fg transition-colors hover:bg-fg/6 disabled:opacity-35",
+          size === "sm" ? "w-10" : "w-12",
+        )}
       >
         <Minus className="size-4" strokeWidth={1.5} />
       </button>
@@ -54,7 +61,10 @@ export function QuantityStepper({
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
         aria-label="Añadir una unidad"
-        className={cn("inline-flex items-center justify-center text-fg transition-colors hover:bg-fg/6 disabled:opacity-35", size === "sm" ? "w-10" : "w-12")}
+        className={cn(
+          "inline-flex items-center justify-center text-fg transition-colors hover:bg-fg/6 disabled:opacity-35",
+          size === "sm" ? "w-10" : "w-12",
+        )}
       >
         <Plus className="size-4" strokeWidth={1.5} />
       </button>

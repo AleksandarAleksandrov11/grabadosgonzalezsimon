@@ -69,6 +69,7 @@
   --invert-bg: var(--paper);
   --invert-fg: var(--ink);
   color-scheme: dark;
+  color: var(--fg);
 }
 
 .theme-light {
@@ -83,6 +84,7 @@
   --invert-bg: var(--ink);
   --invert-fg: var(--paper);
   color-scheme: light;
+  color: var(--fg);
 }
 
 @theme inline {
@@ -547,4 +549,105 @@ html.lenis body {
 }
 .print-only {
   display: none;
+}
+
+/* Revelado del titular del hero por CSS: arranca en el primer pintado (no
+   espera a la hidratación) para no penalizar el LCP. */
+@keyframes word-up {
+  from {
+    transform: translate3d(0, 70%, 0);
+    opacity: 0.001;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes fade-up {
+  from {
+    transform: translate3d(0, 18px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.word-reveal {
+  display: inline-block;
+  animation: word-up 1.1s var(--ease-out) both;
+  animation-delay: calc(120ms + var(--i, 0) * 70ms);
+}
+.css-fade-up {
+  animation: fade-up 1s var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+.css-fade-in {
+  animation: fade-in 1.4s var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Botón con brillo: tono del reflejo según el fondo */
+.theme-dark .btn-shine.btn-on-light::before {
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(10, 10, 10, 0) 25%,
+    rgba(10, 10, 10, 0.1) 50%,
+    rgba(10, 10, 10, 0) 75%,
+    transparent 100%
+  );
+}
+
+/* Proceso de la técnica */
+@keyframes sand-fly {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-60px, 82px);
+    opacity: 0;
+  }
+}
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes frost-in {
+  from {
+    opacity: 0.15;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+.technique-sand circle {
+  animation: sand-fly 0.9s linear infinite;
+}
+.technique-sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sparkle 2.4s ease-in-out infinite;
+}
+[data-step="2"] .technique-frost {
+  animation: frost-in 2.2s ease-out both;
 }

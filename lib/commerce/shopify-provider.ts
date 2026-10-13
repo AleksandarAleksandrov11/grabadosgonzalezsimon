@@ -21,7 +21,8 @@ const API_VERSION = "2026-07"; // TODO: usar la versión estable vigente de la S
 async function storefront<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
   const domain = process.env.SHOPIFY_STORE_DOMAIN;
   const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-  if (!domain || !token) throw new Error("Shopify no está configurado (SHOPIFY_STORE_DOMAIN / SHOPIFY_STOREFRONT_ACCESS_TOKEN).");
+  if (!domain || !token)
+    throw new Error("Shopify no está configurado (SHOPIFY_STORE_DOMAIN / SHOPIFY_STOREFRONT_ACCESS_TOKEN).");
   const res = await fetch(`https://${domain}/api/${API_VERSION}/graphql.json`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "X-Shopify-Storefront-Access-Token": token },
@@ -35,18 +36,86 @@ async function storefront<T>(query: string, variables: Record<string, unknown> =
 
 export const PRODUCT_FRAGMENT = /* GraphQL */ `
   fragment ProductFields on Product {
-    id handle title description descriptionHtml productType vendor tags availableForSale createdAt
-    options { id name optionValues { name } }
-    variants(first: 100) { nodes { id title sku availableForSale price { amount currencyCode } compareAtPrice { amount currencyCode } selectedOptions { name value } } }
-    images(first: 10) { nodes { url altText width height } }
-    featuredImage { url altText width height }
-    priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } }
-    seo { title description }
-    metafields(identifiers: [
-      { namespace: "custom", key: "badge" }, { namespace: "custom", key: "illustration" },
-      { namespace: "custom", key: "personalization" }, { namespace: "custom", key: "volume_pricing" },
-      { namespace: "custom", key: "technical" }, { namespace: "custom", key: "tagline" }
-    ]) { namespace key type value }
+    id
+    handle
+    title
+    description
+    descriptionHtml
+    productType
+    vendor
+    tags
+    availableForSale
+    createdAt
+    options {
+      id
+      name
+      optionValues {
+        name
+      }
+    }
+    variants(first: 100) {
+      nodes {
+        id
+        title
+        sku
+        availableForSale
+        price {
+          amount
+          currencyCode
+        }
+        compareAtPrice {
+          amount
+          currencyCode
+        }
+        selectedOptions {
+          name
+          value
+        }
+      }
+    }
+    images(first: 10) {
+      nodes {
+        url
+        altText
+        width
+        height
+      }
+    }
+    featuredImage {
+      url
+      altText
+      width
+      height
+    }
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    seo {
+      title
+      description
+    }
+    metafields(
+      identifiers: [
+        { namespace: "custom", key: "badge" }
+        { namespace: "custom", key: "illustration" }
+        { namespace: "custom", key: "personalization" }
+        { namespace: "custom", key: "volume_pricing" }
+        { namespace: "custom", key: "technical" }
+        { namespace: "custom", key: "tagline" }
+      ]
+    ) {
+      namespace
+      key
+      type
+      value
+    }
   }
 `;
 

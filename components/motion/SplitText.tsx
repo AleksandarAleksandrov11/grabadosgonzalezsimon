@@ -29,7 +29,10 @@ export function SplitText({
 }) {
   const Comp = m[as];
   const words = text.split(" ");
-  const anim = trigger === "mount" ? { animate: "show" } : { whileInView: "show", viewport: { once: true, amount: 0.4 } };
+  const anim =
+    trigger === "mount"
+      ? { animate: "show" }
+      : { whileInView: "show", viewport: { once: true, amount: 0.4 } };
   return (
     <Comp
       className={className}
@@ -43,7 +46,7 @@ export function SplitText({
         const node: ReactNode = italic ? <em className={italicClassName}>{clean}</em> : clean;
         return (
           <Fragment key={i}>
-            <span className="inline-block overflow-hidden pb-[0.12em] align-bottom -mb-[0.12em]">
+            <span className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
               <m.span
                 className={cn("inline-block will-change-transform")}
                 variants={{

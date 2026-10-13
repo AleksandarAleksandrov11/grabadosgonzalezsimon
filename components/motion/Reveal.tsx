@@ -11,7 +11,10 @@ const variants: Record<RevealVariant, Variants> = {
   up: { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0 } },
   fade: { hidden: { opacity: 0 }, show: { opacity: 1 } },
   clip: { hidden: { clipPath: "inset(0 0 100% 0)" }, show: { clipPath: "inset(0 0 0% 0)" } },
-  "clip-up": { hidden: { clipPath: "inset(100% 0 0 0)", y: 30 }, show: { clipPath: "inset(0% 0 0 0)", y: 0 } },
+  "clip-up": {
+    hidden: { clipPath: "inset(100% 0 0 0)", y: 30 },
+    show: { clipPath: "inset(0% 0 0 0)", y: 0 },
+  },
   scale: { hidden: { opacity: 0, scale: 0.94 }, show: { opacity: 1, scale: 1 } },
   blur: { hidden: { opacity: 0, filter: "blur(10px)" }, show: { opacity: 1, filter: "blur(0px)" } },
   left: { hidden: { opacity: 0, x: -36 }, show: { opacity: 1, x: 0 } },
@@ -29,8 +32,33 @@ type RevealProps = {
 };
 
 /** Aparición al entrar en pantalla. Respeta prefers-reduced-motion (MotionConfig). */
-export function Reveal({ children, variant = "up", delay = 0, duration = 0.9, className, as = "div", amount = 0.25 }: RevealProps) {
+export function Reveal({
+  children,
+  variant = "up",
+  delay = 0,
+  duration = 0.9,
+  className,
+  as = "div",
+  amount = 0.25,
+}: RevealProps) {
   const Comp = m[as];
+  if (variant === "clip" || variant === "clip-up") {
+    // El clip-path a 100 % deja el elemento sin área visible: observamos un
+    // contenedor sin estilos y el hijo hereda el estado de la animación.
+    return (
+      <Comp
+        className={className}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount }}
+        variants={{ hidden: {}, show: {} }}
+      >
+        <m.div variants={variants[variant]} transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}>
+          {children}
+        </m.div>
+      </Comp>
+    );
+  }
   return (
     <Comp
       className={className}
@@ -88,7 +116,11 @@ export function StaggerItem({
 }) {
   const Comp = m[as];
   return (
-    <Comp className={cn(className)} variants={variants[variant]} transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}>
+    <Comp
+      className={cn(className)}
+      variants={variants[variant]}
+      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+    >
       {children}
     </Comp>
   );

@@ -55,7 +55,12 @@ export const useOrders = create<OrdersState>()(
     (set, get) => ({
       orders: [],
       add: (data) => {
-        const order: Order = { ...data, id: newOrderId(get().orders), createdAt: new Date().toISOString(), status: "recibido" };
+        const order: Order = {
+          ...data,
+          id: newOrderId(get().orders),
+          createdAt: new Date().toISOString(),
+          status: "recibido",
+        };
         // los pedidos antiguos conservan los datos pero pierden las miniaturas para no llenar localStorage
         const older = get()
           .orders.slice(0, MAX_ORDERS - 1)

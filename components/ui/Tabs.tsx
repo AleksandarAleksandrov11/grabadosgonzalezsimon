@@ -39,7 +39,7 @@ export function Tabs<T extends string>({
     <div
       role="tablist"
       aria-label={label}
-      className={cn("scrollbar-none -mx-1 flex gap-1 overflow-x-auto px-1", className)}
+      className={cn("-mx-1 scrollbar-none flex gap-1 overflow-x-auto px-1", className)}
     >
       {tabs.map((t, i) => {
         const active = t.value === value;

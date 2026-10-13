@@ -44,11 +44,7 @@ export function Drawer({
 
   if (!mounted) return null;
   const asSheet = side === "bottom" || !isDesktop;
-  const from = asSheet
-    ? { y: "100%", x: 0 }
-    : side === "left"
-      ? { x: "-100%", y: 0 }
-      : { x: "100%", y: 0 };
+  const from = asSheet ? { y: "100%", x: 0 } : side === "left" ? { x: "-100%", y: 0 } : { x: "100%", y: 0 };
 
   return createPortal(
     <AnimatePresence>
@@ -95,7 +91,7 @@ export function Drawer({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="tap -mr-2 inline-flex items-center justify-center rounded-full text-fg transition-colors hover:bg-fg/8"
+                  className="-mr-2 inline-flex tap items-center justify-center rounded-full text-fg transition-colors hover:bg-fg/8"
                   aria-label="Cerrar"
                 >
                   <X className="size-5" strokeWidth={1.5} />
@@ -103,7 +99,9 @@ export function Drawer({
               </div>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
-            {footer ? <div className="border-t border-line px-5 pt-4 safe-bottom sm:px-6">{footer}</div> : null}
+            {footer ? (
+              <div className="border-t border-line px-5 pt-4 safe-bottom sm:px-6">{footer}</div>
+            ) : null}
           </m.div>
         </div>
       ) : null}

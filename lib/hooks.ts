@@ -142,3 +142,46 @@ export function useInViewOnce<T extends Element>(rootMargin = "200px") {
   }, [inView, rootMargin]);
   return [ref, inView] as const;
 }
+
+/* ---- Lectura reactiva de localStorage / sessionStorage sin setState en efectos ---- */
+
+const STORAGE_EVENT = "ggs:storage-key";
+
+function readStorage(kind: "local" | "session", key: string) {
+  try {
+    return (kind === "local" ? window.localStorage : window.sessionStorage).getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+export function writeStorage(kind: "local" | "session", key: string, value: string | null) {
+  try {
+    const s = kind === "local" ? window.localStorage : window.sessionStorage;
+    if (value === null) s.removeItem(key);
+    else s.setItem(key, value);
+  } catch {
+    /* almacenamiento no disponible */
+  }
+  window.dispatchEvent(new CustomEvent(STORAGE_EVENT, { detail: key }));
+}
+
+/** Valor de un item de storage como estado externo (null en el servidor). */
+export function useStorageItem(kind: "local" | "session", key: string) {
+  return useSyncExternalStore(
+    (cb) => {
+      const on = (e: Event) => {
+        const k = e instanceof StorageEvent ? e.key : (e as CustomEvent<string>).detail;
+        if (k === key) cb();
+      };
+      window.addEventListener("storage", on);
+      window.addEventListener(STORAGE_EVENT, on);
+      return () => {
+        window.removeEventListener("storage", on);
+        window.removeEventListener(STORAGE_EVENT, on);
+      };
+    },
+    () => readStorage(kind, key),
+    () => null,
+  );
+}

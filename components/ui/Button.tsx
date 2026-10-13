@@ -17,13 +17,13 @@ export function buttonClasses({
   block?: boolean;
 } = {}) {
   return cn(
-    "group/btn relative inline-flex select-none items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap font-sans font-semibold tracking-[0.02em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-[var(--ease-out)] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45",
+    "group/btn relative inline-flex items-center justify-center gap-2.5 overflow-hidden font-sans font-semibold tracking-[0.02em] whitespace-nowrap transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-[var(--ease-out)] select-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45",
     variant !== "link" && "btn-shine rounded-[var(--radius)]",
     size === "sm" && "min-h-10 px-4 text-[0.8125rem]",
     size === "md" && "min-h-12 px-6 text-[0.9375rem]",
     size === "lg" && "min-h-14 px-8 text-base",
     size === "icon" && "size-11 p-0",
-    variant === "primary" && "bg-fg text-bg hover:bg-fg/88 btn-on-light",
+    variant === "primary" && "btn-on-light bg-fg text-bg hover:bg-fg/88",
     variant === "invert" && "bg-bg text-fg hover:bg-surface-2",
     variant === "outline" && "border border-line-strong text-fg hover:border-fg hover:bg-fg/5",
     variant === "ghost" && "text-fg hover:bg-fg/6",
@@ -43,7 +43,19 @@ type CommonProps = {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ComponentProps<"button"> & CommonProps>(function Button(
-  { variant, size, block, className, children, iconLeft, iconRight, loading, disabled, type = "button", ...rest },
+  {
+    variant,
+    size,
+    block,
+    className,
+    children,
+    iconLeft,
+    iconRight,
+    loading,
+    disabled,
+    type = "button",
+    ...rest
+  },
   ref,
 ) {
   return (
@@ -102,8 +114,22 @@ export function ButtonLink({
 export function Spinner({ className }: { className?: string }) {
   return (
     <svg className={cn("size-4 animate-spin", className)} viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2.5" />
-      <path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+        fill="none"
+        stroke="currentColor"
+        strokeOpacity="0.25"
+        strokeWidth="2.5"
+      />
+      <path
+        d="M21 12a9 9 0 0 0-9-9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

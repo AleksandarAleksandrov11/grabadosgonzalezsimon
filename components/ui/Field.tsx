@@ -14,7 +14,15 @@ type FieldShellProps = {
   optionalLabel?: boolean;
 };
 
-export function FieldShell({ label, error, hint, required, children, className, optionalLabel }: FieldShellProps) {
+export function FieldShell({
+  label,
+  error,
+  hint,
+  required,
+  children,
+  className,
+  optionalLabel,
+}: FieldShellProps) {
   const id = useId();
   const hintId = hint ? `${id}-hint` : undefined;
   const errId = error ? `${id}-err` : undefined;
@@ -38,7 +46,11 @@ export function FieldShell({ label, error, hint, required, children, className, 
         </p>
       ) : null}
       {error ? (
-        <p id={errId} role="alert" className="flex items-center gap-1.5 text-[0.8125rem] font-medium text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]">
+        <p
+          id={errId}
+          role="alert"
+          className="flex items-center gap-1.5 text-[0.8125rem] font-medium text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]"
+        >
           <svg viewBox="0 0 16 16" className="size-3.5 shrink-0" aria-hidden="true">
             <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.4" />
             <path d="M8 4.5v4.2M8 10.8v.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -50,14 +62,26 @@ export function FieldShell({ label, error, hint, required, children, className, 
   );
 }
 
-type InputProps = ComponentProps<"input"> & { label: ReactNode; error?: string; hint?: ReactNode; optionalLabel?: boolean };
+type InputProps = ComponentProps<"input"> & {
+  label: ReactNode;
+  error?: string;
+  hint?: ReactNode;
+  optionalLabel?: boolean;
+};
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { label, error, hint, className, required, optionalLabel, ...rest },
   ref,
 ) {
   return (
-    <FieldShell label={label} error={error} hint={hint} required={required} className={className} optionalLabel={optionalLabel}>
+    <FieldShell
+      label={label}
+      error={error}
+      hint={hint}
+      required={required}
+      className={className}
+      optionalLabel={optionalLabel}
+    >
       {({ id, describedBy, invalid }) => (
         <input
           ref={ref}
@@ -73,14 +97,26 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   );
 });
 
-type TextareaProps = ComponentProps<"textarea"> & { label: ReactNode; error?: string; hint?: ReactNode; optionalLabel?: boolean };
+type TextareaProps = ComponentProps<"textarea"> & {
+  label: ReactNode;
+  error?: string;
+  hint?: ReactNode;
+  optionalLabel?: boolean;
+};
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
   { label, error, hint, className, required, rows = 4, optionalLabel, ...rest },
   ref,
 ) {
   return (
-    <FieldShell label={label} error={error} hint={hint} required={required} className={className} optionalLabel={optionalLabel}>
+    <FieldShell
+      label={label}
+      error={error}
+      hint={hint}
+      required={required}
+      className={className}
+      optionalLabel={optionalLabel}
+    >
       {({ id, describedBy, invalid }) => (
         <textarea
           ref={ref}
@@ -97,14 +133,26 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   );
 });
 
-type SelectProps = ComponentProps<"select"> & { label: ReactNode; error?: string; hint?: ReactNode; optionalLabel?: boolean };
+type SelectProps = ComponentProps<"select"> & {
+  label: ReactNode;
+  error?: string;
+  hint?: ReactNode;
+  optionalLabel?: boolean;
+};
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
   { label, error, hint, className, required, children, optionalLabel, ...rest },
   ref,
 ) {
   return (
-    <FieldShell label={label} error={error} hint={hint} required={required} className={className} optionalLabel={optionalLabel}>
+    <FieldShell
+      label={label}
+      error={error}
+      hint={hint}
+      required={required}
+      className={className}
+      optionalLabel={optionalLabel}
+    >
       {({ id, describedBy, invalid }) => (
         <div className="relative">
           <select
@@ -142,7 +190,10 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
   const errId = error ? `${id}-err` : undefined;
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={id} className="group/cb flex cursor-pointer items-start gap-3 text-[0.875rem] leading-snug text-fg-muted">
+      <label
+        htmlFor={id}
+        className="group/cb flex cursor-pointer items-start gap-3 text-[0.875rem] leading-snug text-fg-muted"
+      >
         <span className="relative mt-0.5 inline-flex size-5 shrink-0">
           <input
             ref={ref}
@@ -159,13 +210,24 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
             className="pointer-events-none absolute inset-0 m-auto size-3.5 text-bg opacity-0 transition-opacity peer-checked:opacity-100"
             aria-hidden="true"
           >
-            <path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M3.5 8.5l3 3 6-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </span>
         <span>{label}</span>
       </label>
       {error ? (
-        <p id={errId} role="alert" className="pl-8 text-[0.8125rem] font-medium text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]">
+        <p
+          id={errId}
+          role="alert"
+          className="pl-8 text-[0.8125rem] font-medium text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]"
+        >
           {error}
         </p>
       ) : null}

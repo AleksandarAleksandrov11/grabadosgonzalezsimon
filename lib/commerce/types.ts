@@ -54,7 +54,8 @@ export type OccasionTag =
   | "jubilacion"
   | "navidad";
 
-export type CategoryHandle = "vasos" | "copas" | "jarras" | "jarrones" | "metopas-y-placas" | "trofeos" | "packs";
+export type CategoryHandle =
+  "vasos" | "copas" | "jarras" | "jarrones" | "metopas-y-placas" | "trofeos" | "packs";
 
 export type PersonalizationType = "texto" | "iniciales" | "logo" | "fecha";
 

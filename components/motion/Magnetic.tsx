@@ -6,7 +6,15 @@ import { useRef, type ReactNode } from "react";
 import { useIsTouch } from "@/lib/hooks";
 
 /** Efecto magnético sutil (solo con ratón). */
-export function Magnetic({ children, strength = 0.25, className }: { children: ReactNode; strength?: number; className?: string }) {
+export function Magnetic({
+  children,
+  strength = 0.25,
+  className,
+}: {
+  children: ReactNode;
+  strength?: number;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const touch = useIsTouch();
   const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });

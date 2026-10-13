@@ -1,5 +1,14 @@
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+/** tailwind-merge con nuestros tamaños de texto propios (si no, los confunde con colores). */
+const twMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      "font-size": [{ text: ["display-xl", "display-l", "display-m", "display-s", "lead", "eyebrow"] }],
+    },
+  },
+});
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -36,10 +45,7 @@ export function slugify(s: string) {
 
 /** Normaliza texto para búsquedas: sin tildes y en minúsculas. */
 export function normalize(s: string) {
-  return s
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase();
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 }
 
 export function plural(n: number, one: string, many: string) {

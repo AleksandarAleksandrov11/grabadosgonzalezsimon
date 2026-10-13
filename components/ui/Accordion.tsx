@@ -42,7 +42,9 @@ export function Accordion({
                 onClick={() => toggle(it.id)}
                 className={cn(
                   "group flex w-full items-center justify-between gap-6 text-left transition-colors hover:text-fg",
-                  size === "lg" ? "py-6 font-display text-[clamp(1.25rem,1rem+0.8vw,1.75rem)] leading-tight" : "",
+                  size === "lg"
+                    ? "py-6 font-display text-[clamp(1.25rem,1rem+0.8vw,1.75rem)] leading-tight"
+                    : "",
                   size === "md" ? "py-5 text-[1.0625rem] font-semibold" : "",
                   size === "sm" ? "py-4 text-[0.9375rem] font-semibold" : "",
                 )}
@@ -71,7 +73,7 @@ export function Accordion({
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   className="overflow-hidden"
                 >
-                  <div className="pb-6 pr-10 text-[0.98rem] leading-relaxed text-fg-muted [&_a]:underline [&_a]:underline-offset-4 [&_p+p]:mt-3 [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:pl-5">
+                  <div className="pr-10 pb-6 text-[0.98rem] leading-relaxed text-fg-muted [&_a]:underline [&_a]:underline-offset-4 [&_p+p]:mt-3 [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:pl-5">
                     {it.content}
                   </div>
                 </m.div>

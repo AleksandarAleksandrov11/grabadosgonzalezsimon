@@ -35,7 +35,8 @@ export function StoreHydrator() {
     const onFull = () =>
       toast({
         title: "Almacenamiento lleno",
-        description: "El navegador no tiene espacio para guardar más datos de la demo. Borra pedidos o diseños antiguos.",
+        description:
+          "El navegador no tiene espacio para guardar más datos de la demo. Borra pedidos o diseños antiguos.",
         tone: "error",
       });
     window.addEventListener("storage", onStorage);

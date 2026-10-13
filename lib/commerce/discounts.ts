@@ -13,13 +13,20 @@ export const DISCOUNT_CODES = {
 
 export type DiscountCode = keyof typeof DISCOUNT_CODES;
 
-export function validateDiscount(raw: string, lines: CartLine[]): { ok: true; code: DiscountCode } | { ok: false; error: string } {
+export function validateDiscount(
+  raw: string,
+  lines: CartLine[],
+): { ok: true; code: DiscountCode } | { ok: false; error: string } {
   const code = raw.trim().toUpperCase();
   if (!code) return { ok: false, error: "Introduce un código." };
-  if (!(code in DISCOUNT_CODES)) return { ok: false, error: "Este código no es válido. Prueba con DEMO10 o BODA15." };
+  if (!(code in DISCOUNT_CODES))
+    return { ok: false, error: "Este código no es válido. Prueba con DEMO10 o BODA15." };
   const d = DISCOUNT_CODES[code as DiscountCode];
   if (d.tag && !lines.some((l) => l.tags.includes(d.tag!))) {
-    return { ok: false, error: "BODA15 solo se aplica a productos para bodas y no hay ninguno en tu carrito." };
+    return {
+      ok: false,
+      error: "BODA15 solo se aplica a productos para bodas y no hay ninguno en tu carrito.",
+    };
   }
   return { ok: true, code: code as DiscountCode };
 }
