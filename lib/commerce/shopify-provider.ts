@@ -109,6 +109,9 @@ export const PRODUCT_FRAGMENT = /* GraphQL */ `
         { namespace: "custom", key: "volume_pricing" }
         { namespace: "custom", key: "technical" }
         { namespace: "custom", key: "tagline" }
+        { namespace: "custom", key: "category" }
+        { namespace: "custom", key: "min_quantity" }
+        { namespace: "custom", key: "complete_the_set" }
       ]
     ) {
       namespace
