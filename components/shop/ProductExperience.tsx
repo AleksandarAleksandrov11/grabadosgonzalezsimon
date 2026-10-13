@@ -123,11 +123,11 @@ export function ProductExperience({ product }: { product: Product }) {
         attributes = designAttributes(useCustomizer.getState().design, PIECES[glass].label);
       }
       add(toCartLine(product, variant, attributes, preview), qty);
-      toast({
-        title: "Añadido al carrito",
-        description: `${product.title}${qty > 1 ? ` · ${qty} uds.` : ""}`,
-      });
       if (buyNow) {
+        toast({
+          title: "Añadido al carrito",
+          description: `${product.title}${qty > 1 ? ` · ${qty} uds.` : ""}`,
+        });
         router.push("/checkout");
         return;
       }

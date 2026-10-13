@@ -44,7 +44,7 @@ export function FaqExplorer({ faqs, groups }: { faqs: Faq[]; groups: FaqGroup[] 
           ) : null}
         </div>
         <nav aria-label="Temas" className="mt-6">
-          <ul className="-mx-[var(--gutter)] scrollbar-none flex gap-2 overflow-x-auto px-[var(--gutter)] lg:mx-0 lg:flex-col lg:gap-1 lg:px-0">
+          <ul className="relative -mx-[var(--gutter)] scrollbar-none flex gap-2 overflow-x-auto px-[var(--gutter)] lg:mx-0 lg:flex-col lg:gap-1 lg:px-0">
             {(["Todas", ...groups] as const).map((g) => {
               const count = g === "Todas" ? faqs.length : faqs.filter((f) => f.group === g).length;
               return (

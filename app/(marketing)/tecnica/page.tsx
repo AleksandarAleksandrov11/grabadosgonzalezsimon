@@ -150,7 +150,7 @@ export default function TecnicaPage() {
             <p className="mb-3 text-[0.8125rem] text-fg-subtle md:hidden" aria-hidden="true">
               Desliza la tabla para ver todas las técnicas →
             </p>
-            <div className="-mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)]">
+            <div className="relative -mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)]">
               <table className="w-full min-w-[720px] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-line-strong">

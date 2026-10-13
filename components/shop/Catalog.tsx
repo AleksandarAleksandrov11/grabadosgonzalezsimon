@@ -225,6 +225,7 @@ export function Catalog({
         <EmptyState onClear={clearAll} />
       ) : (
         <>
+          <h2 className="sr-only">Productos</h2>
           <m.ul
             layout
             className="mt-6 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4"
@@ -281,13 +282,16 @@ export function Catalog({
 /** Grid estático (sin filtros) para el HTML inicial / fallback de Suspense: SEO y sin JS. */
 export function StaticGrid({ products }: { products: Product[] }) {
   return (
-    <ul className="mt-24 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
-      {products.slice(0, PAGE).map((p) => (
-        <li key={p.handle} className="relative">
-          <ProductCard product={p} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <h2 className="sr-only">Productos</h2>
+      <ul className="mt-24 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+        {products.slice(0, PAGE).map((p) => (
+          <li key={p.handle} className="relative">
+            <ProductCard product={p} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 

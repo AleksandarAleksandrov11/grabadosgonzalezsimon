@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { forCard } from "@/lib/commerce/catalog-lite";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FinalCTA } from "@/components/home/FinalCTA";
@@ -125,7 +126,7 @@ export default async function OcasionPage(props: PageProps<"/ocasiones/[slug]">)
           </div>
           <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
             {products.slice(0, 8).map((p) => (
-              <ProductCard key={p.handle} product={p} />
+              <ProductCard key={p.handle} product={forCard(p)} />
             ))}
           </div>
         </div>

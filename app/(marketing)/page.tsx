@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { forCard } from "@/lib/commerce/catalog-lite";
 import { Hero } from "@/components/home/Hero";
 import { OccasionsMarquee } from "@/components/home/OccasionsMarquee";
 import { Intro } from "@/components/home/Intro";
@@ -27,7 +28,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function HomePage() {
-  const products = allProducts();
+  const products = allProducts().map(forCard);
   const byTag = (t: string) => products.filter((p) => p.tags.includes(t)).slice(0, 8);
   const lists = {
     best: products.slice(0, 8),

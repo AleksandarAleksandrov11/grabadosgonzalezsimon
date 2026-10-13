@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { forCard } from "@/lib/commerce/catalog-lite";
 import { PageHero } from "@/components/layout/PageHero";
 import { FavoritesView } from "@/components/shop/FavoritesView";
 import { allProducts } from "@/lib/commerce/local-provider";
@@ -23,7 +24,7 @@ export default function FavoritosPage() {
       />
       <section className="theme-light bg-paper pt-10 pb-28 sm:pt-14">
         <div className="container-x">
-          <FavoritesView products={allProducts()} />
+          <FavoritesView products={allProducts().map(forCard)} />
         </div>
       </section>
     </>

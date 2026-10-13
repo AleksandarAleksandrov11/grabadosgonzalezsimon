@@ -119,7 +119,7 @@ export function Studio({ products }: { products: Product[] }) {
         ),
         product.metafields.minQuantity ?? 1,
       );
-      toast({ title: "Añadido al carrito con tu diseño", description: product.title });
+      // el carrito lateral que se abre ya confirma la acción (sin toast que lo tape)
       useUI.getState().setCartOpen(true);
     } finally {
       setBusy(null);

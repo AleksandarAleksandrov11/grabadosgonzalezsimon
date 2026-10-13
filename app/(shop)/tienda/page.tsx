@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { forCard } from "@/lib/commerce/catalog-lite";
 import Link from "next/link";
 import { Suspense } from "react";
 import { PageHero } from "@/components/layout/PageHero";
@@ -15,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function ShopPage() {
-  const products = allProducts();
+  const products = allProducts().map(forCard);
   return (
     <>
       <PageHero

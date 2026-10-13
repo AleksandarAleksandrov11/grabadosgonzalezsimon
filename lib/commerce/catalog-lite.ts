@@ -43,3 +43,11 @@ export function searchIndex(): LiteProduct[] {
 export function giftBoxLite(): LiteProduct {
   return toLite(getProductSync("estuche-regalo")!);
 }
+
+/**
+ * Producto «para tarjeta»: sin los campos largos que las tarjetas y la vista
+ * rápida no usan (descriptionHtml, SEO). Reduce el payload RSC de los listados.
+ */
+export function forCard(p: Product): Product {
+  return { ...p, descriptionHtml: "", seo: { title: "", description: "" } };
+}

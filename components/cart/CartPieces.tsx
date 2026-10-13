@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import * as m from "motion/react-m";
 import { Gift, Tag, Truck, X } from "lucide-react";
 import { DISCOUNT_CODES, validateDiscount } from "@/lib/commerce/discounts";
@@ -48,6 +48,7 @@ export function DiscountInput() {
   const { lines, discountCode, setDiscount } = useCart();
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const id = useId();
 
   if (discountCode) {
     return (
@@ -81,12 +82,12 @@ export function DiscountInput() {
         toast({ title: `Código ${res.code} aplicado`, description: DISCOUNT_CODES[res.code].label });
       }}
     >
-      <label htmlFor="discount-code" className="sr-only">
+      <label htmlFor={`${id}-code`} className="sr-only">
         Código de descuento
       </label>
       <div className="flex gap-2">
         <input
-          id="discount-code"
+          id={`${id}-code`}
           value={value}
           onChange={(e) => {
             setValue(e.target.value.toUpperCase());
@@ -95,7 +96,7 @@ export function DiscountInput() {
           placeholder="Código de descuento (prueba DEMO10)"
           autoComplete="off"
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? "discount-error" : undefined}
+          aria-describedby={error ? `${id}-error` : undefined}
           className="h-11 min-w-0 flex-1 rounded-[var(--radius)] border border-line-strong bg-surface px-3 !text-[0.875rem] uppercase placeholder:text-fg-subtle placeholder:normal-case focus:border-fg focus:outline-none"
         />
         <button
@@ -107,7 +108,7 @@ export function DiscountInput() {
       </div>
       {error ? (
         <p
-          id="discount-error"
+          id={`${id}-error`}
           role="alert"
           className="mt-2 text-[0.8125rem] font-medium text-[#b3261e] [.theme-dark_&]:text-[#ffb4ab]"
         >

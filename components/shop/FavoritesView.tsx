@@ -66,6 +66,7 @@ export function FavoritesView({ products }: { products: Product[] }) {
           Vaciar favoritos
         </Button>
       </div>
+      <h2 className="sr-only">Tus favoritos</h2>
       <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
         {favs.map((p) => (
           <ProductCard key={p.handle} product={p} />

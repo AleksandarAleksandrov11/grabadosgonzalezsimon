@@ -6,6 +6,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Catalog, StaticGrid } from "@/components/shop/Catalog";
 import { categories, categoryByHandle } from "@/data/collections";
 import { filterProducts } from "@/lib/commerce/filter";
+import { forCard } from "@/lib/commerce/catalog-lite";
 import { allProducts } from "@/lib/commerce/local-provider";
 import type { CategoryHandle } from "@/lib/commerce/types";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -28,7 +29,7 @@ export default async function CategoryPage({ params }: PageProps<"/tienda/[categ
   const { categoria } = await params;
   const c = categoryByHandle(categoria);
   if (!c) notFound();
-  const all = allProducts();
+  const all = allProducts().map(forCard);
   const inCat = filterProducts(all, { category: c.handle as CategoryHandle });
   return (
     <>

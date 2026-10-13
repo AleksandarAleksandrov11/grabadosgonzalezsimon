@@ -53,8 +53,61 @@ export function sampleSpline(points: Pt[], perSeg = 14): Pt[] {
   return out;
 }
 
+/** Número compacto para datos de trazado: 0.3 → .3, -0.3 → -.3 */
+const c = (n: number) => f(n).replace(/^(-?)0\./, "$1.");
+
+/** Distancia de p al segmento a–b. */
+function segDist(p: Pt, a: Pt, b: Pt) {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const len = dx * dx + dy * dy;
+  const t = len ? Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / len)) : 0;
+  return Math.hypot(p[0] - (a[0] + t * dx), p[1] - (a[1] + t * dy));
+}
+
+/** Ramer–Douglas–Peucker: quita puntos casi alineados (invisible a ε = 0,12 px). */
+function simplify(pts: Pt[], eps = 0.12): Pt[] {
+  if (pts.length < 3) return pts;
+  const keep = new Uint8Array(pts.length);
+  keep[0] = keep[pts.length - 1] = 1;
+  const stack: [number, number][] = [[0, pts.length - 1]];
+  while (stack.length) {
+    const [i0, i1] = stack.pop()!;
+    let max = 0;
+    let idx = -1;
+    for (let i = i0 + 1; i < i1; i++) {
+      const d = segDist(pts[i], pts[i0], pts[i1]);
+      if (d > max) {
+        max = d;
+        idx = i;
+      }
+    }
+    if (idx > 0 && max > eps) {
+      keep[idx] = 1;
+      stack.push([i0, idx], [idx, i1]);
+    }
+  }
+  return pts.filter((_, i) => keep[i]);
+}
+
+/**
+ * Polilínea compacta: redondeo a 0,1, sin puntos repetidos ni casi alineados y
+ * con coordenadas relativas. Reduce mucho el HTML (hay decenas de piezas por página).
+ */
 export function polyline(points: Pt[], move = true) {
-  return points.map((p, i) => `${i === 0 && move ? "M" : "L"}${f(p[0])} ${f(p[1])}`).join("");
+  if (!points.length) return "";
+  const r = points.map(([x, y]) => [Math.round(x * 10) / 10, Math.round(y * 10) / 10] as Pt);
+  const pts = simplify(r.filter((p, i) => i === 0 || p[0] !== r[i - 1][0] || p[1] !== r[i - 1][1]));
+  let out = `${move ? "M" : "L"}${f(pts[0][0])} ${f(pts[0][1])}`;
+  if (pts.length > 1) {
+    out +=
+      "l" +
+      pts
+        .slice(1)
+        .map((p, i) => `${c(p[0] - pts[i][0])} ${c(p[1] - pts[i][1])}`)
+        .join(" ");
+  }
+  return out;
 }
 
 /** Perfil muestreado y función r(y) por interpolación lineal. */

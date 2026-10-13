@@ -119,7 +119,7 @@ function TextPanel({ compact = false }: { compact?: boolean }) {
       <div
         className={cn(
           compact
-            ? "-mx-1 scrollbar-none flex gap-1.5 overflow-x-auto px-1 [&>label]:w-[5.5rem] [&>label]:shrink-0"
+            ? "relative -mx-1 scrollbar-none flex gap-1.5 overflow-x-auto px-1 [&>label]:w-[5.5rem] [&>label]:shrink-0"
             : "grid grid-cols-3 gap-1.5",
         )}
       >
@@ -144,7 +144,7 @@ function TextPanel({ compact = false }: { compact?: boolean }) {
             >
               {f.sample}
             </span>
-            <span className="mt-0.5 text-[0.625rem] leading-tight text-fg-subtle">{f.label}</span>
+            <span className="mt-0.5 text-[0.625rem] leading-tight text-fg-muted">{f.label}</span>
           </label>
         ))}
       </div>
@@ -465,7 +465,7 @@ export function Controls({
       <div
         role="tablist"
         aria-label="Opciones de personalización"
-        className="scrollbar-none flex gap-1 overflow-x-auto border-b border-line"
+        className="relative scrollbar-none flex gap-1 overflow-x-auto border-b border-line"
       >
         {tabs.map((t) => (
           <button

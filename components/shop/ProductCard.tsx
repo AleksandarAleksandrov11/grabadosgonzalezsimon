@@ -9,7 +9,6 @@ import { FavoriteButton } from "./FavoriteButton";
 import { PENDING_DESIGN, toCartLine } from "@/lib/commerce/variant";
 import type { Product } from "@/lib/commerce/types";
 import { useCart } from "@/lib/store/cart";
-import { toast } from "@/lib/store/toast";
 import { useUI } from "@/lib/store/ui";
 import { cn, formatPrice } from "@/lib/utils";
 
@@ -37,7 +36,6 @@ export function ProductCard({
     const svg = art.current?.querySelector("svg")?.outerHTML;
     if (r) flyToCart({ x: r.left, y: r.top, w: r.width, h: r.height, image: svg });
     else useUI.getState().setCartOpen(true);
-    toast({ title: "Añadido al carrito", description: `${product.title}${min > 1 ? ` · ${min} uds.` : ""}` });
   };
 
   return (

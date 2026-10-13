@@ -1,13 +1,17 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Checkbox, Input, Textarea } from "@/components/ui/Field";
-import { quickContactSchema, type QuickContact } from "@/lib/validation";
+import type { QuickContact } from "@/lib/validation";
+
+// Validación con las reglas nativas de react-hook-form (mismos mensajes que el
+// esquema Zod de lib/validation.ts, que se sigue aplicando en /api/contact).
+// Así este formulario, presente en muchas páginas, no arrastra Zod al bundle.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 import { SuccessMark } from "./SuccessMark";
 
 /** Formulario rápido (email + mensaje), como el de la web actual del cliente. */
@@ -20,7 +24,6 @@ export function QuickContactForm() {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<QuickContact>({
-    resolver: zodResolver(quickContactSchema),
     defaultValues: { email: "", message: "", privacy: false, marketing: false },
   });
 
@@ -68,7 +71,10 @@ export function QuickContactForm() {
             autoComplete="email"
             required
             error={errors.email?.message}
-            {...register("email")}
+            {...register("email", {
+              required: "Escribe tu email.",
+              pattern: { value: EMAIL_RE, message: "Ese email no parece válido." },
+            })}
           />
           <Textarea
             label="Mensaje"
@@ -76,7 +82,14 @@ export function QuickContactForm() {
             rows={4}
             placeholder="Cuéntanos tu idea: pieza, cantidad, texto o logo, fecha…"
             error={errors.message?.message}
-            {...register("message")}
+            {...register("message", {
+              validate: (v) => {
+                const t = v.trim();
+                if (t.length < 10) return "Cuéntanos un poco más (mínimo 10 caracteres).";
+                if (t.length > 2000) return "Máximo 2000 caracteres.";
+                return true;
+              },
+            })}
           />
           <div className="space-y-3">
             <Checkbox
@@ -94,7 +107,9 @@ export function QuickContactForm() {
               }
               required
               error={errors.privacy?.message}
-              {...register("privacy")}
+              {...register("privacy", {
+                validate: (v) => v === true || "Debes aceptar la política de privacidad.",
+              })}
             />
           </div>
           {serverError ? (

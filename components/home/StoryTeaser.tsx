@@ -21,7 +21,7 @@ export function StoryTeaser() {
               alt="Detalle del taller: arena de grabado y maquinaria junto a un vaso recién grabado"
               fill
               sizes="(min-width: 1024px) 80vw, 160vw"
-              className="origin-[70%_100%] scale-[1.7] object-cover object-[70%_100%] grayscale"
+              className="origin-[50%_100%] scale-[2.3] object-cover object-[50%_100%] grayscale"
             />
           </Parallax>
           {/* TODO: sustituir por una foto real del artesano trabajando en el taller */}

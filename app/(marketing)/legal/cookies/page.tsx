@@ -52,8 +52,8 @@ export default function CookiesPage() {
         <strong>almacenamiento local del navegador</strong> (equivalente a cookies técnicas), que no se envía
         a ningún servidor:
       </p>
-      <div className="overflow-x-auto">
-        <table>
+      <div className="relative -mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)] sm:mx-0 sm:px-0">
+        <table className="min-w-[34rem]">
           <thead>
             <tr>
               <th scope="col">Clave</th>

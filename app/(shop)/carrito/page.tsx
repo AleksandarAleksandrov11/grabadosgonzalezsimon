@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
 import { CartPage } from "@/components/cart/CartPage";
-import { giftBoxLite } from "@/lib/commerce/catalog-lite";
+import { forCard, giftBoxLite } from "@/lib/commerce/catalog-lite";
 import { allProducts } from "@/lib/commerce/local-provider";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -24,7 +24,7 @@ export default function CarritoPage() {
       />
       <section className="theme-light bg-paper pt-10 pb-28 sm:pt-14">
         <div className="container-x">
-          <CartPage giftBox={giftBoxLite()} pool={allProducts()} />
+          <CartPage giftBox={giftBoxLite()} pool={allProducts().map(forCard)} />
         </div>
       </section>
     </>

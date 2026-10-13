@@ -191,6 +191,12 @@
    ========================================================================== */
 
 @layer base {
+  /* Un <fieldset> crece por defecto hasta su min-content: con filas de scroll
+     horizontal dentro ensanchaba la página en móvil. */
+  fieldset {
+    min-inline-size: 0;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -572,10 +578,11 @@ html.lenis body {
     opacity: 1;
   }
 }
+/* opacity 0.001 (no 0): el elemento cuenta como pintado para el LCP desde el primer frame */
 @keyframes fade-up {
   from {
     transform: translate3d(0, 18px, 0);
-    opacity: 0;
+    opacity: 0.001;
   }
   to {
     transform: translate3d(0, 0, 0);
@@ -584,7 +591,7 @@ html.lenis body {
 }
 @keyframes fade-in {
   from {
-    opacity: 0;
+    opacity: 0.001;
   }
   to {
     opacity: 1;

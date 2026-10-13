@@ -50,7 +50,7 @@ export function Testimonials() {
         ref={track}
         tabIndex={0}
         aria-label="Reseñas de ejemplo"
-        className="mt-12 scrollbar-none flex snap-x snap-mandatory scroll-px-[var(--gutter)] gap-4 overflow-x-auto scroll-smooth px-[var(--gutter)] pb-4 focus-visible:outline-offset-[-4px] min-[1440px]:scroll-px-[calc((100vw-1440px)/2+var(--gutter))] min-[1440px]:px-[calc((100vw-1440px)/2+var(--gutter))]"
+        className="relative mt-12 scrollbar-none flex snap-x snap-mandatory scroll-px-[var(--gutter)] gap-4 overflow-x-auto scroll-smooth px-[var(--gutter)] pb-4 focus-visible:outline-offset-[-4px] min-[1440px]:scroll-px-[calc((100vw-1440px)/2+var(--gutter))] min-[1440px]:px-[calc((100vw-1440px)/2+var(--gutter))]"
         data-lenis-prevent-horizontal
       >
         {testimonials.map((t, i) => (

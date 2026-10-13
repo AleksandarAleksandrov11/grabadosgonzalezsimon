@@ -147,7 +147,7 @@ export function ProductGallery({
         ) : null}
       </div>
       <ul
-        className="gallery-thumbs scrollbar-none flex gap-2 overflow-x-auto"
+        className="gallery-thumbs relative scrollbar-none flex gap-2 overflow-x-auto"
         aria-label="Imágenes del producto"
       >
         {slides.map((s, k) => (

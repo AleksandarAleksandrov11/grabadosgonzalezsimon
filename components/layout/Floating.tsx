@@ -116,7 +116,7 @@ export function CookieBanner() {
               Usamos cookies técnicas para que la tienda funcione (carrito, preferencias). Las analíticas solo
               si las aceptas.{" "}
               <Link href="/legal/cookies" className="underline underline-offset-2">
-                Más información
+                Política de cookies
               </Link>
               .
             </p>

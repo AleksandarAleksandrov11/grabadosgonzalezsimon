@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StudioLoader } from "@/components/customizer/StudioLoader";
+import { forCard } from "@/lib/commerce/catalog-lite";
 import { allProducts } from "@/lib/commerce/local-provider";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -11,7 +12,9 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function PersonalizePage() {
-  const products = allProducts().filter((p) => p.metafields.personalization.types.length > 0);
+  const products = allProducts()
+    .filter((p) => p.metafields.personalization.types.length > 0)
+    .map(forCard);
   return (
     <>
       <section className="theme-dark grain relative overflow-hidden bg-ink pt-[calc(var(--header-h)+1.5rem)] pb-8 sm:pb-10">

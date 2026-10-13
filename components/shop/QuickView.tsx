@@ -12,7 +12,6 @@ import { VariantPicker } from "./VariantPicker";
 import { unitPriceFor } from "@/lib/commerce/pricing";
 import { findVariant, PENDING_DESIGN, selectedFromVariant, toCartLine } from "@/lib/commerce/variant";
 import { useCart } from "@/lib/store/cart";
-import { toast } from "@/lib/store/toast";
 import { useUI } from "@/lib/store/ui";
 import type { Product } from "@/lib/commerce/types";
 
@@ -90,7 +89,6 @@ function QuickViewBody({ product }: { product: Product }) {
                 size="lg"
                 onClick={() => {
                   add(toCartLine(product, variant, PENDING_DESIGN), qty);
-                  toast({ title: "Añadido al carrito", description: product.title });
                   close();
                   setCartOpen(true);
                 }}
