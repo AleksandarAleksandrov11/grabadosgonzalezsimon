@@ -13,11 +13,11 @@ import { cn } from "@/lib/utils";
  * dinámica) que avanza los 4 pasos con el scroll. En móvil o con movimiento
  * reducido, stepper vertical sin pin.
  */
-export function TechniquePinned() {
+export function TechniquePinned({ link = true }: { link?: boolean }) {
   const desktop = useIsDesktop();
   const reduce = usePrefersReducedMotion();
   const pinned = desktop && !reduce;
-  return pinned ? <PinnedDesktop /> : <Stepper />;
+  return pinned ? <PinnedDesktop link={link} /> : <Stepper link={link} />;
 }
 
 function Heading({ className }: { className?: string }) {
@@ -37,7 +37,7 @@ function Heading({ className }: { className?: string }) {
   );
 }
 
-function PinnedDesktop() {
+function PinnedDesktop({ link }: { link: boolean }) {
   // React es dueño del <div> exterior; GSAP solo fija (y envuelve) la <section> interior.
   const section = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
@@ -119,12 +119,14 @@ function PinnedDesktop() {
                 </li>
               ))}
             </ol>
-            <Link
-              href="/tecnica"
-              className="group/btn mt-10 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-paper"
-            >
-              <span className="link-underline">Descubre la técnica en detalle</span> <ArrowIcon />
-            </Link>
+            {link ? (
+              <Link
+                href="/tecnica"
+                className="group/btn mt-10 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-paper"
+              >
+                <span className="link-underline">Descubre la técnica en detalle</span> <ArrowIcon />
+              </Link>
+            ) : null}
           </div>
           <div className="col-span-6 col-start-7">
             <div className="relative mx-auto max-w-[540px]">
@@ -143,7 +145,7 @@ function PinnedDesktop() {
   );
 }
 
-function Stepper() {
+function Stepper({ link }: { link: boolean }) {
   return (
     <section
       className="theme-dark grain relative overflow-hidden bg-ink section-y"
@@ -168,12 +170,14 @@ function Stepper() {
             </li>
           ))}
         </ol>
-        <Link
-          href="/tecnica"
-          className="group/btn mt-12 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-paper"
-        >
-          <span className="link-underline">Descubre la técnica en detalle</span> <ArrowIcon />
-        </Link>
+        {link ? (
+          <Link
+            href="/tecnica"
+            className="group/btn mt-12 inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-paper"
+          >
+            <span className="link-underline">Descubre la técnica en detalle</span> <ArrowIcon />
+          </Link>
+        ) : null}
       </div>
     </section>
   );

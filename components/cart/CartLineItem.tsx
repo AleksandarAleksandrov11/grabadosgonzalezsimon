@@ -6,7 +6,7 @@ import { Glass } from "@/components/glassware/Glass";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { lineTotal, tierFor, unitPriceFor } from "@/lib/commerce/pricing";
 import type { CartLine } from "@/lib/commerce/types";
-import { designToQuery } from "@/lib/engrave/store";
+import { designToQuery } from "@/lib/engrave/share";
 import type { Design } from "@/lib/engrave/types";
 import { attr, useCart } from "@/lib/store/cart";
 import { toast } from "@/lib/store/toast";

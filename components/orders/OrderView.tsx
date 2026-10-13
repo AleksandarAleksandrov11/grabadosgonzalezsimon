@@ -47,9 +47,7 @@ function NotFound({ id }: { id: string }) {
             borrado o que lo abrieras en otro dispositivo.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <ButtonLink href="/mis-pedidos" variant="invert">
-              Ver mis pedidos
-            </ButtonLink>
+            <ButtonLink href="/mis-pedidos">Ver mis pedidos</ButtonLink>
             <ButtonLink href="/tienda" variant="outline">
               Ir a la tienda
             </ButtonLink>
