@@ -97,7 +97,7 @@ export function productJsonLd(p: Product): Json {
     sku: p.variants[0]?.sku,
     brand: { "@type": "Brand", name: site.name },
     category: p.productType,
-    image: [absoluteUrl(`/producto/${p.handle}/opengraph-image`), ...p.images.map((i) => absoluteUrl(i.url))],
+    image: [absoluteUrl(`/og/producto/${p.handle}`), ...p.images.map((i) => absoluteUrl(i.url))],
     url,
     offers: {
       "@type": "AggregateOffer",

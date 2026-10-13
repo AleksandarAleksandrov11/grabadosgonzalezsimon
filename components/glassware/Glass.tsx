@@ -118,7 +118,14 @@ type Pal = Omit<(typeof PAL)["dark"], "blend"> & { blend: "screen" | "multiply" 
 
 /* ------------------------------------------------------------------------ */
 
-export function Glass({
+export function Glass(props: Props) {
+  const uid = svgId(useId());
+  return <GlassMarkup uid={uid} {...props} />;
+}
+
+/** Igual que <Glass> pero con un id fijo (sin hooks): para generar el SVG fuera de React (imágenes OG). */
+export function GlassMarkup({
+  uid,
   id,
   tone = "dark",
   layer = "all",
@@ -128,8 +135,7 @@ export function Glass({
   showZone,
   engravingClassName,
   children,
-}: Props) {
-  const uid = svgId(useId());
+}: Props & { uid: string }) {
   const pal = PAL[tone];
   return (
     <svg

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: site.description,
   },
   twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+  robots: site.indexable ? { index: true, follow: true } : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

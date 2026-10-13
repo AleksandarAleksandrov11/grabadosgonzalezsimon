@@ -30,7 +30,12 @@ export async function generateMetadata(props: PageProps<"/ocasiones/[slug]">): P
   const { slug } = await props.params;
   const o = occasionBySlug(slug);
   if (!o) return {};
-  return pageMetadata({ title: o.seoTitle, description: o.seoDescription, path: `/ocasiones/${o.slug}` });
+  return pageMetadata({
+    title: o.seoTitle,
+    description: o.seoDescription,
+    path: `/ocasiones/${o.slug}`,
+    image: `/og/ocasion/${o.slug}`,
+  });
 }
 
 export default async function OcasionPage(props: PageProps<"/ocasiones/[slug]">) {

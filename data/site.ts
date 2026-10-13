@@ -14,6 +14,11 @@ export const site = {
   // TODO: sustituir por el dominio definitivo cuando se publique (o definir NEXT_PUBLIC_SITE_URL en Vercel)
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://grabadosgonzalezsimon.vercel.app").replace(/\/$/, ""),
   locale: "es_ES",
+  /**
+   * La demo NO se indexa por defecto (evita que Google la confunda con la web
+   * real). Al publicar en el dominio definitivo: NEXT_PUBLIC_INDEXABLE=true.
+   */
+  indexable: process.env.NEXT_PUBLIC_INDEXABLE === "true",
   email: "grabadosgonzalezs@gmail.com",
   phones: {
     mobile: { display: "659 74 62 90", href: "tel:+34659746290", e164: "+34659746290" },

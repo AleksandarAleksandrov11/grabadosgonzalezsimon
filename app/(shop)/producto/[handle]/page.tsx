@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: PageProps<"/producto/[handle]
     title: p.seo.title,
     description: p.seo.description,
     path: `/producto/${p.handle}`,
+    image: `/og/producto/${p.handle}`,
     noIndex: p.metafields.hidden,
   });
 }

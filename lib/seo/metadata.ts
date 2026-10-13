@@ -22,6 +22,9 @@ export function pageMetadata({
   absoluteTitle,
 }: PageMetaInput): Metadata {
   const url = path === "/" ? "/" : path;
+  // Sin imagen propia se usa la OG general (app/opengraph-image.tsx). Las rutas con
+  // opengraph-image propio (ocasiones) la sustituyen automáticamente.
+  image ??= "/opengraph-image";
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -33,13 +36,13 @@ export function pageMetadata({
       siteName: site.name,
       locale: site.locale,
       type: "website",
-      ...(image ? { images: [{ url: image, width: 1200, height: 630, alt: title }] } : {}),
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title: absoluteTitle ? title : `${title} · ${site.name}`,
       description,
-      ...(image ? { images: [image] } : {}),
+      images: [image],
     },
     robots: noIndex ? { index: false, follow: true } : undefined,
   };
