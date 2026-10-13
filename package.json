@@ -1,0 +1,54 @@
+{
+  "name": "grabados-gonzalez-simon",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "analyze": "next analyze --output",
+    "analyze:webpack": "ANALYZE=true next build --webpack",
+    "test:e2e": "playwright test",
+    "screenshots": "playwright test tests/screenshots.spec.ts",
+    "shopify:csv": "node scripts/generate-shopify-csv.mjs"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "5.9.1",
+    "clsx": "2.1.1",
+    "gsap": "3.15.0",
+    "html-to-image": "1.11.13",
+    "lenis": "1.3.26",
+    "lucide-react": "1.56.0",
+    "motion": "14.2.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-hook-form": "7.90.0",
+    "tailwind-merge": "3.7.0",
+    "zod": "4.6.7",
+    "zustand": "5.0.15"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "16.4.0",
+    "@playwright/test": "1.64.0",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "9",
+    "eslint-config-next": "16.4.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "svgo": "4.1.0",
+    "tailwindcss": "^4",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

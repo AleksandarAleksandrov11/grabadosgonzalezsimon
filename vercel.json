@@ -1,0 +1,52 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/sobre-mi", "destination": "/sobre-nosotros", "permanent": true },
+    { "source": "/productos", "destination": "/tienda", "permanent": true },
+    { "source": "/política-privacidad", "destination": "/legal/privacidad", "permanent": true },
+    { "source": "/pol%C3%ADtica-privacidad", "destination": "/legal/privacidad", "permanent": true },
+    { "source": "/politica-privacidad", "destination": "/legal/privacidad", "permanent": true },
+    { "source": "/política-cookies", "destination": "/legal/cookies", "permanent": true },
+    { "source": "/pol%C3%ADtica-cookies", "destination": "/legal/cookies", "permanent": true },
+    { "source": "/politica-cookies", "destination": "/legal/cookies", "permanent": true },
+    { "source": "/aviso-legal", "destination": "/legal/aviso-legal", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), accelerometer=(self), gyroscope=(self)"
+        },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://vercel.live; style-src 'self' 'unsafe-inline' https://vercel.live; img-src 'self' blob: data: https://vercel.live https://vercel.com; font-src 'self' data: https://vercel.live https://assets.vercel.com; connect-src 'self' https://vercel.live wss://ws-us3.pusher.com; frame-src https://www.google.com https://maps.google.com https://vercel.live; worker-src 'self' blob:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/brand/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}
