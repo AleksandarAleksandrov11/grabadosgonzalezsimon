@@ -55,7 +55,7 @@ export function WhatsAppButton() {
   );
 }
 
-const COOKIE_KEY = "ggs-demo:cookies";
+const COOKIE_KEY = "ggs:cookies";
 type Consent = { necessary: true; analytics: boolean; preferences: boolean; date: string };
 
 /** Banner de cookies funcional (aceptar / rechazar / configurar), guardado en localStorage. */
@@ -149,7 +149,7 @@ export function CookieBanner() {
             {
               id: "nec",
               label: "Técnicas (necesarias)",
-              desc: "Carrito, pedidos de prueba y preferencias de la demo. Siempre activas.",
+              desc: "Carrito, pedidos y preferencias. Siempre activas.",
               value: true,
               set: null,
             },
@@ -163,7 +163,7 @@ export function CookieBanner() {
             {
               id: "ana",
               label: "Analíticas",
-              desc: "Medición anónima de visitas. (La demo no usa ninguna herramienta de analítica.)",
+              desc: "Medición anónima de visitas para mejorar la web.",
               value: analytics,
               set: setAnalytics,
             },

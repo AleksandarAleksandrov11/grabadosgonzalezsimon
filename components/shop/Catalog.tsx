@@ -9,7 +9,6 @@ import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import { ProductCard } from "./ProductCard";
 import { Drawer } from "@/components/ui/Drawer";
 import { Button, ButtonLink } from "@/components/ui/Button";
-import { DemoPriceNote } from "@/components/ui/misc";
 import { categories } from "@/data/collections";
 import { OCCASION_LABEL } from "@/data/occasion-labels";
 import { filterProducts } from "@/lib/commerce/filter";
@@ -218,7 +217,6 @@ export function Catalog({
         <p className="text-[0.875rem] text-fg-muted" aria-live="polite">
           {results.length} {results.length === 1 ? "producto" : "productos"}
         </p>
-        <DemoPriceNote />
       </div>
 
       {results.length === 0 ? (
@@ -226,10 +224,7 @@ export function Catalog({
       ) : (
         <>
           <h2 className="sr-only">Productos</h2>
-          <m.ul
-            layout
-            className="mt-6 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4"
-          >
+          <m.ul layout className="mt-6 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
             <AnimatePresence mode="popLayout" initial={false}>
               {visible.map((p, i) => (
                 <m.li
@@ -284,7 +279,7 @@ export function StaticGrid({ products }: { products: Product[] }) {
   return (
     <>
       <h2 className="sr-only">Productos</h2>
-      <ul className="mt-24 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+      <ul className="mt-24 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
         {products.slice(0, PAGE).map((p) => (
           <li key={p.handle} className="relative">
             <ProductCard product={p} />

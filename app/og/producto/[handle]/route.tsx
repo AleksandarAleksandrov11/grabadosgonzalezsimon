@@ -21,7 +21,7 @@ export async function GET(_req: Request, ctx: RouteContext<"/og/producto/[handle
     eyebrow: "Personalízalo",
     title: p.title,
     subtitle: p.metafields.tagline,
-    foot: `Desde ${formatPrice(p.priceRange.minVariantPrice.amount)} · precio orientativo de demostración`,
+    foot: `Desde ${formatPrice(p.priceRange.minVariantPrice.amount)}`,
     glass: p.metafields.illustration,
     engraving: p.metafields.sampleEngraving,
   });

@@ -6,13 +6,12 @@ import { Reveal } from "@/components/motion/Reveal";
 import { faqs } from "@/data/faqs";
 
 export function HomeFaq() {
-  const items = faqs.filter((f) => f.home).slice(0, 5);
+  const items = faqs.filter((f) => f.home).slice(0, 4);
   return (
     <section className="theme-light border-t border-line bg-paper section-y" aria-labelledby="faq-title">
       <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <SectionHeading
-            eyebrow="Dudas frecuentes"
             title={
               <span id="faq-title">
                 Preguntas <em className="font-light">y respuestas</em>

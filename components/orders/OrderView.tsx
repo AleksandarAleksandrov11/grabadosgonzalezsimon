@@ -19,7 +19,7 @@ const PAYMENT_LABEL: Record<Order["payment"]["method"], string> = {
   transferencia: "Transferencia bancaria",
 };
 
-/** Confirmación / detalle de un pedido de prueba guardado en este navegador. */
+/** Confirmación y detalle de un pedido guardado en este navegador. */
 export function OrderView({ id }: { id: string }) {
   const hydrated = useHydrated((s) => s.hydrated);
   const order = useOrders((s) => s.orders.find((o) => o.id === id));
@@ -40,12 +40,8 @@ function NotFound({ id }: { id: string }) {
     <section className="theme-dark grain relative bg-ink pt-[calc(var(--header-h)+5rem)] pb-28">
       <div className="relative z-[2] container-x">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">Pedido {id}</p>
-          <h1 className="mt-4 font-display text-display-m text-paper">No encontramos este pedido</h1>
-          <p className="mt-5 text-stone-300">
-            Los pedidos de prueba solo se guardan en el navegador donde se hicieron. Puede que se hayan
-            borrado o que lo abrieras en otro dispositivo.
-          </p>
+          <h1 className="font-display text-display-m text-paper">No encontramos el pedido {id}</h1>
+          <p className="mt-5 text-stone-300">Comprueba el número o escríbenos y lo buscamos por ti.</p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/mis-pedidos">Ver mis pedidos</ButtonLink>
             <ButtonLink href="/tienda" variant="outline">
@@ -66,13 +62,13 @@ function OrderDetail({ order }: { order: Order }) {
     {
       label: "Revisión del diseño",
       date: addBusinessDays(created, 1),
-      detail: "Te enviaríamos una prueba por email",
+      detail: "Te enviamos una prueba por email",
     },
     { label: "En grabado", date: addBusinessDays(created, 3), detail: "Chorro de arena en el taller" },
     {
       label: pickup ? "Listo para recoger" : "Enviado",
       date: addBusinessDays(created, pickup ? 6 : 7),
-      detail: pickup ? "Te avisaríamos por teléfono" : "Con número de seguimiento",
+      detail: pickup ? "Te avisamos por teléfono" : "Con número de seguimiento",
     },
   ];
   const s = order.shipping;
@@ -87,11 +83,8 @@ function OrderDetail({ order }: { order: Order }) {
         />
         <div className="relative z-[2] mx-auto flex max-w-3xl flex-col items-center px-[var(--gutter)] text-center">
           <EngravedCheck />
-          <p className="css-fade-up mt-8 eyebrow" style={{ "--d": "500ms" } as React.CSSProperties}>
-            Pedido de prueba confirmado
-          </p>
           <h1
-            className="css-fade-up mt-4 font-display text-display-m text-paper"
+            className="css-fade-up mt-8 font-display text-display-m text-paper"
             style={{ "--d": "620ms" } as React.CSSProperties}
           >
             ¡Gracias, {s.firstName}!
@@ -100,15 +93,9 @@ function OrderDetail({ order }: { order: Order }) {
             className="css-fade-up mt-5 max-w-[52ch] text-lead text-stone-300"
             style={{ "--d": "740ms" } as React.CSSProperties}
           >
-            Tu pedido <strong className="font-semibold text-paper tabular-nums">{order.id}</strong> se ha
-            registrado en este navegador. En la tienda real recibirías un email en{" "}
-            <span className="text-paper">{order.contact.email}</span> con la prueba del grabado.
-          </p>
-          <p
-            className="css-fade-up mt-6 rounded-full border border-champagne/40 bg-champagne/10 px-4 py-2 text-[0.8125rem] text-champagne"
-            style={{ "--d": "860ms" } as React.CSSProperties}
-          >
-            🧪 Demo: no se ha realizado ningún cargo ni se ha enviado ningún pedido.
+            Hemos recibido tu pedido{" "}
+            <strong className="font-semibold text-paper tabular-nums">{order.id}</strong>. Te enviaremos la
+            prueba del grabado a <span className="text-paper">{order.contact.email}</span>.
           </p>
         </div>
       </section>
@@ -155,7 +142,7 @@ function OrderDetail({ order }: { order: Order }) {
                       {t.done ? <span className="sr-only"> (completado)</span> : null}
                     </p>
                     <p className="text-[0.875rem] text-fg-subtle">
-                      {t.done ? formatDate(t.date) : `Estimado: ${formatDate(t.date)} (ejemplo)`}
+                      {t.done ? formatDate(t.date) : `Previsto: ${formatDate(t.date)}`}
                       {t.detail ? ` · ${t.detail}` : ""}
                     </p>
                   </m.li>
@@ -181,8 +168,7 @@ function OrderDetail({ order }: { order: Order }) {
                 <p>{order.contact.phone}</p>
                 <p className="mt-2">
                   {PAYMENT_LABEL[order.payment.method]}
-                  {order.payment.last4 ? ` ···· ${order.payment.last4}` : ""}{" "}
-                  <span className="text-fg-subtle">(simulado)</span>
+                  {order.payment.last4 ? ` ···· ${order.payment.last4}` : ""}
                 </p>
                 <p className="text-fg-subtle">{formatDate(order.createdAt)}</p>
               </InfoBlock>
@@ -203,7 +189,7 @@ function OrderDetail({ order }: { order: Order }) {
                 Imprimir o guardar PDF
               </Button>
               <ButtonLink
-                href={whatsappLink(`Hola, tengo una pregunta sobre mi pedido ${order.id} (demo web).`)}
+                href={whatsappLink(`Hola, tengo una pregunta sobre mi pedido ${order.id}.`)}
                 external
                 variant="outline"
                 iconLeft={<WhatsAppIcon className="size-4" />}

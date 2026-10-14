@@ -26,7 +26,7 @@ export function StoreHydrator() {
 
     // sincronizar entre pestañas
     const onStorage = (e: StorageEvent) => {
-      if (!e.key?.startsWith("ggs-demo:")) return;
+      if (!e.key?.startsWith("ggs:")) return;
       if (e.key.endsWith("cart")) useCart.persist.rehydrate();
       if (e.key.endsWith("orders")) useOrders.persist.rehydrate();
       if (e.key.endsWith("favorites")) useFavorites.persist.rehydrate();
@@ -36,7 +36,7 @@ export function StoreHydrator() {
       toast({
         title: "Almacenamiento lleno",
         description:
-          "El navegador no tiene espacio para guardar más datos de la demo. Borra pedidos o diseños antiguos.",
+          "El navegador no tiene espacio para guardar más datos. Borra pedidos o diseños antiguos.",
         tone: "error",
       });
     window.addEventListener("storage", onStorage);

@@ -16,7 +16,7 @@ export function MyDesigns({ onLoad }: { onLoad: (d: SavedDesign) => void }) {
       <div className="rounded-[var(--radius-lg)] border border-dashed border-line-strong px-5 py-10 text-center">
         <p className="font-display text-2xl">Aún no has guardado diseños</p>
         <p className="mt-2 text-[0.9375rem] text-fg-muted">
-          Pulsa «Guardar diseño» y lo encontrarás aquí la próxima vez (se guarda solo en este navegador).
+          Pulsa «Guardar diseño» y lo encontrarás aquí la próxima vez.
         </p>
       </div>
     );

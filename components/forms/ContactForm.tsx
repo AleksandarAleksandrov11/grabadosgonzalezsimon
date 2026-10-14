@@ -72,11 +72,7 @@ export function ContactForm() {
             <SuccessMark size={72} />
             <p className="font-display text-display-s">¡Gracias, {sentTo}!</p>
             <p className="max-w-[48ch] text-fg-muted">
-              Hemos recibido tu mensaje. En la web real te responderíamos lo antes posible por email o por
-              teléfono.
-            </p>
-            <p className="rounded-full border border-line-strong px-3 py-1.5 text-[0.8125rem] text-fg-muted">
-              🧪 Demo: el formulario se ha validado pero no se ha enviado nada.
+              Hemos recibido tu mensaje. Te responderemos lo antes posible por email o por teléfono.
             </p>
             <Button variant="outline" onClick={() => setSentTo(null)}>
               Enviar otro mensaje
@@ -133,11 +129,7 @@ export function ContactForm() {
               error={errors.message?.message}
               {...register("message")}
             />
-            <FieldShell
-              label="Adjuntar imagen o logo"
-              optionalLabel
-              hint="Demo: solo se registra el nombre del archivo."
-            >
+            <FieldShell label="Adjuntar imagen o logo" optionalLabel>
               {({ id, describedBy }) => (
                 <label
                   htmlFor={id}

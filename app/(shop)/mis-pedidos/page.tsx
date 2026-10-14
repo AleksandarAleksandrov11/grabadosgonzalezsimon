@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Mis pedidos",
-  description: "Pedidos de prueba realizados en esta demo (guardados solo en tu navegador).",
+  description: "Consulta tus pedidos y su seguimiento.",
   path: "/mis-pedidos",
   noIndex: true,
 });
@@ -13,13 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function MisPedidosPage() {
   return (
     <>
-      <PageHero
-        size="m"
-        crumbs={[{ name: "Mis pedidos", href: "/mis-pedidos" }]}
-        eyebrow="Tu cuenta (demo)"
-        title="Mis pedidos"
-        lead="Los pedidos de prueba que has hecho en esta demo. Se guardan solo en este navegador."
-      />
+      <PageHero size="m" crumbs={[{ name: "Mis pedidos", href: "/mis-pedidos" }]} title="Mis pedidos" />
       <section className="theme-light bg-paper pt-10 pb-28 sm:pt-14">
         <div className="mx-auto max-w-4xl px-[var(--gutter)]">
           <OrdersList />

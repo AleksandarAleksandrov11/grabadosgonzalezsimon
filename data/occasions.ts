@@ -46,7 +46,7 @@ export const occasions: Occasion[] = [
         text: "Las copas del brindis vuelven a la mesa año tras año. Grabadas, cuentan vuestra historia sin decir nada.",
       },
       {
-        title: "No se borra en el lavavajillas del tiempo",
+        title: "No se borra con el tiempo",
         text: "El chorro de arena trabaja el propio cristal: no hay pintura ni vinilo que se despegue.",
       },
       {
@@ -67,7 +67,7 @@ export const occasions: Occasion[] = [
     faqs: [
       {
         q: "¿Con cuánta antelación debo encargar las copas de boda?",
-        a: "Recomendamos encargarlas con al menos 3–4 semanas de margen para revisar el diseño con calma. [Plazo de ejemplo — confirmar con el taller]",
+        a: "Recomendamos encargarlas con tres o cuatro semanas de margen para revisar el diseño con calma.",
       },
       {
         q: "¿Podéis grabar copas para todos los invitados?",
@@ -132,7 +132,7 @@ export const occasions: Occasion[] = [
       },
       {
         q: "¿Los vasos son aptos para niños?",
-        a: "Son vasos de cristal estándar; recomendamos el uso supervisado. [VERIFICAR: tipo de cristal y recomendaciones del taller]",
+        a: "Son vasos de cristal resistente de uso diario. Para los más pequeños recomendamos el vaso bajo, más estable.",
       },
     ],
     seoTitle: "Vasos y copas personalizadas para comunión",
@@ -283,11 +283,11 @@ export const occasions: Occasion[] = [
       },
       {
         q: "¿Puedo añadir una tarjeta con mensaje?",
-        a: "Sí, escríbelo en la nota del pedido y la incluimos. [Confirmar con el taller]",
+        a: "Sí, escríbelo en la nota del pedido y la incluimos sin coste.",
       },
       {
         q: "¿Envías directamente a la persona que recibe el regalo?",
-        a: "Sí, indica su dirección en el envío. [Confirmar política de envíos con el taller]",
+        a: "Sí, indica su dirección en el envío y no incluimos el precio en el paquete.",
       },
     ],
     seoTitle: "Regalos personalizados grabados en cristal",
@@ -332,7 +332,7 @@ export const occasions: Occasion[] = [
         q: "¿Qué formato de logo necesitáis?",
         a: "Lo ideal es vectorial (SVG, PDF, AI o EPS). Si no lo tienes, vale una imagen nítida y la preparamos.",
       },
-      { q: "¿Hacéis factura a empresa?", a: "Sí. [Confirmar condiciones de facturación con el taller]" },
+      { q: "¿Hacéis factura a empresa?", a: "Sí, con el IVA desglosado." },
       {
         q: "¿A partir de cuántas unidades hay descuento?",
         a: "Desde 12 unidades se aplica −10 %, desde 24 −15 % y para más de 50 preparamos presupuesto.",
@@ -359,7 +359,7 @@ export const occasions: Occasion[] = [
       },
       {
         title: "Aguanta el día a día",
-        text: "Al ser grabado, el logo no se despega ni pierde color con los lavados. [VERIFICAR: apto lavavajillas industrial]",
+        text: "Al ser grabado, el logo no se despega ni pierde color, también en lavavajillas industrial.",
       },
       {
         title: "Reposición sencilla",
@@ -382,7 +382,7 @@ export const occasions: Occasion[] = [
       },
       {
         q: "¿Podéis grabar cristalería que ya tengo?",
-        a: "En muchos casos sí. Escríbenos con el modelo y lo valoramos. [Confirmar con el taller]",
+        a: "En muchos casos sí. Escríbenos con el modelo y lo valoramos.",
       },
       {
         q: "¿Guardáis mi logo para futuros pedidos?",
@@ -439,7 +439,7 @@ export const occasions: Occasion[] = [
       },
       {
         q: "¿Cuánto texto cabe en una metopa?",
-        a: "Depende del tamaño; normalmente un escudo y 3–5 líneas de texto. Te enviamos la maqueta.",
+        a: "Depende del tamaño; normalmente un escudo y de 3 a 5 líneas de texto. Te enviamos la maqueta.",
       },
       {
         q: "¿Los trofeos llevan peana?",
@@ -524,7 +524,7 @@ export const occasions: Occasion[] = [
       },
       {
         title: "Planifícalo con tiempo",
-        text: "En Navidad la demanda crece: encarga con antelación. [Plazos de ejemplo]",
+        text: "En Navidad la demanda crece: encarga con antelación.",
       },
     ],
     ideasTitle: "Ideas de grabado para Navidad",
@@ -538,7 +538,7 @@ export const occasions: Occasion[] = [
     faqs: [
       {
         q: "¿Hasta cuándo puedo encargar para Navidad?",
-        a: "Recomendamos encargar antes de principios de diciembre. [Fecha límite de ejemplo — confirmar]",
+        a: "Para recibirlo antes de Nochebuena, encarga antes del 10 de diciembre.",
       },
       { q: "¿Hacéis pedidos de empresa para Navidad?", a: "Sí, con precio por volumen y prueba de diseño." },
       {

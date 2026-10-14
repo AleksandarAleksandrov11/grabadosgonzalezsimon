@@ -2,21 +2,12 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence } from "motion/react";
-import * as m from "motion/react-m";
 import { Glass } from "@/components/glassware/Glass";
 import { whenIdle } from "@/lib/hooks";
 
 const SandblastCanvas = dynamic(() => import("./SandblastCanvas"), { ssr: false });
 
 export const HERO_GLASS = "copa-balon" as const;
-
-export const HERO_CAPTIONS = [
-  "Bodas · iniciales y fecha",
-  "Empresas · tu logotipo",
-  "Comuniones · nombre y símbolo",
-  "Trofeos · campeones 2026",
-];
 
 /**
  * Copa del hero: capas [cristal trasero] [canvas del chorro de arena]
@@ -25,7 +16,6 @@ export const HERO_CAPTIONS = [
 export function HeroGlass() {
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
-  const [caption, setCaption] = useState(0);
 
   // arrancar el canvas cuando el navegador esté libre (después del LCP)
   useEffect(() => {
@@ -112,27 +102,10 @@ export function HeroGlass() {
             }}
           />
         </div>
-        {ready ? <SandblastCanvas glass={HERO_GLASS} onExample={setCaption} /> : null}
+        {ready ? <SandblastCanvas glass={HERO_GLASS} /> : null}
         <div className="absolute inset-0 [transform:translate3d(var(--hx,0px),var(--hy,0px),0)]">
           <Glass id={HERO_GLASS} tone="dark" layer="front" className="absolute inset-0" />
         </div>
-      </div>
-      <div className="mt-2 flex h-7 justify-center motion-reduce:hidden" aria-hidden="true">
-        <AnimatePresence mode="wait">
-          {ready ? (
-            <m.p
-              key={caption}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-[0.6875rem] font-medium tracking-[0.06em] text-stone-300 backdrop-blur"
-            >
-              <span className="size-1 rounded-full bg-champagne" />
-              {HERO_CAPTIONS[caption]}
-            </m.p>
-          ) : null}
-        </AnimatePresence>
       </div>
     </div>
   );

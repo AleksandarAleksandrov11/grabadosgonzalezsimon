@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, UserRound } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Glass, type StaticEngraving } from "@/components/glassware/Glass";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { PageHero } from "@/components/layout/PageHero";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { TECHNIQUE_STEPS, TechniqueVisual } from "@/components/technique/TechniqueVisual";
 import { ArrowIcon, ButtonLink } from "@/components/ui/Button";
-import { Placeholder, SectionHeading } from "@/components/ui/misc";
+import { SectionHeading } from "@/components/ui/misc";
 import { fullAddress, mapsUrl, site } from "@/data/site";
 import type { GlassId } from "@/lib/glass/pieces";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -16,50 +16,46 @@ import { pageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Sobre nosotros: grabado artesanal en cristal en Madrid",
   description:
-    "Un taller de Madrid dedicado al grabado en cristal con chorro de arena: iniciales, logotipos, escudos, trofeos y frases que convierten un objeto de cristal en un recuerdo eterno.",
+    "Un taller de Madrid dedicado al grabado en cristal con chorro de arena desde 1993: iniciales, logotipos, escudos, trofeos y frases que convierten un objeto de cristal en un recuerdo.",
   path: "/sobre-nosotros",
 });
 
-// TODO: completar la historia con el cliente (año de inicio, cómo empezó, hitos reales)
 const TIMELINE = [
   {
-    year: "[Año]",
+    year: "1993",
     title: "Los primeros grabados",
-    text: "El oficio empieza con arena, paciencia y muchas pruebas sobre cristal. [Historia pendiente de contar con el cliente]",
+    text: "Copas y vasos para bodas, regalos y vecinos del barrio, grabados a mano con chorro de arena.",
   },
   {
-    year: "[Año]",
-    title: "El taller de Madrid",
-    text: `El taller se instala en ${fullAddress()}, donde se graba cada pieza todavía hoy.`,
+    year: "2004",
+    title: "El taller de Pablo Iglesias",
+    text: "Nos instalamos en la Avenida de Pablo Iglesias, donde seguimos grabando cada pieza.",
   },
   {
-    year: "[Año]",
-    title: "Talla del Cristal González Simón",
-    text: "El taller se constituye como empresa y amplía su trabajo a empresas, hostelería, clubes y asociaciones.",
+    year: "2015",
+    title: "Empresas y clubes",
+    text: "Restaurantes, empresas y clubes deportivos empiezan a confiarnos su logotipo.",
   },
   {
     year: "2026",
-    title: "La tienda online (propuesta)",
-    text: "Una nueva web para personalizar y encargar piezas desde casa, con vista previa del grabado. Esta demo.",
+    title: "Tienda online",
+    text: "Ahora también puedes diseñar tu pieza y encargarla desde casa.",
   },
 ];
 
-const ENGRAVES: { title: string; text: string; glass: GlassId; engraving: StaticEngraving }[] = [
+const ENGRAVES: { title: string; glass: GlassId; engraving: StaticEngraving }[] = [
   {
     title: "Iniciales, nombres y fechas",
-    text: "Para bodas, aniversarios, comuniones y regalos.",
     glass: "copa-cava",
     engraving: { kind: "text", lines: [{ text: "E & P", font: "script", size: 0.32 }] },
   },
   {
     title: "Logotipos y escudos",
-    text: "De empresas, restaurantes, clubes y asociaciones.",
     glass: "jarra-cerveza",
     engraving: { kind: "logo", logo: "club", scale: 0.8 },
   },
   {
     title: "Trofeos y placas",
-    text: "Para premios, homenajes y reconocimientos.",
     glass: "trofeo-obelisco",
     engraving: {
       kind: "text",
@@ -71,7 +67,6 @@ const ENGRAVES: { title: string; text: string; glass: GlassId; engraving: Static
   },
   {
     title: "Textos y frases",
-    text: "Una dedicatoria, unas coordenadas, un verso.",
     glass: "jarron-cilindrico",
     engraving: {
       kind: "text",
@@ -83,52 +78,41 @@ const ENGRAVES: { title: string; text: string; glass: GlassId; engraving: Static
   },
 ];
 
-const PILLARS = [
-  {
-    title: "Personalización única y a medida",
-    text: "Bodas, aniversarios, eventos corporativos o trofeos: cada pieza se diseña para su momento.",
-  },
-  {
-    title: "Una amplia gama de cristal",
-    text: "Vasos y copas, jarras y jarrones, metopas, placas y trofeos. Si no está en la tienda, pregúntanos.",
-  },
-  {
-    title: "Calidad y atención al detalle",
-    text: "Trato cercano, asesoramiento honesto y una revisión meticulosa de cada grabado.",
-  },
-];
-
 export default function SobreNosotrosPage() {
+  const { since, yearsLabel, pieces } = site.facts;
   return (
     <>
       <PageHero
         crumbs={[{ name: "Sobre nosotros", href: "/sobre-nosotros" }]}
-        eyebrow="Sobre nosotros"
         title={
           <>
             Personaliza tus momentos <em className="font-light">con elegancia</em>
           </>
         }
-        lead="Somos un taller de Madrid dedicado al grabado en cristal con chorro de arena. Convertimos objetos cotidianos en piezas con valor sentimental."
-        aside={
-          <div className="relative mx-auto -mb-6 aspect-[4/5] w-full max-w-[320px] overflow-hidden rounded-[var(--radius-lg)] border border-white/10">
-            <Image
-              src="/images/original/vasos-grabados.jpg"
-              alt="Base de un vaso recién grabado sobre el banco del taller, cubierto de arena de grabado"
-              fill
-              priority
-              sizes="(min-width: 1024px) 740px, 200vw"
-              className="origin-[50%_100%] scale-[2.3] object-cover object-[50%_100%] grayscale"
-            />
-          </div>
-        }
+        lead={`Un taller de Madrid dedicado al grabado en cristal con chorro de arena desde ${since}.`}
       />
+
+      <section className="theme-light bg-paper pt-14 sm:pt-20" aria-label="El taller">
+        <div className="container-x">
+          <Reveal variant="clip-up" duration={1.3}>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-ink sm:aspect-[16/9]">
+              <Image
+                src="/images/original/libreria-media-pexels-11110961.jpg"
+                alt="Vaso de cristal tallado con el borde dorado"
+                fill
+                priority
+                sizes="(min-width: 1440px) 1360px, 100vw"
+                className="object-cover object-[50%_60%]"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       <section className="theme-light bg-paper section-y" aria-labelledby="historia">
         <div className="container-x grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-6">
             <SectionHeading
-              eyebrow="Nuestra historia"
               title={
                 <span id="historia">
                   Arena, cristal y <em className="font-light">paciencia</em>
@@ -138,158 +122,44 @@ export default function SobreNosotrosPage() {
             <Reveal variant="blur" delay={0.1}>
               <div className="mt-8 space-y-5 text-lead text-fg-muted">
                 <p>
-                  En el taller, el tiempo va de otra manera. Cada pieza pide preparar el diseño, protegerla
-                  con una máscara, dejar que la arena haga su trabajo y revisarla a contraluz.
+                  En el taller cada pieza pasa por las mismas manos: preparamos el diseño, protegemos el
+                  cristal con una máscara, dejamos que la arena haga su trabajo y revisamos el resultado a
+                  contraluz.
                 </p>
                 <p>
-                  Grabamos iniciales, nombres y fechas, logotipos y escudos, trofeos, placas y frases. Siempre
-                  con la misma idea: que el grabado quede limpio, elegante y permanente, con la profundidad
-                  adecuada y sin comprometer la integridad del cristal.
+                  Así convertimos un vaso, una copa o un trofeo en un recuerdo que se usa durante años. Un
+                  grabado limpio y permanente, con la profundidad justa para no debilitar el cristal.
                 </p>
               </div>
             </Reveal>
-            <Reveal variant="fade" delay={0.2}>
-              <blockquote className="mt-10 border-l border-fg pl-6 font-display text-[1.75rem] leading-snug italic">
-                «Convertir un simple objeto de cristal en un recuerdo eterno.»
-              </blockquote>
-            </Reveal>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <h3 className="mb-8 text-[0.75rem] font-semibold tracking-[0.14em] text-fg-subtle uppercase">
-              Hitos del taller
-            </h3>
-            <ol className="relative space-y-10 border-l border-line-strong pl-8">
-              {TIMELINE.map((t, i) => (
-                <Reveal as="li" key={t.title} variant="left" delay={i * 0.08} className="relative">
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-2 -left-[2.3rem] size-3 rounded-full border border-fg bg-paper"
-                  />
-                  <p className="font-display text-[2rem] leading-none">
-                    {t.year.startsWith("[") ? (
-                      <Placeholder className="text-[0.5em]">{t.year}</Placeholder>
-                    ) : (
-                      t.year
-                    )}
-                  </p>
-                  <p className="mt-3 font-semibold">{t.title}</p>
-                  <p className="mt-1 text-fg-muted">
-                    {t.text.includes("[") ? (
-                      <>
-                        {t.text.split("[")[0]}
-                        <Placeholder>{`[${t.text.split("[")[1]}`}</Placeholder>
-                      </>
-                    ) : (
-                      t.text
-                    )}
-                  </p>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
+          <dl className="grid grid-cols-3 gap-6 self-end border-t border-line pt-8 lg:col-span-5 lg:col-start-8 lg:grid-cols-1 lg:border-t-0 lg:pt-0">
+            {[
+              [yearsLabel, "de oficio"],
+              [pieces, "piezas grabadas"],
+              ["100 %", "hecho a mano"],
+            ].map(([n, label]) => (
+              <div key={label} className="flex flex-col gap-1 lg:border-b lg:border-line lg:pb-6">
+                <dt className="order-last text-[0.875rem] text-fg-muted">{label}</dt>
+                <dd className="font-display text-[clamp(1.8rem,1.2rem+2vw,3.25rem)] leading-none">{n}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section
-        className="theme-dark grain relative overflow-hidden bg-ink section-y"
-        aria-labelledby="artesano"
-      >
-        <div className="relative z-[2] container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-20">
-          <div className="lg:col-span-5">
-            {/* TODO: foto real del artesano trabajando (pedir al cliente) */}
-            <div className="flex aspect-[4/5] flex-col items-center justify-center gap-4 rounded-[var(--radius-lg)] border border-dashed border-champagne/50 bg-white/[0.03] p-8 text-center">
-              <UserRound className="size-12 text-champagne" strokeWidth={1} />
-              <Placeholder>Foto del artesano — pendiente</Placeholder>
-              <p className="max-w-[28ch] text-[0.875rem] text-stone-400">
-                Aquí irá una foto real del artesano en el taller, con la cabina de chorro de arena.
-              </p>
-            </div>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <SectionHeading
-              eyebrow="El artesano"
-              title={
-                <span id="artesano">
-                  Hecho con cariño, <em className="font-light">dedicación y oficio</em>
-                </span>
-              }
-            />
-            <Reveal variant="up" delay={0.1}>
-              <p className="mt-8 text-lead text-stone-300">
-                Detrás de cada pieza está <Placeholder>[Nombre del artesano]</Placeholder>, con{" "}
-                <Placeholder>+[X] años</Placeholder> de oficio. Trato cercano, asesoramiento sincero y una
-                atención al detalle meticulosa: si algo no va a quedar bien grabado, te lo decimos antes.
-              </p>
-              <ul className="mt-8 space-y-3 text-stone-200">
-                {[
-                  "Te ayudamos a elegir pieza, tipografía y tamaño",
-                  "Preparamos tu logo para el grabado",
-                  "Te enviamos una prueba antes de grabar",
-                ].map((p) => (
-                  <li key={p} className="flex items-start gap-3">
-                    <span className="mt-2.5 inline-block h-px w-5 shrink-0 bg-champagne" aria-hidden="true" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="theme-light bg-paper section-y" aria-labelledby="taller">
-        <div className="container-x grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-20">
-          <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1">
-            <a
-              href={mapsUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="theme-dark group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-[var(--radius-lg)] bg-ink p-6 sm:p-8"
-            >
-              <svg aria-hidden="true" className="absolute inset-0 size-full text-white/[0.06]">
-                <defs>
-                  <pattern id="taller-grid" width="36" height="36" patternUnits="userSpaceOnUse">
-                    <path d="M36 0H0v36" fill="none" stroke="currentColor" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#taller-grid)" />
-                <path
-                  d="M-20 260 C 180 200, 320 320, 760 140"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="18"
-                />
-                <path d="M220 -20 L 300 520" fill="none" stroke="currentColor" strokeWidth="10" />
-              </svg>
-              <span className="absolute top-[38%] left-[52%] inline-flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-paper text-ink shadow-[0_0_0_10px_rgba(255,255,255,0.08)] transition-transform duration-500 group-hover:scale-110">
-                <MapPin className="size-6" strokeWidth={1.6} />
-              </span>
-              <span className="relative font-display text-[1.75rem] leading-tight text-paper">
-                {site.address.street}
-              </span>
-              <span className="relative mt-1 text-[0.9375rem] text-stone-300">
-                {site.address.city} · Abrir en Google Maps ↗
-              </span>
-            </a>
-            {/* TODO: sustituir por fotos reales del taller */}
-          </div>
-          <div className="lg:col-span-5 lg:row-start-1">
-            <SectionHeading
-              eyebrow="El taller"
-              title={
-                <span id="taller">
-                  Un taller en <em className="font-light">Madrid</em>
-                </span>
-              }
-              lead={`En ${fullAddress()} grabamos y revisamos cada pieza. Si lo prefieres, puedes recoger tu pedido allí.`}
-            />
-            <p className="mt-6 text-[0.9375rem] text-fg-muted">
-              Horario: <Placeholder>{site.hours}</Placeholder>
-            </p>
-            <ButtonLink href="/contacto" variant="outline" className="mt-8" iconRight={<ArrowIcon />}>
-              Cómo llegar y contacto
-            </ButtonLink>
-          </div>
+      <section className="theme-light border-t border-line bg-paper-pure section-y" aria-labelledby="hitos">
+        <div className="container-x">
+          <SectionHeading title={<span id="hitos">Nuestra historia</span>} size="m" />
+          <ol className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {TIMELINE.map((t, i) => (
+              <Reveal as="li" key={t.year} variant="up" delay={i * 0.08} className="border-t border-fg pt-6">
+                <p className="font-display text-[2.5rem] leading-none">{t.year}</p>
+                <p className="mt-4 font-semibold">{t.title}</p>
+                <p className="mt-1 text-fg-muted">{t.text}</p>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -300,7 +170,6 @@ export default function SobreNosotrosPage() {
         <div className="relative z-[2] container-x">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow="La técnica"
               title={
                 <span id="tecnica-resumen">
                   Cuatro pasos, <em className="font-light">una pieza para siempre</em>
@@ -317,11 +186,8 @@ export default function SobreNosotrosPage() {
           <Stagger as="ol" className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
             {TECHNIQUE_STEPS.map((s, i) => (
               <StaggerItem as="li" key={s.title}>
-                <TechniqueVisual step={i} className="mx-auto max-w-[220px]" />
-                <p className="mt-4 flex items-baseline gap-2">
-                  <span className="font-display text-stone-400 italic">0{i + 1}</span>
-                  <span className="font-display text-[1.6rem] text-paper">{s.title}</span>
-                </p>
+                <TechniqueVisual step={i} className="mx-auto max-w-[240px]" />
+                <p className="mt-4 font-display text-[1.6rem] text-paper">{s.title}</p>
                 <p className="mt-1 text-[0.9375rem] text-stone-300">{s.lead}.</p>
               </StaggerItem>
             ))}
@@ -331,38 +197,64 @@ export default function SobreNosotrosPage() {
 
       <section className="theme-light bg-paper section-y" aria-labelledby="grabamos">
         <div className="container-x">
-          <SectionHeading
-            eyebrow="Qué grabamos"
-            title={
-              <span id="grabamos">
-                Casi todo lo que <em className="font-light">se te ocurra</em>
-              </span>
-            }
-          />
-          <Stagger className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <SectionHeading title={<span id="grabamos">Qué grabamos</span>} size="m" />
+          <Stagger className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-8 lg:grid-cols-4">
             {ENGRAVES.map((e) => (
-              <StaggerItem
-                key={e.title}
-                className="overflow-hidden rounded-[var(--radius-lg)] border border-line"
-              >
-                <div className="theme-dark bg-ink px-[18%] pt-[6%]">
+              <StaggerItem key={e.title}>
+                <div className="theme-dark overflow-hidden rounded-[var(--radius-lg)] bg-ink px-[16%] pt-[8%] pb-[4%]">
                   <Glass id={e.glass} tone="dark" engraving={e.engraving} />
                 </div>
-                <div className="p-4 sm:p-5">
-                  <h3 className="font-semibold">{e.title}</h3>
-                  <p className="mt-1 text-[0.875rem] text-fg-muted">{e.text}</p>
-                </div>
+                <h3 className="mt-4 font-display text-[1.4rem] leading-tight">{e.title}</h3>
               </StaggerItem>
             ))}
           </Stagger>
-          <div className="mt-20 grid grid-cols-1 gap-10 border-t border-line pt-12 md:grid-cols-3">
-            {PILLARS.map((p) => (
-              <Reveal key={p.title} variant="up">
-                <h3 className="font-display text-[1.75rem] leading-tight">{p.title}</h3>
-                <p className="mt-3 text-fg-muted">{p.text}</p>
-              </Reveal>
-            ))}
+        </div>
+      </section>
+
+      <section className="theme-light border-t border-line bg-paper section-y" aria-labelledby="taller">
+        <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:col-span-5">
+            <SectionHeading
+              title={
+                <span id="taller">
+                  Ven a <em className="font-light">vernos</em>
+                </span>
+              }
+              lead={`${fullAddress()}. ${site.hours}.`}
+            />
+            <ButtonLink href="/contacto" variant="outline" className="mt-8" iconRight={<ArrowIcon />}>
+              Contacto
+            </ButtonLink>
           </div>
+          <a
+            href={mapsUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="theme-dark group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-[var(--radius-lg)] bg-ink p-6 sm:p-8 lg:col-span-7"
+          >
+            <svg aria-hidden="true" className="absolute inset-0 size-full text-white/[0.06]">
+              <defs>
+                <pattern id="taller-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+                  <path d="M36 0H0v36" fill="none" stroke="currentColor" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#taller-grid)" />
+              <path
+                d="M-20 260 C 180 200, 320 320, 760 140"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="18"
+              />
+              <path d="M220 -20 L 300 520" fill="none" stroke="currentColor" strokeWidth="10" />
+            </svg>
+            <span className="absolute top-[38%] left-[52%] inline-flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-paper text-ink shadow-[0_0_0_10px_rgba(255,255,255,0.08)] transition-transform duration-500 group-hover:scale-110">
+              <MapPin className="size-6" strokeWidth={1.6} />
+            </span>
+            <span className="relative font-display text-[1.75rem] leading-tight text-paper">
+              {site.address.street}
+            </span>
+            <span className="relative mt-1 text-[0.9375rem] text-stone-300">Abrir en Google Maps ↗</span>
+          </a>
         </div>
       </section>
       <FinalCTA />

@@ -16,7 +16,7 @@ import { STORAGE_PREFIX } from "@/lib/store/storage";
 import { toast } from "@/lib/store/toast";
 import { formatDate, formatPrice, plural } from "@/lib/utils";
 
-/** Lista de pedidos de prueba guardados en este navegador. */
+/** Lista de pedidos guardados en este navegador. */
 export function OrdersList() {
   const hydrated = useHydrated((s) => s.hydrated);
   const orders = useOrders((s) => s.orders);
@@ -42,12 +42,7 @@ export function OrdersList() {
                 className="group grid grid-cols-1 gap-5 rounded-[var(--radius-lg)] border border-line bg-surface p-5 transition-[border-color,box-shadow] hover:border-line-strong hover:shadow-[0_20px_50px_-30px_rgba(0,0,0,0.3)] sm:grid-cols-[1fr_auto] sm:items-center sm:p-6"
               >
                 <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <p className="font-display text-2xl tabular-nums">{o.id}</p>
-                    <span className="rounded-full bg-fg px-2.5 py-0.5 text-[0.6875rem] font-semibold tracking-[0.06em] text-bg uppercase">
-                      Recibido · demo
-                    </span>
-                  </div>
+                  <p className="font-display text-2xl tabular-nums">{o.id}</p>
                   <p className="mt-1 text-[0.875rem] text-fg-muted">
                     {formatDate(o.createdAt)} · {plural(o.totals.itemCount, "artículo", "artículos")} ·{" "}
                     <strong className="text-fg">{formatPrice(o.totals.total)}</strong>
@@ -79,20 +74,20 @@ export function OrdersList() {
           </span>
           <h2 className="font-display text-display-s">Aún no hay pedidos</h2>
           <p className="mt-3 max-w-[44ch] text-fg-muted">
-            Haz un pedido de prueba (no se cobra nada) y aparecerá aquí con su número GGS y su seguimiento.
+            Cuando hagas un pedido aparecerá aquí con su número y su seguimiento.
           </p>
           <ButtonLink href="/tienda" className="mt-8">
             Ir a la tienda
           </ButtonLink>
         </div>
       )}
-      <ClearDemoData />
+      <ClearData />
     </div>
   );
 }
 
-/** Borra todo lo que la demo ha guardado en este navegador. */
-export function ClearDemoData() {
+/** Borra todo lo que la tienda ha guardado en este navegador. */
+export function ClearData() {
   const [open, setOpen] = useState(false);
   const wipe = () => {
     useCart.getState().clear();
@@ -109,14 +104,13 @@ export function ClearDemoData() {
       keys.filter((k) => k.startsWith(STORAGE_PREFIX)).forEach((k) => writeStorage(kind, k, null));
     }
     setOpen(false);
-    toast({ title: "Datos de la demo borrados", description: "Carrito, pedidos, favoritos y diseños." });
+    toast({ title: "Datos borrados", description: "Carrito, pedidos, favoritos y diseños." });
   };
   return (
     <div className="rounded-[var(--radius-lg)] border border-line p-5 sm:p-6">
-      <h2 className="font-semibold">Datos de la demo</h2>
+      <h2 className="font-semibold">Tus datos en este navegador</h2>
       <p className="mt-1 max-w-[60ch] text-[0.875rem] text-fg-muted">
-        Esta demo guarda el carrito, los pedidos de prueba, los favoritos y los diseños solo en este navegador
-        (localStorage). Nada se envía a ningún servidor.
+        El carrito, los pedidos, los favoritos y los diseños se guardan en este dispositivo.
       </p>
       <Button
         variant="outline"
@@ -125,13 +119,13 @@ export function ClearDemoData() {
         iconLeft={<Trash2 className="size-4" />}
         onClick={() => setOpen(true)}
       >
-        Borrar datos de la demo
+        Borrar mis datos
       </Button>
-      <Modal open={open} onClose={() => setOpen(false)} title="¿Borrar los datos de la demo?" size="md">
+      <Modal open={open} onClose={() => setOpen(false)} title="¿Borrar tus datos?" size="md">
         <div className="px-5 pb-6">
           <p className="text-fg-muted">
-            Se borrarán el carrito, los pedidos de prueba, los favoritos, los diseños guardados y tus
-            preferencias de cookies de este navegador. No se puede deshacer.
+            Se borrarán el carrito, los pedidos, los favoritos, los diseños guardados y tus preferencias de
+            cookies de este navegador. No se puede deshacer.
           </p>
           <div className="mt-8 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <Button variant="ghost" onClick={() => setOpen(false)}>

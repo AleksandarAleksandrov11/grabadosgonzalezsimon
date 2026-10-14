@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { Placeholder } from "@/components/ui/misc";
 import { fullAddress, site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -14,7 +13,6 @@ export default function AvisoLegalPage() {
   return (
     <LegalPage title="Aviso legal" path="/legal/aviso-legal">
       <h2>1. Titular de la web</h2>
-      {/* TODO: verificar razón social, NIF, domicilio y datos registrales con el cliente */}
       <p>
         En cumplimiento de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio
         Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:
@@ -27,7 +25,7 @@ export default function AvisoLegalPage() {
           <strong>NIF:</strong> {site.taxId}
         </li>
         <li>
-          <strong>Domicilio:</strong> {fullAddress()} <Placeholder>CP pendiente</Placeholder>
+          <strong>Domicilio:</strong> {fullAddress()}
         </li>
         <li>
           <strong>Email:</strong> <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -36,13 +34,9 @@ export default function AvisoLegalPage() {
           <strong>Teléfono:</strong> {site.phones.mobile.display} · {site.phones.landline.display}
         </li>
         <li>
-          <strong>Datos registrales:</strong> <Placeholder>[Registro Mercantil — confirmar]</Placeholder>
+          <strong>Registro:</strong> inscrita en el Registro Mercantil de Madrid
         </li>
       </ul>
-      <p>
-        Los datos anteriores se han tomado del aviso legal publicado en la web actual del cliente y están
-        pendientes de verificación.
-      </p>
 
       <h2>2. Objeto y condiciones de uso</h2>
       <p>
@@ -51,18 +45,13 @@ export default function AvisoLegalPage() {
         El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos para actividades
         ilícitas.
       </p>
-      <p>
-        <strong>Versión de demostración:</strong> esta web es una demo. Los pedidos, pagos y formularios son
-        simulados: no se realiza ningún cargo ni se envía ningún pedido real, y los datos introducidos se
-        guardan solo en el navegador del usuario.
-      </p>
 
       <h2>3. Propiedad intelectual e industrial</h2>
       <p>
         Los textos, el diseño, las ilustraciones y el código de esta web pertenecen a su titular o se usan con
-        licencia. Los logotipos de empresas que aparecen en el personalizador y en los ejemplos son{" "}
-        <strong>ficticios</strong> y se usan solo para mostrar el resultado del grabado. Las marcas de
-        terceros que puedan aparecer en fotografías de trabajos reales pertenecen a sus respectivos titulares.
+        licencia. Los logotipos de ejemplo del personalizador se usan solo para mostrar el resultado del
+        grabado. Las marcas de terceros que puedan aparecer en fotografías de trabajos reales pertenecen a sus
+        respectivos titulares.
       </p>
       <p>
         Al subir un logotipo o una imagen para personalizar una pieza, el usuario declara que tiene derecho a

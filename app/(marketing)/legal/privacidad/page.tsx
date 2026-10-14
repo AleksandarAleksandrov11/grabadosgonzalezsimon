@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { Placeholder } from "@/components/ui/misc";
 import { fullAddress, site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -15,7 +14,7 @@ export default function PrivacidadPage() {
     <LegalPage
       title="Política de privacidad"
       path="/legal/privacidad"
-      lead="Qué datos tratamos, para qué y cómo ejercer tus derechos, conforme al RGPD (UE 2016/679) y la LOPDGDD (LO 3/2018)."
+      lead="Qué datos tratamos, para qué y cómo ejercer tus derechos."
     >
       <h2>1. Responsable del tratamiento</h2>
       <ul>
@@ -30,15 +29,14 @@ export default function PrivacidadPage() {
         </li>
       </ul>
 
-      <h2>2. Esta demo no envía tus datos</h2>
+      <h2>2. Datos guardados en tu navegador</h2>
       <p>
-        En la versión de demostración, los formularios se validan pero <strong>no se envían</strong>: el
-        carrito, los pedidos de prueba, los favoritos y los diseños se guardan solo en tu navegador
-        (localStorage) y puedes borrarlos desde <a href="/mis-pedidos">Mis pedidos</a>. Los logos que subes al
-        personalizador se procesan en tu dispositivo y no se suben a ningún servidor.
+        El carrito, los favoritos y los diseños guardados se almacenan en tu propio navegador. Los logotipos
+        que subes al personalizador se procesan en tu dispositivo y no se envían a ningún servidor hasta que
+        confirmas el pedido.
       </p>
 
-      <h2>3. Finalidades y legitimación (web definitiva)</h2>
+      <h2>3. Finalidades y legitimación</h2>
       <table>
         <thead>
           <tr>
@@ -72,7 +70,8 @@ export default function PrivacidadPage() {
       <p>
         No se ceden datos a terceros salvo obligación legal. Pueden acceder a ellos proveedores necesarios
         para prestar el servicio (alojamiento web, pasarela de pago, transporte, email), con contrato de
-        encargo de tratamiento: <Placeholder>[lista de proveedores — confirmar]</Placeholder>.
+        encargo de tratamiento: Vercel Inc. (alojamiento web), la entidad bancaria que gestiona los pagos y la
+        empresa de transporte que entrega cada pedido.
       </p>
 
       <h2>6. Tus derechos</h2>

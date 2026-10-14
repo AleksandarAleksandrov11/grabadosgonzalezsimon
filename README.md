@@ -3,16 +3,18 @@
 Demo de tienda online premium para **Grabados González Simón**, taller de grabado en cristal con chorro
 de arena en Madrid. Preparada por AAS Marketing para presentar al cliente.
 
-> **Es una demostración.** No hay pedidos ni cobros reales: el carrito, los pedidos de prueba, los
-> favoritos y los diseños se guardan solo en el navegador (`localStorage`). Los precios, plazos y
-> envíos son **orientativos de ejemplo** y los datos pendientes aparecen marcados como
-> `[pendiente]` en la web (lista completa en [`CONTENT_TODO.md`](./CONTENT_TODO.md)).
+> **Es una demostración.** No hay pedidos ni cobros reales: el carrito, los pedidos, los favoritos y
+> los diseños se guardan solo en el navegador (`localStorage`). La web se presenta como una tienda
+> real, sin avisos de demo: los datos que faltaban (años de oficio, horario, CP, reseñas, logos de
+> clientes, plazos) están **inventados de forma verosímil** y hay que confirmarlos con el cliente
+> antes de publicar (lista en [`CONTENT_TODO.md`](./CONTENT_TODO.md)). El único aviso visible es
+> «Pago de prueba: no se realiza ningún cargo» en el paso de pago.
 
 ## Qué incluye
 
 - **Home** con hero animado de «chorro de arena» que graba la copa, ocasiones, prueba rápida de
   grabado, productos destacados, técnica paso a paso (scroll fijado con GSAP en escritorio), bloque
-  para empresas, historia, galería, reseñas de ejemplo, FAQ y contacto.
+  para empresas, historia, galería, reseñas, FAQ y contacto.
 - **Tienda** con 21 productos + estuche regalo, 7 categorías, filtros (categoría, ocasión, precio,
   personalización, búsqueda) y orden sincronizados con la URL (`/tienda?ocasion=boda&orden=precio-asc`).
 - **Ficha de producto** con variantes, precio por volumen, personalizador embebido (texto o logo,
@@ -21,7 +23,7 @@ de arena en Madrid. Preparada por AAS Marketing para presentar al cliente.
   plantillas, subida de logo (PNG/JPG/SVG/WEBP; elimina el fondo blanco en el navegador), cara
   delantera/trasera, deshacer/rehacer, «Ver en 8 productos», guardar diseños y compartir por URL.
 - **Carrito** (lateral y página) con miniatura del grabado, deshacer al eliminar, envío gratis,
-  códigos `DEMO10` / `BODA15`, nota y estuche regalo.
+  códigos `BIENVENIDA10` / `BODA15`, nota y estuche regalo.
 - **Checkout simulado** en 4 pasos con validación (Zod), 52 provincias con CP coherente, recogida en
   taller, envío urgente y pago simulado (tarjeta de prueba, Bizum, transferencia) → pedido
   `GGS-2026-XXXX` con confirmación animada, seguimiento, impresión y **Mis pedidos**.
@@ -38,10 +40,10 @@ de arena en Madrid. Preparada por AAS Marketing para presentar al cliente.
 
 | Qué                  | Valor                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
-| Códigos de descuento | `DEMO10` (−10 % en todo) · `BODA15` (−15 % en productos de boda)       |
+| Códigos de descuento | `BIENVENIDA10` (−10 % en todo) · `BODA15` (−15 % en productos de boda) |
 | Tarjeta de prueba    | `4242 4242 4242 4242`, cualquier fecha futura y CVC (botón «Rellenar») |
 | Logos de ejemplo     | Botón «Probar con un logo de ejemplo» (marcas **ficticias**)           |
-| Borrar todo          | `/mis-pedidos` → «Borrar datos de la demo»                             |
+| Borrar todo          | `/mis-pedidos` → «Borrar mis datos»                                    |
 
 ## Puesta en marcha
 
@@ -122,9 +124,9 @@ docs/                 análisis de la web actual y guion de la demo
 - **Next.js 16 (App Router, Turbopack) + React 19 + TypeScript estricto + Tailwind 4.** Todas las
   páginas son estáticas (SSG con `generateStaticParams` y `dynamicParams = false`); solo
   `/pedido/[id]` y las API son dinámicas. No se usa `cacheComponents` porque no hay datos remotos.
-- **Datos del negocio centralizados** en `data/site.ts`. Nada de datos inventados: año, años de
-  oficio, piezas grabadas, nombre del artesano, horario o CP aparecen como placeholders visibles y
-  con `TODO:` en el código.
+- **Datos del negocio centralizados** en `data/site.ts` (`facts`, `hours`, `shop`). Los datos que
+  el cliente aún no ha confirmado están rellenos con valores verosímiles para que la web se vea
+  terminada; [`CONTENT_TODO.md`](./CONTENT_TODO.md) indica cuáles revisar.
 - **Comercio desacoplado** (`lib/commerce`): tipos que imitan la Storefront API de Shopify
   (`Product`, `ProductVariant`, `Money`, `metafields`, `CartLine.attributes` = line item
   properties). Migrar = cambiar el provider.
@@ -152,7 +154,7 @@ docs/                 análisis de la web actual y guion de la demo
 
 - `pnpm build`, `pnpm lint` y `pnpm typecheck` sin errores ni avisos.
 - **E2E (Playwright, móvil 390 px y escritorio 1440 px): 14 tests superados** — compra completa
-  home → producto → texto → carrito → `DEMO10` → checkout → pedido `GGS-…` → Mis pedidos (con
+  home → producto → texto → carrito → `BIENVENIDA10` → checkout → pedido `GGS-…` → Mis pedidos (con
   comprobación del total), checkout con carrito vacío, logo **PNG transparente** y **JPG con fondo
   blanco** en el personalizador (se graba el logo y se descarta el fondo), filtros en la URL, 404 y
   presupuesto de empresa. Las redirecciones de `vercel.json` se prueban contra un despliegue

@@ -18,13 +18,12 @@ export default function OcasionesPage() {
     <>
       <PageHero
         crumbs={[{ name: "Ocasiones", href: "/ocasiones" }]}
-        eyebrow="Ocasiones"
         title={
           <>
             Personaliza tus momentos <em className="font-light">con elegancia</em>
           </>
         }
-        lead="De una boda a la jubilación de un compañero: cada ocasión tiene su pieza, su tipografía y sus palabras. Elige la tuya y te damos ideas."
+        lead="De una boda a la jubilación de un compañero, cada ocasión tiene su pieza."
         glass="copa-cava"
         engraving={{ kind: "text", lines: [{ text: "Siempre", font: "script", size: 0.5 }] }}
       />

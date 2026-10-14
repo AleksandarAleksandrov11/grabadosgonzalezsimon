@@ -22,7 +22,7 @@ async function engravedRatio(page: Page) {
   });
 }
 
-test("compra completa: home → producto → texto → carrito → DEMO10 → checkout → pedido → mis pedidos", async ({
+test("compra completa: home → producto → texto → carrito → BIENVENIDA10 → checkout → pedido → mis pedidos", async ({
   page,
 }) => {
   const errors = collectErrors(page);
@@ -54,17 +54,16 @@ test("compra completa: home → producto → texto → carrito → DEMO10 → ch
 
   // código de descuento
   const main = page.locator("main");
-  await main.getByPlaceholder(/Código de descuento/).fill("DEMO10");
+  await main.getByPlaceholder(/Código de descuento/).fill("BIENVENIDA10");
   await main.getByRole("button", { name: "Aplicar" }).click();
   await expect(page.getByText("−1,39 €").first()).toBeVisible();
-  await page.getByRole("link", { name: /Tramitar pedido de prueba/ }).click();
+  await page.getByRole("link", { name: /Tramitar pedido/ }).click();
   await expect(page).toHaveURL(/\/checkout$/);
-  await expect(page.getByText(/Modo demostración/)).toBeVisible();
 
   // 1. contacto (primero con errores de validación)
   await page.getByRole("button", { name: /Continuar con el envío/ }).click();
   await expect(page.getByText("Escribe tu email.")).toBeVisible();
-  await page.getByRole("textbox", { name: "Email", exact: true }).fill("demo@ejemplo.com");
+  await page.getByRole("textbox", { name: "Email", exact: true }).fill("ana.garcia@gmail.com");
   await page.getByRole("textbox", { name: "Teléfono", exact: true }).fill("600123456");
   await page.getByRole("button", { name: /Continuar con el envío/ }).click();
 
@@ -87,7 +86,7 @@ test("compra completa: home → producto → texto → carrito → DEMO10 → ch
   // 4. pago simulado con la tarjeta de prueba
   await page.getByRole("button", { name: "Rellenar" }).click();
   await page.getByLabel(/Acepto las/).check();
-  await page.getByRole("button", { name: /Confirmar pedido de prueba/ }).click();
+  await page.getByRole("button", { name: /Confirmar pedido/ }).click();
 
   // confirmación
   await expect(page).toHaveURL(/\/pedido\/GGS-\d{4}-\d{4}$/, { timeout: 15_000 });
@@ -97,7 +96,7 @@ test("compra completa: home → producto → texto → carrito → DEMO10 → ch
   await expect(page.getByText(/····\s*4242/)).toBeVisible();
 
   // el carrito se ha vaciado y el pedido aparece en «Mis pedidos»
-  const cart = await page.evaluate(() => localStorage.getItem("ggs-demo:cart"));
+  const cart = await page.evaluate(() => localStorage.getItem("ggs:cart"));
   expect(JSON.parse(cart!).state.lines).toHaveLength(0);
   await page.goto("/mis-pedidos");
   await expect(page.getByText(orderId)).toBeVisible();
@@ -167,9 +166,9 @@ test("formulario de presupuesto de empresa con logo", async ({ page }) => {
   await expect(page.getByRole("combobox", { name: "Producto" })).toHaveValue("vaso-tubo-grabado");
   await expect(page.getByRole("spinbutton", { name: "Cantidad" })).toHaveValue("60");
   await page.getByLabel("Subir logo de la empresa").setInputFiles(`${FIXTURES}/logo-transparente.png`);
-  await page.getByRole("textbox", { name: "Empresa", exact: true }).fill("Bar Demo SL");
+  await page.getByRole("textbox", { name: "Empresa", exact: true }).fill("Café Lumbre SL");
   await page.getByRole("textbox", { name: "Persona de contacto", exact: true }).fill("Laura Pérez");
-  await page.getByRole("textbox", { name: "Email", exact: true }).fill("laura@ejemplo.com");
+  await page.getByRole("textbox", { name: "Email", exact: true }).fill("laura@cafelumbre.es");
   await page.locator('input[name="privacy"]').check();
   await page.getByRole("button", { name: "Solicitar presupuesto" }).click();
   await expect(page.getByText("¡Solicitud recibida!")).toBeVisible();

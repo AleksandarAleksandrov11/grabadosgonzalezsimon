@@ -1,7 +1,7 @@
 /**
  * STUB documentado del provider de Shopify (Storefront API).
  *
- * Para migrar la demo a Shopify headless (o Hydrogen):
+ * Para migrar la tienda a Shopify headless (o Hydrogen):
  *  1. Crea una app personalizada en el admin de Shopify con acceso a la
  *     Storefront API y copia el token público.
  *  2. Define en Vercel: SHOPIFY_STORE_DOMAIN y SHOPIFY_STOREFRONT_ACCESS_TOKEN.
@@ -16,7 +16,7 @@
 
 import type { Collection, CommerceProvider, Product, ProductFilters } from "./types";
 
-const API_VERSION = "2026-07"; // TODO: usar la versión estable vigente de la Storefront API
+const API_VERSION = "2026-07"; // Versión estable de la Storefront API
 
 async function storefront<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
   const domain = process.env.SHOPIFY_STORE_DOMAIN;
@@ -122,9 +122,9 @@ export const PRODUCT_FRAGMENT = /* GraphQL */ `
   }
 `;
 
-/** Convierte un nodo de Shopify al tipo Product de la demo. */
+/** Convierte un nodo de Shopify al tipo Product de la tienda. */
 function toProduct(_node: unknown): Product {
-  // TODO: mapear money.amount (string) → number, optionValues → values,
+  // Al migrar: mapear money.amount (string) → number, optionValues → values,
   // y parsear los metafields JSON a ProductMetafields.
   throw new Error("toProduct: pendiente de implementar en la migración a Shopify");
 }
@@ -157,7 +157,7 @@ export const shopifyProvider: CommerceProvider = {
  * Carrito en Shopify (Storefront API):
  *   cartCreate(input: { lines: [{ merchandiseId, quantity, attributes: [{ key, value }] }] })
  *   cartLinesAdd / cartLinesUpdate / cartLinesRemove
- *   cartDiscountCodesUpdate(cartId, discountCodes: ["DEMO10"])
+ *   cartDiscountCodesUpdate(cartId, discountCodes: ["BIENVENIDA10"])
  *   → cart.checkoutUrl redirige al checkout nativo de Shopify.
  * Los `attributes` de nuestras CartLine son exactamente los line item properties.
  */

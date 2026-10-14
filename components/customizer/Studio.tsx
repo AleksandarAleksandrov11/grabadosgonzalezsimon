@@ -22,7 +22,6 @@ import { VariantPicker } from "@/components/shop/VariantPicker";
 import { Modal } from "@/components/ui/Modal";
 import { Drawer } from "@/components/ui/Drawer";
 import { Button } from "@/components/ui/Button";
-import { DemoPriceNote } from "@/components/ui/misc";
 import type { Product } from "@/lib/commerce/types";
 import { findVariant, selectedFromVariant, toCartLine } from "@/lib/commerce/variant";
 import { loadImageDataUrl, getSource, makeMask, maskToDataUrl } from "@/lib/engrave/image";
@@ -166,7 +165,7 @@ export function Studio({ products }: { products: Product[] }) {
         preview: c ? thumbnail(c, 220, 25_000) : "",
         imageData,
       });
-      toast({ title: "Diseño guardado", description: "Lo tienes en «Mis diseños» (en este navegador)." });
+      toast({ title: "Diseño guardado", description: "Lo tienes en «Mis diseños»." });
     } finally {
       setBusy(null);
     }
@@ -323,7 +322,6 @@ export function Studio({ products }: { products: Product[] }) {
               <span className="font-semibold text-fg">{formatPrice(variant.price.amount)}</span>
               {product.metafields.minQuantity ? ` /ud · mín. ${product.metafields.minQuantity}` : ""}
             </p>
-            <DemoPriceNote className="mt-1" />
           </div>
         </div>
         <div className="mt-6">

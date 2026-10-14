@@ -1,7 +1,6 @@
 "use client";
 
 import * as m from "motion/react-m";
-import { Check } from "lucide-react";
 import { MiniStage } from "./MiniStage";
 import type { Product } from "@/lib/commerce/types";
 import { useCustomizer } from "@/lib/engrave/store";
@@ -36,10 +35,6 @@ export function MultiProductPreview({
   );
   return (
     <div className="px-4 pb-6 sm:px-6">
-      <p className="mb-6 max-w-2xl text-fg-muted">
-        Tu diseño, tal cual, en ocho piezas distintas. Elige la que más te guste y seguimos personalizando
-        sobre ella.
-      </p>
       <m.ul
         className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
         initial="hidden"
@@ -62,11 +57,6 @@ export function MultiProductPreview({
             >
               <div className="relative bg-[radial-gradient(70%_60%_at_50%_40%,rgba(255,255,255,0.08),transparent_70%)] px-[6%] pt-[6%]">
                 <MiniStage glass={p.metafields.personalization.engraveOn} design={design} />
-                {active ? (
-                  <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-champagne px-2 py-0.5 text-[0.625rem] font-bold text-ink uppercase">
-                    <Check className="size-3" /> Actual
-                  </span>
-                ) : null}
               </div>
               <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
                 <p className="text-[0.875rem] leading-snug font-semibold text-paper">{p.title}</p>

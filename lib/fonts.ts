@@ -29,7 +29,6 @@ export const manrope = Manrope({
 
 export const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400", "600"],
   display: "swap",
   preload: false,
   variable: "--font-cinzel",

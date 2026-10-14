@@ -41,10 +41,7 @@ export function DesignQuoteForm({
       <div className="flex flex-col items-center gap-4 px-6 pt-4 pb-10 text-center" role="status">
         <SuccessMark />
         <p className="font-display text-3xl">¡Solicitud registrada!</p>
-        <p className="max-w-sm text-fg-muted">
-          Demo: no se ha enviado nada. En la web real te responderíamos con el presupuesto y la prueba del
-          diseño.
-        </p>
+        <p className="max-w-sm text-fg-muted">Te responderemos con el presupuesto y la prueba del diseño.</p>
         <Button onClick={onDone}>Volver al estudio</Button>
       </div>
     );

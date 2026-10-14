@@ -29,7 +29,7 @@ const EXAMPLES: Example[] = [
   },
   {
     design: { ...DEFAULT_DESIGN, mode: "image", scale: 1.04 },
-    logo: "/images/demo-logos/bodega-ejemplo.svg",
+    logo: "/images/logos/bodega-valdecruz.svg",
   },
   {
     design: {

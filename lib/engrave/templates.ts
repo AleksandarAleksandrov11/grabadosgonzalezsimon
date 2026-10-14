@@ -47,7 +47,7 @@ export const TEMPLATES: Template[] = [
     preset: {
       mode: "text",
       line1: "C·D",
-      line2: "DEMO",
+      line2: "ALAMEDA",
       font: "roman",
       font2: "roman",
       line2Scale: 0.36,

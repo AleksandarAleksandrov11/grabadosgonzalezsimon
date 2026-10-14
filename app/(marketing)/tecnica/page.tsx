@@ -54,19 +54,19 @@ const COMPARE = [
 const FACTS = [
   {
     title: "Es irreversible",
-    text: "El grabado forma parte del cristal. Por eso siempre te enviamos una prueba antes de producir.",
+    text: "El grabado forma parte del cristal, por eso siempre enviamos una prueba antes.",
   },
   {
     title: "Profundidad justa",
-    text: "Trabajamos con la profundidad adecuada para que se vea y se toque, sin comprometer la integridad de la pieza.",
+    text: "Se ve y se toca, sin debilitar la pieza.",
   },
   {
     title: "Blanco, no color",
-    text: "El chorro de arena esmerila el cristal: el resultado es blanco mate. No añadimos tintas ni pinturas.",
+    text: "La arena esmerila el cristal. Sin tintas ni pinturas.",
   },
   {
     title: "Cada pieza, revisada",
-    text: "Retiramos la máscara, limpiamos y revisamos cada grabado a mano y a contraluz.",
+    text: "Limpiamos y revisamos cada grabado a contraluz.",
   },
 ];
 
@@ -91,13 +91,12 @@ export default function TecnicaPage() {
     <>
       <PageHero
         crumbs={[{ name: "La técnica", href: "/tecnica" }]}
-        eyebrow="La técnica"
         title={
           <>
             Chorro de arena: <em className="font-light">luz</em> dentro del cristal
           </>
         }
-        lead="Proyectamos arena a presión sobre el cristal protegido con una máscara. Lo que queda al descubierto se vuelve blanco y mate: un grabado limpio, elegante y permanente, sin desgaste con el tiempo."
+        lead="Arena a presión sobre el cristal protegido con una máscara. Lo que queda al descubierto se vuelve blanco y mate para siempre."
         glass="old-fashioned"
         engraving={{ kind: "text", lines: [{ text: "Arena", font: "classic", size: 0.26 }] }}
       />
@@ -111,13 +110,11 @@ export default function TecnicaPage() {
         <div className="relative z-[2] container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHeading
-              eyebrow="Antes y después"
               title={
                 <span id="antes-despues">
                   De cristal liso a <em className="font-light">recuerdo</em>
                 </span>
               }
-              lead="La arena solo toca lo que el diseño deja al descubierto. El resto de la pieza queda intacta y transparente."
             />
           </div>
           <Reveal variant="scale">
@@ -138,17 +135,15 @@ export default function TecnicaPage() {
       <section className="theme-light bg-paper section-y" aria-labelledby="comparativa">
         <div className="container-x">
           <SectionHeading
-            eyebrow="Comparativa"
             title={
               <span id="comparativa">
                 ¿Por qué <em className="font-light">chorro de arena</em>?
               </span>
             }
-            lead="Hay varias formas de personalizar cristal. Esta es una comparación orientativa y general de las más habituales."
           />
           <Reveal variant="up" className="mt-12">
             <p className="mb-3 text-[0.8125rem] text-fg-subtle md:hidden" aria-hidden="true">
-              Desliza la tabla para ver todas las técnicas →
+              Desliza para ver todas las técnicas
             </p>
             <div className="relative -mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)]">
               <table className="w-full min-w-[720px] border-collapse text-left">
@@ -173,7 +168,7 @@ export default function TecnicaPage() {
                       scope="col"
                       className="px-4 py-4 font-display text-[1.5rem] font-normal text-fg-muted"
                     >
-                      Vinilo / impresión
+                      Vinilo
                     </th>
                   </tr>
                 </thead>
@@ -202,16 +197,11 @@ export default function TecnicaPage() {
 
       <section className="theme-light border-t border-line bg-paper-pure section-y" aria-labelledby="saber">
         <div className="container-x">
-          <SectionHeading
-            eyebrow="Bueno saberlo"
-            title={<span id="saber">Antes de encargar</span>}
-            size="m"
-          />
+          <SectionHeading title={<span id="saber">Antes de encargar</span>} size="m" />
           <Stagger className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {FACTS.map((f, i) => (
-              <StaggerItem key={f.title} className="border-t border-line-strong pt-6">
-                <p className="font-display text-xl text-fg-subtle italic">0{i + 1}</p>
-                <h3 className="mt-3 font-display text-[1.6rem] leading-tight">{f.title}</h3>
+            {FACTS.map((f) => (
+              <StaggerItem key={f.title} className="border-t border-fg pt-6">
+                <h3 className="font-display text-[1.6rem] leading-tight">{f.title}</h3>
                 <p className="mt-2 text-fg-muted">{f.text}</p>
               </StaggerItem>
             ))}
@@ -224,11 +214,7 @@ export default function TecnicaPage() {
       <section className="theme-light border-t border-line bg-paper section-y" aria-labelledby="faq-tecnica">
         <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Dudas técnicas"
-              title={<span id="faq-tecnica">Preguntas sobre la técnica</span>}
-              size="s"
-            />
+            <SectionHeading title={<span id="faq-tecnica">Preguntas frecuentes</span>} size="s" />
           </div>
           <div className="lg:col-span-8">
             <Accordion

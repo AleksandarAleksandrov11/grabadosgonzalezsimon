@@ -92,7 +92,7 @@ export function Header() {
         <Link
           href="/"
           className="relative z-10 -ml-1 flex items-center rounded-sm p-1 text-paper"
-          aria-label="Grabados González Simón — inicio"
+          aria-label="Grabados González Simón, inicio"
         >
           <Logo size="sm" />
         </Link>

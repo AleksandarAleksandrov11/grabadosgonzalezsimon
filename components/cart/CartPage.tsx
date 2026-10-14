@@ -6,7 +6,6 @@ import { Glass } from "@/components/glassware/Glass";
 import { PaymentIcons } from "@/components/icons";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { ArrowIcon, ButtonLink } from "@/components/ui/Button";
-import { DemoPriceNote } from "@/components/ui/misc";
 import { site } from "@/data/site";
 import type { LiteProduct } from "@/lib/commerce/catalog-lite";
 import type { Product } from "@/lib/commerce/types";
@@ -20,7 +19,7 @@ import { DiscountInput, FreeShippingBar, GiftBoxToggle, OrderNote, TotalsTable }
 export function CartPage({ giftBox, pool }: { giftBox: LiteProduct; pool: Product[] }) {
   const hydrated = useHydrated((s) => s.hydrated);
   const { lines, discountCode } = useCart();
-  const totals = computeTotals(lines, discountCode, "estandar", site.demo.freeShippingThreshold);
+  const totals = computeTotals(lines, discountCode, "estandar", site.shop.freeShippingThreshold);
 
   if (!hydrated) return <CartSkeleton />;
   if (!lines.length) return <EmptyCart pool={pool} />;
@@ -34,7 +33,7 @@ export function CartPage({ giftBox, pool }: { giftBox: LiteProduct; pool: Produc
     )
     .concat(pool)
     .filter((p, i, arr) => !inCart.has(p.handle) && arr.findIndex((x) => x.handle === p.handle) === i)
-    .slice(0, 4);
+    .slice(0, 3);
 
   return (
     <>
@@ -78,25 +77,23 @@ export function CartPage({ giftBox, pool }: { giftBox: LiteProduct; pool: Produc
             <OrderNote />
             <TotalsTable totals={totals} />
             <ButtonLink href="/checkout" size="lg" block iconRight={<ArrowIcon />}>
-              Tramitar pedido de prueba
+              Tramitar pedido
             </ButtonLink>
             <ul className="space-y-2.5 text-[0.8125rem] text-fg-muted">
               <li className="flex items-center gap-2.5">
-                <Lock className="size-4 shrink-0" strokeWidth={1.5} /> Pago simulado: no se realiza ningún
-                cargo
+                <Lock className="size-4 shrink-0" strokeWidth={1.5} /> Pago seguro
               </li>
               <li className="flex items-center gap-2.5">
                 <ShieldCheck className="size-4 shrink-0" strokeWidth={1.5} /> Revisamos cada diseño antes de
                 grabar
               </li>
               <li className="flex items-center gap-2.5">
-                <Truck className="size-4 shrink-0" strokeWidth={1.5} /> Producción: {site.demo.productionTime}{" "}
-                (ejemplo)
+                <Truck className="size-4 shrink-0" strokeWidth={1.5} /> Producción en{" "}
+                {site.shop.productionTime}
               </li>
             </ul>
             <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
               <PaymentIcons />
-              <DemoPriceNote />
             </div>
           </div>
         </aside>
@@ -107,7 +104,7 @@ export function CartPage({ giftBox, pool }: { giftBox: LiteProduct; pool: Produc
           <h2 id="upsell-title" className="mb-8 font-display text-display-s">
             Completa tu pedido
           </h2>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
             {related.map((p) => (
               <ProductCard key={p.handle} product={p} />
             ))}
@@ -144,8 +141,8 @@ function EmptyCart({ pool }: { pool: Product[] }) {
         <h2 id="sugerencias" className="mb-8 font-display text-display-s">
           Los más pedidos
         </h2>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
-          {pool.slice(0, 4).map((p) => (
+        <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
+          {pool.slice(0, 3).map((p) => (
             <ProductCard key={p.handle} product={p} />
           ))}
         </div>

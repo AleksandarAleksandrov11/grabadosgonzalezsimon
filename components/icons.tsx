@@ -29,7 +29,7 @@ export function GlassLineIcon({ className }: { className?: string }) {
 export function PaymentIcons({ className }: { className?: string }) {
   const items = ["Tarjeta", "Bizum", "Transferencia"];
   return (
-    <ul className={cn("flex flex-wrap gap-2", className)} aria-label="Métodos de pago aceptados (demo)">
+    <ul className={cn("flex flex-wrap gap-2", className)} aria-label="Métodos de pago aceptados">
       {items.map((t) => (
         <li
           key={t}

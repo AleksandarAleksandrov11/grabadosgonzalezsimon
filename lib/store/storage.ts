@@ -33,5 +33,5 @@ const safe: StateStorage = {
 
 export const storage = createJSONStorage(() => safe);
 
-/** Prefijo común de las claves de la demo (para «Borrar datos de la demo»). */
-export const STORAGE_PREFIX = "ggs-demo:";
+/** Prefijo común de las claves guardadas (para «Borrar mis datos»). */
+export const STORAGE_PREFIX = "ggs:";

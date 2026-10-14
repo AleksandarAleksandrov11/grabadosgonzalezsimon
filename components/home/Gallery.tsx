@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
-import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Glass, type GlassTone, type StaticEngraving } from "@/components/glassware/Glass";
 import { Modal } from "@/components/ui/Modal";
 import { SectionHeading } from "@/components/ui/misc";
@@ -28,8 +28,8 @@ const ITEMS: Item[] = [
     kind: "photo",
     src: "/images/original/vasos-grabados.jpg",
     alt: "Vaso de tubo con logotipo grabado al chorro de arena en el taller",
-    caption: "Trabajo real del taller · vaso de tubo con logotipo",
-    ratio: "aspect-[3/4]",
+    caption: "Vaso de tubo con logotipo",
+    ratio: "aspect-[4/5]",
     position: "object-[50%_40%]",
   },
   {
@@ -44,33 +44,8 @@ const ITEMS: Item[] = [
       ],
     },
     alt: "Copa de vino con iniciales de boda",
-    caption: "Vista generada · iniciales de boda",
-    bg: "bg-ink",
-  },
-  {
-    kind: "glass",
-    id: "metopa",
-    tone: "light",
-    engraving: { kind: "logo", logo: "club", scale: 0.86 },
-    alt: "Metopa de cristal con escudo deportivo de ejemplo",
-    caption: "Vista generada · escudo de club (ficticio)",
-    bg: "bg-[#ecebe6]",
-  },
-  {
-    kind: "photo",
-    src: "/images/original/cristaleria-grabada-sobre-mi.jpg",
-    alt: "Copa de balón de cristal antes de grabar",
-    caption: "Copa de balón antes de grabar",
-    ratio: "aspect-[4/5]",
-  },
-  {
-    kind: "glass",
-    id: "jarra-cerveza",
-    tone: "dark",
-    engraving: { kind: "logo", logo: "cafe", scale: 0.8 },
-    alt: "Jarra de cerveza con logotipo de cafetería de ejemplo",
-    caption: "Vista generada · logotipo de hostelería (ficticio)",
-    bg: "bg-ink",
+    caption: "Copa de boda con iniciales",
+    bg: "bg-ink-soft",
   },
   {
     kind: "glass",
@@ -84,44 +59,8 @@ const ITEMS: Item[] = [
       ],
     },
     alt: "Trofeo de cristal tipo llama con la palabra Campeones",
-    caption: "Vista generada · trofeo de torneo",
+    caption: "Trofeo de torneo",
     bg: "bg-ink-soft",
-  },
-  {
-    kind: "glass",
-    id: "agua",
-    tone: "light",
-    engraving: {
-      kind: "text",
-      lines: [
-        { text: "Lucía", font: "script", size: 0.4 },
-        { text: "1ª COMUNIÓN", font: "thin", size: 0.08, tracking: 0.2 },
-      ],
-    },
-    alt: "Vaso de agua con nombre de comunión",
-    caption: "Vista generada · comunión",
-    bg: "bg-[#efece5]",
-  },
-  {
-    kind: "glass",
-    id: "jarron-boca-ancha",
-    tone: "light",
-    engraving: { kind: "text", lines: [{ text: "C & J", font: "script", size: 0.34 }] },
-    alt: "Jarrón de boca ancha para centro de mesa con iniciales",
-    caption: "Vista generada · centro de mesa de boda",
-    bg: "bg-[#f3f1ec]",
-  },
-  {
-    kind: "glass",
-    id: "set-whisky",
-    tone: "dark",
-    engraving: {
-      kind: "text",
-      lines: [{ text: "R G", font: "roman", size: 0.3, weight: 600, tracking: 0.1 }],
-    },
-    alt: "Set de decantador y dos vasos de whisky con monograma",
-    caption: "Vista generada · set de regalo con monograma",
-    bg: "bg-ink",
   },
 ];
 
@@ -183,37 +122,31 @@ export function Gallery() {
     >
       <div className="relative z-[2] container-x">
         <SectionHeading
-          eyebrow="Galería"
           title={
             <span id="galeria-title">
               Detalles que <em className="font-light">brillan</em>
             </span>
           }
-          lead="Una muestra del trabajo del taller y de vistas generadas con el personalizador. Pronto, con más fotos reales de cada encargo."
         />
-        <ul className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>li]:mb-4">
+        <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {ITEMS.map((it, i) => (
             <m.li
               key={i}
-              className="break-inside-avoid"
+              className={cn(i === 0 && "sm:col-span-2 lg:row-span-2")}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.9, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.9, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <button
                 type="button"
                 onClick={() => setOpen(i)}
-                className="group relative block w-full overflow-hidden rounded-[var(--radius-lg)] text-left"
+                className="group relative block h-full w-full overflow-hidden rounded-[var(--radius-lg)] text-left"
                 aria-label={`Ampliar: ${it.caption}`}
               >
-                <div className="transition-transform duration-[1.2s] ease-[var(--ease-out)] group-hover:scale-[1.03]">
+                <div className="h-full transition-transform duration-[1.2s] ease-[var(--ease-out)] group-hover:scale-[1.03] [&>div]:h-full">
                   <Art item={it} />
                 </div>
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 bg-gradient-to-t from-black/75 to-transparent px-4 pt-10 pb-3 text-[0.8125rem] text-stone-200">
-                  {it.caption}
-                  <Expand className="size-4 shrink-0 opacity-70 transition-opacity group-hover:opacity-100" />
-                </span>
               </button>
             </m.li>
           ))}

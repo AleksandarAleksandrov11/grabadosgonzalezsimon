@@ -23,10 +23,6 @@ export function TechniquePinned({ link = true }: { link?: boolean }) {
 function Heading({ className }: { className?: string }) {
   return (
     <div className={className}>
-      <p className="mb-5 flex items-center gap-3 eyebrow">
-        <span className="h-px w-8 bg-current opacity-60" aria-hidden="true" />
-        La técnica
-      </p>
       <h2
         id="tecnica-title"
         className="max-w-[16ch] font-display text-display-m tracking-[-0.015em] text-paper"

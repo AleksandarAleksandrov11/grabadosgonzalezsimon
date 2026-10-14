@@ -38,7 +38,6 @@ export default async function CategoryPage({ params }: PageProps<"/tienda/[categ
           { name: "Tienda", href: "/tienda" },
           { name: c.short, href: `/tienda/${c.handle}` },
         ]}
-        eyebrow={`${inCat.length} productos`}
         title={c.title}
         lead={c.description}
         glass={c.illustration}

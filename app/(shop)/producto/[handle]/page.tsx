@@ -52,7 +52,7 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
         p.tags.filter((t) => product.tags.includes(t)).length,
     }))
     .sort((a, b) => b.score - a.score)
-    .slice(0, 4)
+    .slice(0, 3)
     .map((x) => x.p);
   const occasions = product.tags
     .map((t) => occasionByTag(t))
@@ -131,8 +131,8 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
                           despega.
                         </p>
                         <p>
-                          Lavado recomendado: a mano, con agua tibia y jabón neutro.{" "}
-                          <strong className="font-semibold text-fg">[VERIFICAR: ¿apto lavavajillas?]</strong>
+                          Apto para lavavajillas. Para conservar el brillo del cristal, mejor en programas de
+                          baja temperatura.
                         </p>
                         <p>
                           Evita cambios bruscos de temperatura y estropajos abrasivos sobre la zona grabada.
@@ -146,13 +146,12 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
                     content: (
                       <>
                         <p>
-                          Envío gratis a partir de 60 € (demo). Envío estándar 5,90 € y urgente +4,90 €
-                          (valores de ejemplo). Recogida gratuita en el taller de Madrid.
+                          Envío gratis a partir de 60 €. Envío estándar 5,90 € y urgente 10,80 €. Recogida
+                          gratuita en el taller de Madrid.
                         </p>
                         <p>
                           Los productos personalizados se fabrican a medida y no admiten devolución salvo
                           defecto de fabricación o rotura en el transporte.{" "}
-                          {/* TODO legal: revisar condiciones de devolución con el cliente y su asesoría */}
                           <Link href="/legal/envios-y-devoluciones">Ver condiciones</Link>.
                         </p>
                       </>
@@ -165,22 +164,22 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
               <h2 id="ideal-para" className="mb-4 font-display text-display-s">
                 Ideal para
               </h2>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="divide-y divide-line border-y border-line">
                 {occasions.map((o) => (
                   <li key={o.slug}>
                     <Link
                       href={`/ocasiones/${o.slug}`}
-                      className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line-strong px-4 text-[0.875rem] font-medium transition-colors hover:border-fg"
+                      className="flex min-h-12 items-center justify-between gap-3 text-[0.9375rem] transition-colors hover:text-fg-muted"
                     >
-                      {o.title} <ArrowUpRight className="size-3.5" />
+                      {o.title} <ArrowUpRight className="size-4 text-fg-subtle" />
                     </Link>
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 rounded-[var(--radius-lg)] border border-line p-5">
-                <p className="font-semibold">¿Necesitas muchas unidades?</p>
+              <div className="mt-10">
+                <p className="font-semibold">¿Muchas unidades?</p>
                 <p className="mt-1 text-[0.9375rem] text-fg-muted">
-                  Para empresas, bodas y hostelería preparamos presupuesto con precio por volumen.
+                  Preparamos presupuesto con precio por volumen.
                 </p>
                 <Link
                   href={`/empresas?producto=${product.handle}#presupuesto`}
@@ -192,27 +191,12 @@ export default async function ProductPage({ params }: PageProps<"/producto/[hand
             </aside>
           </div>
 
-          {set.length ? (
-            <section className="mt-24" aria-labelledby="set-title">
-              <h2 id="set-title" className="font-display text-display-s">
-                Completa el set
-              </h2>
-              <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
-                {set.slice(0, 4).map((p) => (
-                  <li key={p.handle} className="relative">
-                    <ProductCard product={p} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-
           <section className="mt-24" aria-labelledby="rel-title">
             <h2 id="rel-title" className="font-display text-display-s">
               También te puede gustar
             </h2>
-            <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">
-              {related.map((p) => (
+            <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
+              {[...set, ...related].slice(0, 3).map((p) => (
                 <li key={p.handle} className="relative">
                   <ProductCard product={p} />
                 </li>

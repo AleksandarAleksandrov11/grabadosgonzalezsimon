@@ -15,13 +15,7 @@ export const metadata: Metadata = pageMetadata({
 export default function FavoritosPage() {
   return (
     <>
-      <PageHero
-        size="m"
-        crumbs={[{ name: "Favoritos", href: "/favoritos" }]}
-        eyebrow="Tu selección"
-        title="Favoritos"
-        lead="Las piezas que te han gustado, guardadas en este navegador."
-      />
+      <PageHero size="m" crumbs={[{ name: "Favoritos", href: "/favoritos" }]} title="Favoritos" />
       <section className="theme-light bg-paper pt-10 pb-28 sm:pt-14">
         <div className="container-x">
           <FavoritesView products={allProducts().map(forCard)} />

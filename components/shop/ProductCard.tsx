@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRef } from "react";
 import { Eye, Plus } from "lucide-react";
 import { Glass } from "@/components/glassware/Glass";
-import { Badge } from "@/components/ui/misc";
 import { FavoriteButton } from "./FavoriteButton";
 import { PENDING_DESIGN, toCartLine } from "@/lib/commerce/variant";
 import type { Product } from "@/lib/commerce/types";
@@ -53,7 +52,7 @@ export function ProductCard({
         />
         <div
           ref={art}
-          className="pointer-events-none absolute inset-x-[8%] top-[6%] bottom-[2%] [transform:perspective(900px)] transition-transform duration-[900ms] ease-[var(--ease-out)] group-hover/card:[transform:perspective(900px)_rotateY(-9deg)_translateY(-2%)_scale(1.03)]"
+          className="pointer-events-none absolute inset-x-[10%] top-[7%] bottom-[3%] transition-transform duration-[1.1s] ease-[var(--ease-out)] group-hover/card:scale-[1.03]"
         >
           <Glass
             id={mf.illustration}
@@ -62,22 +61,12 @@ export function ProductCard({
             title={`Ilustración: ${product.title}`}
           />
         </div>
-        {/* barrido de luz */}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-none group-hover/card:left-[130%] group-hover/card:opacity-100 group-hover/card:transition-[left,opacity] group-hover/card:duration-[1100ms]"
-        />
-        {mf.badge ? (
-          <Badge tone="frost" className="absolute top-3 left-3 z-[2]">
-            {mf.badge}
-          </Badge>
-        ) : null}
         <FavoriteButton
           handle={product.handle}
           title={product.title}
           className="absolute top-2 right-2 z-[2]"
         />
-        <div className="absolute inset-x-3 bottom-3 z-[2] flex gap-2 transition-[opacity,transform] duration-500 ease-[var(--ease-out)] [@media(hover:hover)]:translate-y-3 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-focus-within/card:translate-y-0 [@media(hover:hover)]:group-focus-within/card:opacity-100 [@media(hover:hover)]:group-hover/card:translate-y-0 [@media(hover:hover)]:group-hover/card:opacity-100">
+        <div className="absolute inset-x-3 bottom-3 z-[2] hidden translate-y-3 gap-2 opacity-0 transition-[opacity,transform] duration-500 ease-[var(--ease-out)] group-focus-within/card:translate-y-0 group-focus-within/card:opacity-100 group-hover/card:translate-y-0 group-hover/card:opacity-100 [@media(hover:hover)]:flex">
           <button
             type="button"
             onClick={quickAdd}
@@ -97,8 +86,8 @@ export function ProductCard({
           </button>
         </div>
       </div>
-      <div className="flex flex-1 flex-col gap-1 pt-4">
-        <h3 className="text-[0.9375rem] leading-snug font-semibold text-fg sm:text-base">
+      <div className="flex flex-col gap-1 pt-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+        <h3 className="text-[0.9375rem] leading-snug text-fg sm:text-base">
           <Link
             href={`/producto/${product.handle}`}
             className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
@@ -107,14 +96,9 @@ export function ProductCard({
             {product.title}
           </Link>
         </h3>
-        <p className="line-clamp-1 text-[0.8125rem] text-fg-subtle">{mf.tagline}</p>
-        <p className="mt-1 flex flex-wrap items-baseline gap-x-2 text-[0.9375rem] tabular-nums">
-          {from ? <span className="text-[0.75rem] text-fg-subtle">desde</span> : null}
-          <span className="font-semibold">{formatPrice(v.price.amount)}</span>
-          {min > 1 ? <span className="text-[0.75rem] text-fg-subtle">/ud · mín. {min}</span> : null}
-          {v.compareAtPrice ? (
-            <s className="text-[0.8125rem] text-fg-subtle">{formatPrice(v.compareAtPrice.amount)}</s>
-          ) : null}
+        <p className="shrink-0 text-[0.9375rem] tabular-nums">
+          {from ? <span className="mr-1 text-[0.75rem] text-fg-subtle">desde</span> : null}
+          {formatPrice(v.price.amount)}
         </p>
       </div>
     </article>

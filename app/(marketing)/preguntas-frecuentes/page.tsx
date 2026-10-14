@@ -21,13 +21,12 @@ export default function FaqPage() {
       <PageHero
         size="m"
         crumbs={[{ name: "Preguntas frecuentes", href: "/preguntas-frecuentes" }]}
-        eyebrow="Ayuda"
         title={
           <>
             Preguntas <em className="font-light">frecuentes</em>
           </>
         }
-        lead="Lo que más nos preguntan sobre pedidos, personalización, la técnica y los envíos. ¿No encuentras tu duda? Escríbenos."
+        lead="Pedidos, personalización, técnica y envíos."
       />
       <section className="theme-light bg-paper section-y">
         <div className="container-x">

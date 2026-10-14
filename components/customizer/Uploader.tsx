@@ -46,11 +46,11 @@ export function Uploader({ compact = false }: { compact?: boolean }) {
     setBusy(true);
     const logo = DEMO_LOGOS[demoIdx % DEMO_LOGOS.length];
     try {
-      const src = await loadImageUrl(logo.file, `${logo.name} (ejemplo).svg`);
+      const src = await loadImageUrl(logo.file, `${logo.name}.svg`);
       set({
         mode: "image",
         imageId: src.id,
-        imageName: `${logo.name} (logo de ejemplo)`,
+        imageName: logo.name,
         threshold: src.defaultThreshold,
         invert: false,
         x: 0,
@@ -135,7 +135,6 @@ export function Uploader({ compact = false }: { compact?: boolean }) {
         className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-[var(--radius)] border border-line-strong text-[0.875rem] font-semibold transition-colors hover:border-fg"
       >
         <Sparkles className="size-4" /> Probar con un logo de ejemplo
-        <span className="font-normal text-fg-subtle">({DEMO_LOGOS[demoIdx % DEMO_LOGOS.length].name})</span>
       </button>
       {design.mode === "image" && design.imageId ? <MaskControls /> : null}
     </div>

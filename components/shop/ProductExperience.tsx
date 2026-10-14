@@ -4,13 +4,13 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
-import { BadgeCheck, Clock, PenLine, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
+import { Clock, PenLine, Sparkles, Truck } from "lucide-react";
 import { ProductGallery } from "./ProductGallery";
 import { VariantPicker } from "./VariantPicker";
 import { VolumePricing } from "./VolumePricing";
 import { FavoriteButton } from "./FavoriteButton";
 import { Button } from "@/components/ui/Button";
-import { Badge, DemoPriceNote, Price } from "@/components/ui/misc";
+import { Price } from "@/components/ui/misc";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { site } from "@/data/site";
 import { tierFor, unitPriceFor } from "@/lib/commerce/pricing";
@@ -206,12 +206,6 @@ export function ProductExperience({ product }: { product: Product }) {
       <div className="lg:col-span-5">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              {mf.badge ? <Badge tone="solid">{mf.badge}</Badge> : null}
-              <span className="text-[0.75rem] font-semibold tracking-[0.12em] text-fg-subtle uppercase">
-                {product.productType}
-              </span>
-            </div>
             <h1 className="font-display text-[clamp(2.1rem,1.6rem+1.8vw,3.25rem)] leading-[1.02] tracking-[-0.015em]">
               {product.title}
             </h1>
@@ -223,15 +217,7 @@ export function ProductExperience({ product }: { product: Product }) {
             className="mt-1 shrink-0"
           />
         </div>
-        <p className="mt-3 flex items-center gap-2 text-[0.8125rem] text-fg-muted">
-          <span className="flex text-fg" aria-hidden="true">
-            {Array.from({ length: 5 }).map((_, k) => (
-              <Star key={k} className="size-3.5 fill-current" strokeWidth={0} />
-            ))}
-          </span>
-          4,9 <span className="text-fg-subtle">· valoración de ejemplo</span>
-        </p>
-        <p className="mt-5 text-lead text-fg-muted">{product.description}</p>
+        <p className="mt-4 text-lead text-fg-muted">{product.description}</p>
 
         <div className="mt-6 border-t border-line pt-6">
           <div aria-live="polite">
@@ -246,7 +232,6 @@ export function ProductExperience({ product }: { product: Product }) {
               ) : null}
             </p>
           </div>
-          <DemoPriceNote className="mt-2" />
         </div>
 
         <div className="mt-7">
@@ -337,22 +322,14 @@ export function ProductExperience({ product }: { product: Product }) {
           </Button>
         ) : null}
 
-        <ul className="mt-8 grid grid-cols-1 gap-3 rounded-[var(--radius-lg)] bg-surface-2 p-5 text-[0.875rem]">
+        <ul className="mt-8 space-y-2 border-t border-line pt-6 text-[0.875rem] text-fg-muted">
           <li className="flex gap-3">
             <Clock className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Producción en{" "}
             {mf.technical.productionTime}
           </li>
           <li className="flex gap-3">
             <Truck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Envío gratis desde{" "}
-            {formatPrice(site.demo.freeShippingThreshold)} (demo) o recogida en el taller
-          </li>
-          <li className="flex gap-3">
-            <ShieldCheck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Grabado permanente: no se
-            borra ni se despega
-          </li>
-          <li className="flex gap-3">
-            <BadgeCheck className="mt-0.5 size-4 shrink-0" strokeWidth={1.5} /> Revisamos tu diseño contigo
-            antes de grabar
+            {formatPrice(site.shop.freeShippingThreshold)} o recogida en el taller
           </li>
         </ul>
       </div>

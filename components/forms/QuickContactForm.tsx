@@ -55,10 +55,7 @@ export function QuickContactForm() {
         >
           <SuccessMark />
           <p className="font-display text-3xl">¡Mensaje recibido!</p>
-          <p className="text-fg-muted">
-            Demo: el formulario se ha validado pero no se ha enviado nada. En la web real te responderíamos lo
-            antes posible.
-          </p>
+          <p className="text-fg-muted">Te responderemos lo antes posible.</p>
           <Button variant="outline" size="sm" onClick={() => setSent(false)}>
             Enviar otro mensaje
           </Button>

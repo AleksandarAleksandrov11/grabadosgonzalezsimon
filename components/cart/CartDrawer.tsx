@@ -16,7 +16,7 @@ export function CartDrawer({ giftBox }: { giftBox: LiteProduct }) {
   const { cartOpen, setCartOpen } = useUI();
   const hydrated = useHydrated((s) => s.hydrated);
   const { lines, discountCode, setQuantity } = useCart();
-  const totals = computeTotals(lines, discountCode, "estandar", site.demo.freeShippingThreshold);
+  const totals = computeTotals(lines, discountCode, "estandar", site.shop.freeShippingThreshold);
   const close = () => setCartOpen(false);
   const glassLine = lines.find(
     (l) => l.productHandle !== giftBox.handle && /vaso|copa/i.test(l.productTitle),
@@ -40,7 +40,7 @@ export function CartDrawer({ giftBox }: { giftBox: LiteProduct }) {
             <TotalsTable totals={totals} />
             <div className="grid grid-cols-1 gap-2 pb-1">
               <ButtonLink href="/checkout" onClick={close} size="lg" block data-autofocus>
-                Tramitar pedido de prueba
+                Tramitar pedido
               </ButtonLink>
               <Link
                 href="/carrito"

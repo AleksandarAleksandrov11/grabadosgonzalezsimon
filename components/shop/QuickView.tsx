@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react";
 import { Glass } from "@/components/glassware/Glass";
 import { Modal } from "@/components/ui/Modal";
 import { Button, ButtonLink, ArrowIcon } from "@/components/ui/Button";
-import { Badge, DemoPriceNote, Price } from "@/components/ui/misc";
+import { Price } from "@/components/ui/misc";
 import { QuantityStepper } from "@/components/ui/QuantityStepper";
 import { VariantPicker } from "./VariantPicker";
 import { unitPriceFor } from "@/lib/commerce/pricing";
@@ -47,11 +47,6 @@ function QuickViewBody({ product }: { product: Product }) {
       {
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <div className="theme-dark relative flex items-center justify-center bg-ink px-10 pt-14 pb-6 sm:rounded-l-[var(--radius-lg)] sm:py-10">
-            {product.metafields.badge ? (
-              <Badge tone="frost" className="absolute top-4 left-4">
-                {product.metafields.badge}
-              </Badge>
-            ) : null}
             <div className="w-full max-w-[300px]">
               <Glass
                 id={product.metafields.illustration}
@@ -63,7 +58,6 @@ function QuickViewBody({ product }: { product: Product }) {
           </div>
           <div className="flex flex-col gap-6 p-6 sm:p-8">
             <div>
-              <p className="mb-2 eyebrow">{product.productType}</p>
               <h3 className="font-display text-[2rem] leading-[1.05]">{product.title}</h3>
               <p className="mt-3 text-fg-muted">{product.description}</p>
             </div>
@@ -74,7 +68,6 @@ function QuickViewBody({ product }: { product: Product }) {
                   Precio por unidad · mínimo {product.metafields.minQuantity} uds.
                 </p>
               ) : null}
-              <DemoPriceNote className="mt-1" />
             </div>
             <VariantPicker
               product={product}

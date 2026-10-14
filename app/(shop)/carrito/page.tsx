@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Tu carrito",
-  description: "Revisa las piezas y los grabados de tu pedido de prueba antes de tramitarlo.",
+  description: "Revisa las piezas y los grabados de tu pedido antes de tramitarlo.",
   path: "/carrito",
   noIndex: true,
 });
@@ -15,13 +15,7 @@ export const metadata: Metadata = pageMetadata({
 export default function CarritoPage() {
   return (
     <>
-      <PageHero
-        size="m"
-        crumbs={[{ name: "Carrito", href: "/carrito" }]}
-        eyebrow="Tu pedido"
-        title="Tu carrito"
-        lead="Revisa cada pieza y su grabado. Antes de grabar te enviaríamos una prueba para que la apruebes."
-      />
+      <PageHero size="m" crumbs={[{ name: "Carrito", href: "/carrito" }]} title="Tu carrito" />
       <section className="theme-light bg-paper pt-10 pb-28 sm:pt-14">
         <div className="container-x">
           <CartPage giftBox={giftBoxLite()} pool={allProducts().map(forCard)} />

@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 
 /** Cabecera oscura común de las páginas interiores (con migas y JSON-LD de breadcrumbs). */
 export function PageHero({
-  eyebrow,
   title,
   lead,
   crumbs,
@@ -18,7 +17,6 @@ export function PageHero({
   size = "l",
   aside,
 }: {
-  eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
   crumbs?: { name: string; href?: string }[];
@@ -48,12 +46,6 @@ export function PageHero({
         <div className={cn(glass || aside ? "lg:col-span-8" : "lg:col-span-10")}>
           {crumbs ? (
             <Breadcrumbs items={[{ name: "Inicio", href: "/" }, ...crumbs]} className="css-fade-in mb-8" />
-          ) : null}
-          {eyebrow ? (
-            <p className="css-fade-up mb-5 flex items-center gap-3 eyebrow">
-              <span className="h-px w-8 bg-current opacity-60" aria-hidden="true" />
-              {eyebrow}
-            </p>
           ) : null}
           <h1
             className={cn(

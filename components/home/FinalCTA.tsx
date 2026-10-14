@@ -23,8 +23,7 @@ export function FinalCTA() {
           </Reveal>
           <Reveal variant="up" delay={0.15}>
             <p className="mt-8 max-w-[46ch] text-lead text-stone-300">
-              Estoy a tu disposición para ayudarte en todo lo que necesites. Escríbeme, llámame o déjame un
-              mensaje y te respondo tan rápido como sea posible.
+              Cuéntanos qué tienes en mente y te ayudamos a darle forma.
             </p>
             <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <a
@@ -52,7 +51,7 @@ export function FinalCTA() {
         </div>
         <Reveal variant="fade" delay={0.2} className="lg:col-span-5 lg:col-start-8">
           <div className="rounded-[var(--radius-lg)] border border-white/12 bg-white/[0.03] p-6 backdrop-blur sm:p-8">
-            <p className="mb-6 font-display text-[1.75rem] text-paper">Déjame un mensaje</p>
+            <p className="mb-6 font-display text-[1.75rem] text-paper">Escríbenos</p>
             <QuickContactForm />
           </div>
         </Reveal>

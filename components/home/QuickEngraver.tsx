@@ -35,13 +35,11 @@ export function QuickEngraver() {
       <div className="relative z-[2] container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div>
           <SectionHeading
-            eyebrow="Pruébalo aquí mismo"
             title={
               <span id={`${id}-t`}>
                 Escribe un nombre y míralo <em className="font-light">grabado</em>
               </span>
             }
-            lead="Así de fácil es imaginar tu pieza. En el estudio de personalización puedes además subir tu logo, elegir entre seis tipografías y verlo en todos los productos."
           />
           <Reveal variant="up" delay={0.1} className="mt-10 max-w-md space-y-6">
             <div>
@@ -89,7 +87,7 @@ export function QuickEngraver() {
               </div>
             </fieldset>
             <ButtonLink href={href} size="lg" iconRight={<ArrowIcon />} block>
-              Personalizar de verdad
+              Abrir el personalizador
             </ButtonLink>
           </Reveal>
         </div>
@@ -116,9 +114,6 @@ export function QuickEngraver() {
               }}
             />
           </m.div>
-          <p className="mt-2 text-center text-[0.75rem] text-stone-400">
-            Vista previa orientativa · copa de vino tinto
-          </p>
         </Reveal>
       </div>
     </section>

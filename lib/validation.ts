@@ -274,7 +274,7 @@ export const paymentStepSchema = z
         ctx.addIssue({
           code: "custom",
           path: ["cardNumber"],
-          message: "Número no válido. Usa la tarjeta de prueba 4242 4242 4242 4242.",
+          message: "Número de tarjeta no válido.",
         });
       const m = /^(\d{2})\s?\/\s?(\d{2})$/.exec(v.cardExpiry ?? "");
       if (!m) ctx.addIssue({ code: "custom", path: ["cardExpiry"], message: "Formato MM/AA." });

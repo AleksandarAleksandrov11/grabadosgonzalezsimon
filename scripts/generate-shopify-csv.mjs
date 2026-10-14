@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Genera shopify/products.csv a partir del catálogo de la demo (data/products.ts)
+ * Genera shopify/products.csv a partir del catálogo (data/products.ts)
  * con el formato de importación de productos de Shopify.
  *
  *   pnpm shopify:csv
@@ -9,7 +9,7 @@
  * - Los metafields `custom.*` van como columnas «Nombre (product.metafields.custom.clave)».
  *   Antes de importar hay que crear sus definiciones en Shopify (ver SHOPIFY_MIGRATION.md).
  * - Los productos se importan como BORRADOR (Status = draft) para revisarlos antes de publicar.
- * - Precios orientativos de la demo: sustituir por los reales (CONTENT_TODO.md).
+ * - Los precios salen de data/products.ts.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -100,7 +100,7 @@ for (const p of products) {
       "Option3 Name": first ? (opt(2)?.name ?? "") : "",
       "Option3 Value": opt(2)?.value ?? "",
       "Variant SKU": v.sku,
-      "Variant Grams": 0, // TODO: peso real para calcular envíos
+      "Variant Grams": 0, // Peso en gramos para calcular envíos
       "Variant Inventory Tracker": "", // fabricación bajo pedido: sin control de stock
       "Variant Inventory Policy": "continue",
       "Variant Fulfillment Service": "manual",
@@ -108,7 +108,7 @@ for (const p of products) {
       "Variant Compare At Price": price(v.compareAtPrice),
       "Variant Requires Shipping": "TRUE",
       "Variant Taxable": "TRUE",
-      "Image Src": "", // TODO: subir fotos reales (la demo usa ilustraciones SVG)
+      "Image Src": "", // Las fotos se suben en Shopify
       "Image Position": "",
       "Image Alt Text": "",
       "Gift Card": first ? "FALSE" : "",

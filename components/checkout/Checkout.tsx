@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
-import { Check, ChevronDown, Lock, Pencil } from "lucide-react";
+import { Check, ChevronDown, Pencil } from "lucide-react";
 import { DiscountInput, TotalsTable } from "@/components/cart/CartPieces";
 import { Spinner } from "@/components/ui/Button";
 import { fullAddress, site } from "@/data/site";
@@ -28,7 +28,7 @@ import {
 import { SummaryLines } from "./SummaryLines";
 
 const STEPS = ["Contacto", "Envío", "Personalización", "Pago"] as const;
-const DRAFT_KEY = "ggs-demo:checkout";
+const DRAFT_KEY = "ggs:checkout";
 
 type Draft = {
   step: number;
@@ -56,7 +56,7 @@ function writeDraft(d: Draft | null) {
   }
 }
 
-/** Checkout simulado en 4 pasos. Solo se monta en cliente (tras hidratar los stores). */
+/** Checkout en 4 pasos (sin pasarela real). Solo se monta en cliente, tras hidratar los stores. */
 export function Checkout() {
   const hydrated = useHydrated((s) => s.hydrated);
   if (!hydrated) return <CheckoutSkeleton />;
@@ -73,7 +73,7 @@ function CheckoutBody() {
   const [placed, setPlaced] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const firstRender = useRef(true);
-  const totals = computeTotals(lines, discountCode, method, site.demo.freeShippingThreshold);
+  const totals = computeTotals(lines, discountCode, method, site.shop.freeShippingThreshold);
   const afterDiscount = totals.subtotal - totals.discount;
   const step = Math.min(draft.step, completedUpTo(draft));
 
@@ -250,9 +250,6 @@ function CheckoutBody() {
             </StepSection>
           ))}
         </div>
-        <p className="mt-8 flex items-center gap-2 text-[0.8125rem] text-fg-subtle">
-          <Lock className="size-3.5" strokeWidth={1.6} /> Demo: tus datos solo se guardan en este navegador.
-        </p>
       </div>
 
       <aside className="hidden self-start lg:sticky lg:top-[calc(var(--header-h)+3.5rem)] lg:col-span-5 lg:block">

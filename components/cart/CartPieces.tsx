@@ -11,7 +11,7 @@ import { toast } from "@/lib/store/toast";
 import { cn, formatPrice } from "@/lib/utils";
 
 export function FreeShippingBar({ remaining, className }: { remaining: number; className?: string }) {
-  const threshold = site.demo.freeShippingThreshold;
+  const threshold = site.shop.freeShippingThreshold;
   const pct = Math.min(100, ((threshold - remaining) / threshold) * 100);
   return (
     <div className={cn("space-y-2", className)}>
@@ -22,7 +22,7 @@ export function FreeShippingBar({ remaining, className }: { remaining: number; c
             Te faltan <strong className="text-fg">{formatPrice(remaining)}</strong> para el envío gratis
           </span>
         ) : (
-          <span className="font-semibold text-fg">¡Tienes envío gratis! (demo)</span>
+          <span className="font-semibold text-fg">¡Tienes envío gratis!</span>
         )}
       </p>
       <div
@@ -93,7 +93,7 @@ export function DiscountInput() {
             setValue(e.target.value.toUpperCase());
             setError(null);
           }}
-          placeholder="Código de descuento (prueba DEMO10)"
+          placeholder="Código de descuento"
           autoComplete="off"
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${id}-error` : undefined}

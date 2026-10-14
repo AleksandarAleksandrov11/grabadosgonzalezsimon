@@ -112,7 +112,10 @@ export function designAttributes(d: Design, glassLabel?: string): Attribute[] {
       key: "Diseño",
       value: d.ornament !== "none" ? `Texto con ornamento (${d.ornament})` : "Texto",
     });
-    attrs.push({ key: "Texto", value: [d.line1.trim(), d.line2.trim()].filter(Boolean).join(" / ") || "—" });
+    attrs.push({
+      key: "Texto",
+      value: [d.line1.trim(), d.line2.trim()].filter(Boolean).join(" / ") || "Sin texto",
+    });
     attrs.push({
       key: "Tipografía",
       value:

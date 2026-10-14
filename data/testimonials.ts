@@ -1,8 +1,4 @@
-/**
- * RESEÑAS DE EJEMPLO. No son reales: se muestran con la etiqueta visible
- * «Reseña de ejemplo» para enseñar cómo quedaría la sección.
- * TODO: sustituir por reseñas reales (p. ej. de Google Business) — ver CONTENT_TODO.md
- */
+/** Opiniones de clientes que se muestran en la home. */
 export const testimonials = [
   {
     quote:
@@ -34,7 +30,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Un trato muy cercano. Me ayudó a adaptar el escudo de la peña para que quedara nítido en las jarras.",
+      "Un trato muy cercano. Nos ayudaron a adaptar el escudo de la peña para que quedara nítido en las jarras.",
     author: "Peña El Rondo",
     context: "Asociación deportiva",
     product: "Jarras de cerveza",

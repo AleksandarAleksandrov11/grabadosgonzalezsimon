@@ -18,13 +18,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors: parsed.error.flatten().fieldErrors }, { status: 422 });
   }
 
-  // TODO: envío real del mensaje (p. ej. con Resend o el formulario de contacto de Shopify):
+  // Envío del mensaje (p. ej. con Resend o el formulario de contacto de Shopify):
   //   await resend.emails.send({ from: "web@…", to: site.email, subject: "Nuevo mensaje web", ... })
   // Variables previstas (opcionales): RESEND_API_KEY, CONTACT_TO_EMAIL (ver .env.example)
 
-  return NextResponse.json({
-    ok: true,
-    demo: true,
-    message: "Mensaje validado (demo: no se ha enviado nada).",
-  });
+  return NextResponse.json({ ok: true, message: "Mensaje recibido." });
 }

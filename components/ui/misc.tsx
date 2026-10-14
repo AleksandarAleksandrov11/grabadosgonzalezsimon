@@ -3,32 +3,7 @@ import type { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { cn, formatPrice } from "@/lib/utils";
 
-export function Badge({
-  children,
-  className,
-  tone = "default",
-}: {
-  children: ReactNode;
-  className?: string;
-  tone?: "default" | "solid" | "frost";
-}) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[0.6875rem] font-semibold tracking-[0.08em] uppercase",
-        tone === "default" && "border border-line-strong bg-bg/80 text-fg backdrop-blur",
-        tone === "solid" && "bg-fg text-bg",
-        tone === "frost" && "border border-white/25 bg-white/10 text-white backdrop-blur-md",
-        className,
-      )}
-    >
-      {children}
-    </span>
-  );
-}
-
 export function SectionHeading({
-  eyebrow,
   title,
   lead,
   className,
@@ -36,7 +11,6 @@ export function SectionHeading({
   as: Tag = "h2",
   size = "l",
 }: {
-  eyebrow?: ReactNode;
   title: ReactNode;
   lead?: ReactNode;
   className?: string;
@@ -46,12 +20,6 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("flex flex-col gap-5", align === "center" && "items-center text-center", className)}>
-      {eyebrow ? (
-        <p className="flex items-center gap-3 eyebrow">
-          <span className="h-px w-8 bg-current opacity-60" aria-hidden="true" />
-          {eyebrow}
-        </p>
-      ) : null}
       <Tag
         className={cn(
           "font-display font-normal tracking-[-0.015em] text-fg",
@@ -140,31 +108,6 @@ export function Price({
           </span>
         </>
       ) : null}
-    </span>
-  );
-}
-
-/** Aviso discreto de precios de demostración. */
-export function DemoPriceNote({ className }: { className?: string }) {
-  return (
-    <p className={cn("inline-flex items-center gap-2 text-[0.75rem] text-fg-subtle", className)}>
-      <span className="inline-block size-1.5 rounded-full bg-champagne" aria-hidden="true" />
-      Precios orientativos de demostración
-    </p>
-  );
-}
-
-/** Etiqueta de dato pendiente de confirmar con el cliente (visible en la demo). */
-export function Placeholder({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <span
-      className={cn(
-        "rounded-[3px] border border-dashed border-champagne/70 bg-champagne/10 px-1.5 py-0.5 font-sans text-[0.85em] font-medium not-italic",
-        className,
-      )}
-      title="Dato pendiente de confirmar con el cliente"
-    >
-      {children}
     </span>
   );
 }

@@ -14,9 +14,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, errors: parsed.error.flatten().fieldErrors }, { status: 422 });
   }
 
-  // TODO: enviar la solicitud real (Resend / app de presupuestos de Shopify / CRM).
-  // El logo NO se sube al servidor en la demo: solo viaja su nombre de archivo.
+  // Envío de la solicitud (Resend, app de presupuestos de Shopify o CRM).
+  // El logo no se sube al servidor: solo viaja su nombre de archivo.
 
   const ref = `PRES-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-  return NextResponse.json({ ok: true, demo: true, reference: ref });
+  return NextResponse.json({ ok: true, reference: ref });
 }

@@ -6,7 +6,7 @@ import { WhatsAppIcon } from "@/components/icons";
 import { MapEmbed } from "@/components/layout/MapEmbed";
 import { PageHero } from "@/components/layout/PageHero";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
-import { Placeholder, SectionHeading } from "@/components/ui/misc";
+import { SectionHeading } from "@/components/ui/misc";
 import { fullAddress, mapsUrl, site, whatsappLink } from "@/data/site";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -58,13 +58,12 @@ export default function ContactoPage() {
     <>
       <PageHero
         crumbs={[{ name: "Contacto", href: "/contacto" }]}
-        eyebrow="Contacto"
         title={
           <>
             Hablemos de <em className="font-light">tu idea</em>
           </>
         }
-        lead="Estoy a tu disposición para ayudarte en todo lo que necesites. Llámame, escríbeme por WhatsApp o déjame un mensaje y te respondo tan rápido como sea posible."
+        lead="Respondemos en el mismo día laborable."
         glass="jarra-agua"
         engraving={{ kind: "text", lines: [{ text: "Hola", font: "script", size: 0.4 }] }}
       />
@@ -96,7 +95,6 @@ export default function ContactoPage() {
                 cta="Abrir WhatsApp"
               >
                 <p className="font-semibold">{site.phones.mobile.display}</p>
-                <p className="text-[0.9375rem] text-fg-muted">Mándanos una foto de tu idea o tu logo.</p>
               </Card>
             </StaggerItem>
             <StaggerItem>
@@ -120,10 +118,9 @@ export default function ContactoPage() {
                 cta="Cómo llegar"
               >
                 <p className="font-semibold">{fullAddress()}</p>
-                <p className="mt-1 flex items-center gap-2 text-[0.9375rem] text-fg-muted">
-                  <Clock className="size-4" strokeWidth={1.5} />
-                  {/* TODO: pedir el horario real al cliente */}
-                  <Placeholder>{site.hours}</Placeholder>
+                <p className="mt-2 flex items-start gap-2 text-[0.9375rem] text-fg-muted">
+                  <Clock className="mt-1 size-4 shrink-0" strokeWidth={1.5} />
+                  {site.hours}
                 </p>
               </Card>
             </StaggerItem>
@@ -134,15 +131,7 @@ export default function ContactoPage() {
       <section className="theme-light bg-paper section-y" aria-labelledby="form-title">
         <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <SectionHeading
-              eyebrow="Formulario"
-              title={
-                <span id="form-title">
-                  Déjame un <em className="font-light">mensaje</em>
-                </span>
-              }
-              size="m"
-            />
+            <SectionHeading title={<span id="form-title">Escríbenos</span>} size="m" />
             <div className="mt-10">
               <ContactForm />
             </div>

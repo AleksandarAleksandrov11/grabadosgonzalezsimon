@@ -21,13 +21,12 @@ export default function ShopPage() {
     <>
       <PageHero
         crumbs={[{ name: "Tienda", href: "/tienda" }]}
-        eyebrow="La tienda"
         title={
           <>
             Cristalería grabada, <em className="font-light">a tu medida</em>
           </>
         }
-        lead="Elige la pieza, personalízala con tu texto o tu logo y la grabamos a mano en el taller de Madrid."
+        lead="Elige la pieza, añade tu texto o tu logo y la grabamos a mano en Madrid."
         glass="copa-balon"
         engraving={{ kind: "text", lines: [{ text: "Salud", font: "script", size: 0.42 }] }}
       >

@@ -11,28 +11,28 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const ITEMS = [
-  { key: "ggs-demo:cart", type: "Técnica", purpose: "Guardar el carrito", duration: "Hasta que lo borres" },
+  { key: "ggs:cart", type: "Técnica", purpose: "Guardar el carrito", duration: "Hasta que lo borres" },
   {
-    key: "ggs-demo:orders",
+    key: "ggs:orders",
     type: "Técnica",
-    purpose: "Pedidos de prueba de la demo",
+    purpose: "Tus pedidos",
     duration: "Hasta que lo borres",
   },
-  { key: "ggs-demo:favorites", type: "Técnica", purpose: "Tus favoritos", duration: "Hasta que lo borres" },
+  { key: "ggs:favorites", type: "Técnica", purpose: "Tus favoritos", duration: "Hasta que lo borres" },
   {
-    key: "ggs-demo:designs",
+    key: "ggs:designs",
     type: "Técnica",
     purpose: "Diseños guardados del personalizador",
     duration: "Hasta que lo borres",
   },
   {
-    key: "ggs-demo:cookies",
+    key: "ggs:cookies",
     type: "Técnica",
     purpose: "Recordar tu elección sobre cookies",
     duration: "Hasta que lo borres",
   },
   {
-    key: "ggs-demo:checkout",
+    key: "ggs:checkout",
     type: "Técnica (sesión)",
     purpose: "Progreso del checkout",
     duration: "Al cerrar la pestaña",
@@ -44,7 +44,7 @@ export default function CookiesPage() {
     <LegalPage
       title="Política de cookies"
       path="/legal/cookies"
-      lead="Usamos solo lo imprescindible para que la tienda funcione. Nada de publicidad ni rastreo."
+      lead="Usamos solo lo imprescindible para que la tienda funcione."
     >
       <h2>1. Qué usamos</h2>
       <p>
@@ -91,8 +91,8 @@ export default function CookiesPage() {
         <CookieSettingsButton />
       </div>
       <p>
-        También puedes borrar todos los datos de la demo desde <a href="/mis-pedidos">Mis pedidos</a> o desde
-        la configuración de tu navegador.
+        También puedes borrar estos datos desde <a href="/mis-pedidos">Mis pedidos</a> o desde la
+        configuración de tu navegador.
       </p>
     </LegalPage>
   );

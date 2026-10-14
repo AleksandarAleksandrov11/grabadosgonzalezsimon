@@ -91,11 +91,9 @@ export function Footer() {
 
           <div className="lg:col-span-3">
             <h2 className="mb-4 eyebrow">Novedades del taller</h2>
-            <p className="mb-5 text-[0.9375rem] text-stone-300">
-              Ideas de regalo, nuevas piezas y fechas clave. Sin spam, prometido.
-            </p>
+            <p className="mb-5 text-[0.9375rem] text-stone-300">Ideas de regalo y novedades del taller.</p>
             <NewsletterForm />
-            <h2 className="mt-10 mb-3 eyebrow">Pago seguro (demo)</h2>
+            <h2 className="mt-10 mb-3 eyebrow">Pago seguro</h2>
             <PaymentIcons />
           </div>
         </div>
@@ -104,26 +102,20 @@ export function Footer() {
           <p>
             © <CurrentYear /> {site.name}. Todos los derechos reservados.
           </p>
-          <p className="flex items-center gap-2">
-            Hecho con cariño en Madrid <span aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-champagne/40 px-2.5 py-0.5 text-[0.6875rem] font-semibold tracking-[0.06em] text-champagne uppercase">
-              Demo de presentación
-            </span>
-          </p>
+          <p>Grabado a mano en Madrid</p>
         </div>
       </div>
 
-      {/* Kit Digital — logos oficiales (monocromo, tal y como los proporciona la plataforma actual).
-          TODO: verificar con el manual de publicidad del Kit Digital si se exige la versión a color. */}
+      {/* Kit Digital: logos oficiales en monocromo, como en la web actual */}
       <div className="relative z-[2] bg-paper">
         <div className="container-x flex flex-col items-center justify-center gap-4 py-5 sm:flex-row sm:gap-10">
           <p className="text-[0.75rem] text-stone-700">
-            Esta web está financiada por la Unión Europea — NextGenerationEU
+            Esta web está financiada por la Unión Europea, NextGenerationEU
           </p>
           <div className="flex items-center gap-8">
             <Image
               src="/images/original/eu-logo-next-generation.png"
-              alt="Financiado por la Unión Europea — NextGenerationEU"
+              alt="Financiado por la Unión Europea, NextGenerationEU"
               width={173}
               height={50}
               className="h-9 w-auto sm:h-10"

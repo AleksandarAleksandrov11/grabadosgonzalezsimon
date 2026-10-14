@@ -6,7 +6,7 @@ export async function generateMetadata(props: PageProps<"/pedido/[id]">): Promis
   const { id } = await props.params;
   return pageMetadata({
     title: `Pedido ${decodeURIComponent(id)}`,
-    description: "Confirmación de tu pedido de prueba.",
+    description: "Confirmación de tu pedido.",
     path: `/pedido/${id}`,
     noIndex: true,
   });

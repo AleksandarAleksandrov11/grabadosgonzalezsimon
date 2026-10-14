@@ -109,7 +109,6 @@ export function OccasionEngraver({
           <ButtonLink href={href} size="lg" block className="mt-4" iconRight={<ArrowIcon />}>
             Seguir en el estudio
           </ButtonLink>
-          <p className="mt-2 text-center text-[0.75rem] text-stone-400">Vista previa orientativa</p>
         </div>
       </div>
     </div>

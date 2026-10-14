@@ -31,17 +31,17 @@ export function ProductGallery({
   const mf = product.metafields;
   const slides: Slide[] = [
     ...(live ? [{ kind: "live" as const, label: "Tu diseño" }] : []),
-    { kind: "illus", tone: "dark", engraved: Boolean(mf.sampleEngraving), label: "Con grabado de ejemplo" },
+    { kind: "illus", tone: "dark", engraved: Boolean(mf.sampleEngraving), label: "Grabado" },
     { kind: "illus", tone: "light", engraved: Boolean(mf.sampleEngraving), label: "Sobre fondo claro" },
     { kind: "illus", tone: "dark", engraved: false, label: "Sin grabar" },
-    // TODO: fotos reales del cliente por producto (rellenar `images` en data/products.ts)
+    // Fotos de producto: rellenar `images` en data/products.ts.
     ...product.images.map((img) => ({
       kind: "photo" as const,
       src: img.url,
       alt: img.altText,
       w: img.width,
       h: img.height,
-      label: "Foto real",
+      label: "Foto",
     })),
   ];
   const [i, setI] = useState(0);
@@ -104,7 +104,7 @@ export function ProductGallery({
                         id={mf.illustration}
                         tone={cur.tone}
                         engraving={cur.engraved ? mf.sampleEngraving : null}
-                        title={`${product.title} — ${cur.label.toLowerCase()}`}
+                        title={`${product.title}, ${cur.label.toLowerCase()}`}
                         className="size-full"
                       />
                     </div>
@@ -118,9 +118,6 @@ export function ProductGallery({
                     />
                   )}
                 </div>
-                <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-black/50 px-2.5 py-1 text-[0.6875rem] font-semibold text-paper backdrop-blur">
-                  {cur.kind === "photo" ? "Trabajo real del taller" : "Ilustración orientativa"}
-                </span>
               </div>
             )}
           </m.div>
@@ -179,11 +176,6 @@ export function ProductGallery({
                   />
                 )}
               </span>
-              {s.kind === "live" ? (
-                <span className="absolute inset-x-0 bottom-0 bg-champagne py-0.5 text-center text-[0.5625rem] font-bold tracking-[0.06em] text-ink uppercase">
-                  Tu diseño
-                </span>
-              ) : null}
             </button>
           </li>
         ))}

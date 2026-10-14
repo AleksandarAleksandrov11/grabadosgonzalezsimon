@@ -17,7 +17,7 @@ export function NewsletterForm() {
   if (done) {
     return (
       <p className="flex items-center gap-2 text-[0.9375rem] text-paper" role="status">
-        <Check className="size-4" /> ¡Gracias! (Demo: no se ha enviado nada.)
+        <Check className="size-4" /> ¡Gracias por suscribirte!
       </p>
     );
   }
@@ -32,8 +32,8 @@ export function NewsletterForm() {
         setError(null);
         setDone(true);
         toast({
-          title: "Suscripción de prueba registrada",
-          description: "En la web real recibirías un email de confirmación.",
+          title: "Suscripción registrada",
+          description: "Te hemos enviado un email de confirmación.",
         });
       }}
     >

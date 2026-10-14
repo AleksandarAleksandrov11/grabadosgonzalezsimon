@@ -241,26 +241,22 @@ export function Stage({
           {showGuides && zone.w ? (
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute border border-dashed border-champagne/80"
+              className="pointer-events-none absolute border border-dashed border-white/35"
               style={{
                 left: pct(zone.x, 400),
                 top: pct(zone.y, 500),
                 width: pct(zone.w, 400),
                 height: pct(zone.h, 500),
               }}
-            >
-              <span className="absolute -top-6 left-0 rounded-sm bg-champagne/90 px-1.5 py-0.5 text-[0.625rem] font-semibold tracking-[0.06em] whitespace-nowrap text-ink uppercase">
-                Zona grabable
-              </span>
-            </div>
+            />
           ) : null}
         </div>
         <div ref={frontRef} className="pointer-events-none absolute inset-[4%]">
           <Glass id={glass} tone={tone} layer="front" className="size-full" />
         </div>
         {back ? (
-          <span className="pointer-events-none absolute top-3 left-3 rounded-full bg-black/50 px-2.5 py-1 text-[0.6875rem] font-semibold text-paper backdrop-blur">
-            Cara trasera (vista a través del cristal)
+          <span className="pointer-events-none absolute top-3 left-4 text-[0.8125rem] text-paper/80">
+            Cara trasera
           </span>
         ) : null}
         {rendering && !compact ? <span className="sr-only">Actualizando vista previa…</span> : null}

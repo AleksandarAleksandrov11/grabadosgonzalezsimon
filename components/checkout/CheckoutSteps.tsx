@@ -107,11 +107,8 @@ export function ContactStep({
           {...register("phone")}
         />
       </div>
-      <Checkbox
-        label="Quiero recibir ideas de regalo y novedades del taller (demo)"
-        {...register("newsletter")}
-      />
-      <StepActions note="Demo: no hace falta crear una cuenta.">
+      <Checkbox label="Quiero recibir ideas de regalo y novedades del taller" {...register("newsletter")} />
+      <StepActions note="No hace falta crear una cuenta.">
         <Button type="submit" size="lg" iconRight={<ArrowIcon />}>
           Continuar con el envío
         </Button>
@@ -173,7 +170,7 @@ export function ShippingStep({
                   <Truck className="size-4" strokeWidth={1.5} /> Envío estándar
                 </span>
                 <span className="mt-0.5 block text-[0.8125rem] text-fg-muted">
-                  48–72 h tras la producción (ejemplo)
+                  48 a 72 h tras la producción
                 </span>
               </span>
               <span className="font-semibold tabular-nums">{std === 0 ? "Gratis" : formatPrice(std)}</span>
@@ -185,9 +182,7 @@ export function ShippingStep({
                 <span className="flex items-center gap-2 font-semibold">
                   <Zap className="size-4" strokeWidth={1.5} /> Envío urgente
                 </span>
-                <span className="mt-0.5 block text-[0.8125rem] text-fg-muted">
-                  24 h tras la producción (ejemplo)
-                </span>
+                <span className="mt-0.5 block text-[0.8125rem] text-fg-muted">24 h tras la producción</span>
               </span>
               <span className="font-semibold tabular-nums">{formatPrice(urg)}</span>
             </span>
@@ -293,7 +288,7 @@ export function ShippingStep({
             className="sm:col-span-3"
             label="País"
             readOnly
-            hint="Demo: envíos solo a España."
+            hint="Envíos a toda España."
             {...register("country")}
           />
         </div>
@@ -390,7 +385,7 @@ export function DetailsStep({
           type="date"
           min={minDate}
           optionalLabel
-          hint={`Plazo orientativo: ${site.demo.productionTime} + envío (ejemplo).`}
+          hint={`Producción en ${site.shop.productionTime}, más el envío.`}
           error={errors.desiredDate?.message}
           {...register("desiredDate")}
         />
@@ -409,7 +404,7 @@ export function DetailsStep({
         error={errors.confirmDesigns?.message}
         {...register("confirmDesigns")}
       />
-      <StepActions note="Antes de grabar te enviaríamos una prueba para aprobarla.">
+      <StepActions note="Antes de grabar te enviamos la prueba para que la apruebes.">
         <Button type="submit" size="lg" iconRight={<ArrowIcon />}>
           Continuar al pago
         </Button>
@@ -476,7 +471,7 @@ export function PaymentStep({
 
   const fillTestCard = () => {
     const yy = String((new Date().getFullYear() + 3) % 100).padStart(2, "0");
-    setValue("cardName", "Cliente Demo");
+    setValue("cardName", "Ana García");
     setValue("cardNumber", "4242 4242 4242 4242");
     setValue("cardExpiry", `12/${yy}`);
     setValue("cardCvc", "123");
@@ -486,7 +481,7 @@ export function PaymentStep({
   return (
     <form noValidate onSubmit={handleSubmit(onDone)} className="space-y-7">
       <fieldset>
-        <legend className="mb-3 text-[0.8125rem] font-semibold">Método de pago (simulado)</legend>
+        <legend className="mb-3 text-[0.8125rem] font-semibold">Método de pago</legend>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <RadioCard value="tarjeta" {...register("method")}>
             <span className="flex items-center gap-2 font-semibold">
@@ -603,8 +598,7 @@ export function PaymentStep({
         <div className="rounded-[var(--radius-lg)] border border-line p-4 text-[0.875rem] text-fg-muted sm:p-5">
           <p className="font-semibold text-fg">Transferencia bancaria</p>
           <p className="mt-1">
-            Te enviaríamos los datos bancarios por email y empezaríamos a grabar al recibir el pago. (Demo: no
-            se muestra ninguna cuenta real.)
+            Te enviamos los datos bancarios por email y empezamos a grabar al recibir el pago.
           </p>
         </div>
       )}
@@ -630,12 +624,10 @@ export function PaymentStep({
 
       <div className="space-y-3 border-t border-line pt-6">
         <Button type="submit" size="lg" block loading={placing}>
-          {placing ? "Procesando pedido de prueba…" : `Confirmar pedido de prueba · ${formatPrice(total)}`}
+          {placing ? "Procesando pedido…" : `Confirmar pedido · ${formatPrice(total)}`}
         </Button>
         <p className="text-center text-[0.8125rem] text-fg-subtle" aria-live="polite">
-          {placing
-            ? "Simulando el pago… no se realiza ningún cargo."
-            : "🧪 Pedido de prueba: no se realiza ningún cargo ni se envía nada."}
+          Pago de prueba: no se realiza ningún cargo.
         </p>
       </div>
     </form>

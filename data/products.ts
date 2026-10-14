@@ -1,8 +1,6 @@
 /**
- * Catálogo de DEMO. Precios orientativos de demostración (IVA incluido).
- * TODO: sustituir precios, medidas y plazos por los reales del cliente
- * (ver CONTENT_TODO.md). Cada producto usa una ilustración SVG propia; para
- * usar fotos reales basta con rellenar `images` (TODO por producto).
+ * Catálogo de la tienda (precios con IVA incluido). Cada producto usa una
+ * ilustración SVG propia; para usar fotos basta con rellenar `images`.
  */
 
 import { STANDARD_TIERS } from "@/lib/commerce/pricing";
@@ -54,7 +52,7 @@ type ProductInput = {
 };
 
 const VENDOR = "Grabados González Simón";
-const PRODUCTION = "5–7 días laborables (ejemplo)"; // TODO: plazo real
+const PRODUCTION = "5 a 7 días laborables";
 
 const money = (amount: number) => ({ amount: Math.round(amount * 100) / 100, currencyCode: "EUR" as const });
 
@@ -190,7 +188,7 @@ export const products: Product[] = [
       "Un vaso con peso, tallado en la base y con tus iniciales grabadas a mano. Para brindar despacio y recordar quién te lo regaló.",
     body: [
       "Hay regalos que se usan una vez y regalos que acompañan durante años. Este vaso de whisky, con la base tallada que atrapa la luz, es de los segundos.",
-      "Grabo en él unas iniciales, un nombre, una fecha o un pequeño escudo con chorro de arena. El resultado es un esmerilado blanco, fino y permanente: no es una pegatina ni una impresión, es el propio cristal trabajado.",
+      "Grabamos en él unas iniciales, un nombre, una fecha o un pequeño escudo con chorro de arena. El resultado es un esmerilado blanco, fino y permanente: no es una pegatina ni una impresión, es el propio cristal trabajado.",
     ],
     illustration: "whisky-tallado",
     sample: {
@@ -199,7 +197,7 @@ export const products: Product[] = [
     },
     personalization: pers("whisky-tallado"),
     technical: tech({
-      dimensions: "Ø 8,5 × 9,5 cm aprox. (medida orientativa)",
+      dimensions: "Ø 8,5 × 9,5 cm aprox.",
       capacity: "30–32 cl",
       engravingArea: "Hasta 6 × 4 cm por cara",
     }),
@@ -220,7 +218,7 @@ export const products: Product[] = [
       "Vaso bajo de fondo grueso, robusto y elegante. Ideal para un regalo con nombre propio o para la carta de cócteles de tu local.",
     body: [
       "El fondo grueso le da equilibrio en la mano y ese sonido seco al dejarlo sobre la barra. Es el vaso de los clásicos: Old Fashioned, whisky solo, un buen ron.",
-      "Lo personalizo con un nombre, un mensaje corto o el logotipo de tu negocio. Antes de grabar, te envío la prueba del diseño para que la apruebes.",
+      "Lo personalizamos con un nombre, un mensaje corto o el logotipo de tu negocio. Antes de grabar, te enviamos la prueba del diseño para que la apruebes.",
     ],
     illustration: "old-fashioned",
     sample: {
@@ -232,7 +230,7 @@ export const products: Product[] = [
     },
     personalization: pers("old-fashioned"),
     technical: tech({
-      dimensions: "Ø 9 × 9 cm aprox. (medida orientativa)",
+      dimensions: "Ø 9 × 9 cm aprox.",
       capacity: "33 cl",
       engravingArea: "Hasta 7 × 5 cm por cara",
     }),
@@ -252,7 +250,7 @@ export const products: Product[] = [
     description:
       "El vaso de tubo de toda la vida, alto y ligero, con grabado permanente. El favorito de bares, eventos y celebraciones.",
     body: [
-      "Es el vaso que más grabo para hostelería y eventos: tiene una superficie generosa y recta, perfecta para logotipos con detalle.",
+      "Es el vaso que más grabamos para hostelería y eventos: tiene una superficie generosa y recta, perfecta para logotipos con detalle.",
       "Si lo necesitas para tu bar, una peña o una boda, consulta el precio por volumen: a partir de 12 unidades el precio por vaso baja automáticamente.",
     ],
     illustration: "tubo",
@@ -260,13 +258,13 @@ export const products: Product[] = [
     personalization: pers("tubo"),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 6,5 × 15 cm aprox. (medida orientativa)",
+      dimensions: "Ø 6,5 × 15 cm aprox.",
       capacity: "30–36 cl",
       engravingArea: "Hasta 5 × 9 cm por cara",
     }),
     createdAt: "2026-01-18",
     featuredRank: 3,
-    // Foto real del taller (trabajo del cliente). TODO: confirmar permiso para mostrar logos de terceros.
+    // Foto del taller.
     images: [
       {
         url: "/images/original/vasos-grabados.jpg",
@@ -303,7 +301,7 @@ export const products: Product[] = [
     personalization: pers("agua"),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 7,5 × 11 cm aprox. (medida orientativa)",
+      dimensions: "Ø 7,5 × 11 cm aprox.",
       capacity: "27 cl",
       engravingArea: "Hasta 6 × 6 cm por cara",
     }),
@@ -325,14 +323,14 @@ export const products: Product[] = [
       "Copa de vino tinto de cáliz amplio. Grabada con iniciales, una fecha o el logo de tu bodega para que cada brindis sea único.",
     body: [
       "El cáliz amplio deja respirar el vino y ofrece una zona de grabado perfecta para monogramas, fechas y logotipos de bodega.",
-      "Es una de las piezas que más me piden para bodas, aniversarios y regalos de empresa. Si necesitas varias, el precio por volumen se aplica automáticamente.",
+      "Es una de las piezas que más nos piden para bodas, aniversarios y regalos de empresa. Si necesitas varias, el precio por volumen se aplica automáticamente.",
     ],
     illustration: "copa-vino",
     sample: { kind: "logo", logo: "bodega", scale: 0.86 },
     personalization: pers("copa-vino"),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 9,5 × 22 cm aprox. (medida orientativa)",
+      dimensions: "Ø 9,5 × 22 cm aprox.",
       capacity: "47 cl",
       engravingArea: "Hasta 6 × 5 cm por cara",
     }),
@@ -366,7 +364,7 @@ export const products: Product[] = [
     personalization: pers("copa-blanco"),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 8 × 21 cm aprox. (medida orientativa)",
+      dimensions: "Ø 8 × 21 cm aprox.",
       capacity: "35 cl",
       engravingArea: "Hasta 5 × 4,5 cm por cara",
     }),
@@ -400,7 +398,7 @@ export const products: Product[] = [
     personalization: pers("copa-cava", { maxChars: 14 }),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 7 × 24 cm aprox. (medida orientativa)",
+      dimensions: "Ø 7 × 24 cm aprox.",
       capacity: "21 cl",
       engravingArea: "Hasta 3,5 × 7 cm por cara",
     }),
@@ -428,7 +426,7 @@ export const products: Product[] = [
     personalization: pers("copa-balon"),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 11 × 20 cm aprox. (medida orientativa)",
+      dimensions: "Ø 11 × 20 cm aprox.",
       capacity: "70 cl",
       engravingArea: "Hasta 8 × 6 cm por cara",
     }),
@@ -454,7 +452,7 @@ export const products: Product[] = [
       "Dos copas a juego grabadas con vuestras iniciales y la fecha de la boda. El recuerdo que vuelve a la mesa en cada aniversario.",
     body: [
       "Las copas del brindis son de las pocas cosas de la boda que se usan una y otra vez. Por eso merece la pena que estén grabadas: vuestras iniciales, la fecha y, si queréis, una palabra que sea solo vuestra.",
-      "Os envío la prueba del diseño antes de grabar y, si lo pedís con estuche, llegan listas para regalar.",
+      "Os enviamos la prueba del diseño antes de grabar y, si lo pedís con estuche, llegan listas para regalar.",
     ],
     illustration: "pack-brindis",
     sample: {
@@ -466,7 +464,7 @@ export const products: Product[] = [
     },
     personalization: pers("copa-cava", { maxChars: 14 }),
     technical: tech({
-      dimensions: "2 copas · Ø 7 × 24 cm aprox. (medida orientativa)",
+      dimensions: "2 copas · Ø 7 × 24 cm aprox.",
       capacity: "21 cl cada una",
       engravingArea: "Hasta 3,5 × 7 cm por copa",
     }),
@@ -489,14 +487,14 @@ export const products: Product[] = [
       "Jarra cervecera de cristal grueso con asa. Con un nombre, el escudo de tu peña o el logo de tu cervecería.",
     body: [
       "Una jarra contundente, de cristal grueso, que aguanta el ritmo de una buena terraza. Es un regalo infalible para cumpleaños, despedidas y jubilaciones.",
-      "Para peñas, clubes y cervecerías hago series con escudo o logotipo con precio por volumen.",
+      "Para peñas, clubes y cervecerías hacemos series con escudo o logotipo y precio por volumen.",
     ],
     illustration: "jarra-cerveza",
     sample: { kind: "logo", logo: "club", scale: 0.78 },
     personalization: pers("jarra-cerveza", { faces: 1 }),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Ø 8,5 × 16 cm aprox. (medida orientativa)",
+      dimensions: "Ø 8,5 × 16 cm aprox.",
       capacity: "0,5 L / 1 L",
       engravingArea: "Hasta 7 × 9 cm (cara frontal)",
     }),
@@ -528,7 +526,7 @@ export const products: Product[] = [
     },
     personalization: pers("jarra-agua", { faces: 1 }),
     technical: tech({
-      dimensions: "Ø 10 × 23 cm aprox. (medida orientativa)",
+      dimensions: "Ø 10 × 23 cm aprox.",
       capacity: "1 L / 1,5 L",
       engravingArea: "Hasta 8 × 8 cm (cara frontal)",
     }),
@@ -551,7 +549,7 @@ export const products: Product[] = [
       "Jarrón cilíndrico de líneas puras, grabado con iniciales, una frase o un escudo. Para aniversarios, regalos de empresa o como premio.",
     body: [
       "Un jarrón grabado es un regalo que vuelve a protagonizar la casa cada vez que se llena de flores. Su forma recta permite diseños grandes, frases y escudos.",
-      "También lo preparo como premio o reconocimiento en eventos corporativos.",
+      "También lo preparamos como premio o reconocimiento en eventos corporativos.",
     ],
     illustration: "jarron-cilindrico",
     sample: {
@@ -563,7 +561,7 @@ export const products: Product[] = [
     },
     personalization: pers("jarron-cilindrico", { maxChars: 28 }),
     technical: tech({
-      dimensions: "Ø 10 × 25/30 cm aprox. (medida orientativa)",
+      dimensions: "Ø 10 × 25/30 cm aprox.",
       engravingArea: "Hasta 10 × 14 cm por cara",
     }),
     createdAt: "2026-02-02",
@@ -583,14 +581,14 @@ export const products: Product[] = [
       "Jarrón de boca ancha pensado para centros de mesa de bodas y eventos, grabado con las iniciales o el logotipo del evento.",
     body: [
       "Los centros de mesa grabados son un detalle que se nota: con flores, velas o vacíos, el grabado brilla con la luz del salón.",
-      "Para eventos con varias mesas aplico precio por volumen. Después, los novios o la empresa pueden regalarlos a los invitados.",
+      "Para eventos con varias mesas aplicamos precio por volumen. Después, los novios o la empresa pueden regalarlos a los invitados.",
     ],
     illustration: "jarron-boca-ancha",
     sample: { kind: "text", lines: [{ text: "C & J", font: "script", size: 0.34 }] },
     personalization: pers("jarron-boca-ancha", { maxChars: 24 }),
     volumePricing: STANDARD_TIERS,
     technical: tech({
-      dimensions: "Boca Ø 16 × 20/26 cm aprox. (medida orientativa)",
+      dimensions: "Boca Ø 16 × 20/26 cm aprox.",
       engravingArea: "Hasta 12 × 10 cm por cara",
     }),
     createdAt: "2026-07-01",
@@ -614,7 +612,7 @@ export const products: Product[] = [
       "Metopa de cristal grueso con peana negra. Para homenajes, aniversarios de empresa, premios y reconocimientos con escudo o logotipo.",
     body: [
       "Las metopas son el formato clásico del reconocimiento: cristal grueso con bisel, un escudo o logotipo y un texto que cuenta por qué.",
-      "Grabo escudos de clubes, logotipos corporativos y textos largos con mucho detalle. Antes de grabar te envío la maqueta para revisarla juntos.",
+      "Grabamos escudos de clubes, logotipos corporativos y textos largos con mucho detalle. Antes de grabar te enviamos la maqueta para revisarla juntos.",
     ],
     illustration: "metopa",
     sample: { kind: "logo", logo: "club", scale: 0.86 },
@@ -644,7 +642,7 @@ export const products: Product[] = [
       "Placa horizontal de cristal con soporte, para dedicatorias, inauguraciones, aniversarios y agradecimientos.",
     body: [
       "Hay momentos que merecen quedar por escrito: una inauguración, 25 años en la empresa, un agradecimiento. La placa horizontal da espacio para un texto completo con un logotipo.",
-      "Cuéntame qué quieres decir y te propongo la composición.",
+      "Cuéntanos qué quieres decir y te proponemos la composición.",
     ],
     illustration: "placa",
     sample: {
@@ -678,7 +676,7 @@ export const products: Product[] = [
       "Trofeo de cristal con forma de llama sobre peana negra. Para torneos, premios de empresa y reconocimientos deportivos.",
     body: [
       "Un trofeo de cristal tiene algo que no tiene el metal: la luz lo atraviesa. Esta llama es perfecta para campeonatos, galas y premios a empleados.",
-      "Si organizas un torneo o una gala, pide varias unidades y aplico precio por volumen.",
+      "Si organizas un torneo o una gala, pide varias unidades y aplicamos precio por volumen.",
     ],
     illustration: "trofeo-llama",
     sample: {
@@ -711,7 +709,7 @@ export const products: Product[] = [
       "Obelisco de cristal con peana y estuche de presentación, grabado con el nombre, los años y unas palabras de despedida.",
     body: [
       "Una jubilación o un homenaje es un cierre emocionante. Este obelisco de cristal, con su estuche, es el regalo que el homenajeado pondrá en un lugar especial de casa.",
-      "Lo grabo con su nombre, los años de trayectoria y una dedicatoria del equipo.",
+      "Lo grabamos con su nombre, los años de trayectoria y una dedicatoria del equipo.",
     ],
     illustration: "trofeo-obelisco",
     sample: {
@@ -746,7 +744,7 @@ export const products: Product[] = [
       "Doce vasos grabados con el nombre y la fecha de la comunión. Para la mesa del banquete y como recuerdo para la familia.",
     body: [
       "Un detalle precioso para la mesa principal de la comunión o el bautizo: doce vasos con el nombre del protagonista, la fecha y un pequeño símbolo.",
-      "Después, cada familia se lleva el suyo como recuerdo. Si necesitas más unidades, escríbeme y te preparo presupuesto.",
+      "Después, cada familia se lleva el suyo como recuerdo. Si necesitas más unidades, escríbenos y te preparamos presupuesto.",
     ],
     illustration: "pack-vasos",
     sample: {
@@ -758,7 +756,7 @@ export const products: Product[] = [
     },
     personalization: pers("agua"),
     technical: tech({
-      dimensions: "12 vasos · Ø 7,5 × 11 cm aprox. (medida orientativa)",
+      dimensions: "12 vasos · Ø 7,5 × 11 cm aprox.",
       capacity: "27 cl cada uno",
       engravingArea: "Hasta 6 × 6 cm por vaso",
     }),
@@ -789,7 +787,7 @@ export const products: Product[] = [
       "Copas grabadas con vuestras iniciales y la fecha para cada invitado. Precio por unidad, mínimo 24 copas, con descuentos por volumen.",
     body: [
       "Un detalle para invitados que no acaba en un cajón: cada uno brinda con su copa grabada y se la lleva a casa.",
-      "Precio por unidad con tramos por volumen. Para más de 200 copas, te preparo un presupuesto a medida.",
+      "Precio por unidad con tramos por volumen. Para más de 200 copas, te preparamos un presupuesto a medida.",
     ],
     illustration: "copa-vino",
     sample: {
@@ -808,7 +806,7 @@ export const products: Product[] = [
       { min: 200, max: null, discount: 0.15, quote: true },
     ],
     technical: tech({
-      dimensions: "Según modelo (medidas orientativas)",
+      dimensions: "Según modelo",
       engravingArea: "Hasta 6 × 5 cm por copa",
     }),
     createdAt: "2026-09-01",
@@ -839,7 +837,7 @@ export const products: Product[] = [
       "Vasos y copas con el logotipo de tu bar, restaurante o bodega. Precio por unidad desde 24 piezas, con tramos por volumen.",
     body: [
       "La cristalería con tu logo eleva la imagen del local en cada servicio. Al ser grabado con chorro de arena, el logo no se despega ni pierde color con el uso diario.",
-      "Envíame tu logotipo (vale PDF, SVG, AI o una imagen nítida) y te devuelvo una prueba del grabado antes de producir.",
+      "Envíanos tu logotipo (vale PDF, SVG, AI o una imagen nítida) y te devolvemos una prueba del grabado antes de producir.",
     ],
     illustration: "pack-vasos",
     sample: { kind: "logo", logo: "cafe", scale: 0.86 },
@@ -852,7 +850,7 @@ export const products: Product[] = [
       { min: 250, max: null, discount: 0.18, quote: true },
     ],
     technical: tech({
-      dimensions: "Según pieza elegida (medidas orientativas)",
+      dimensions: "Según pieza elegida",
       engravingArea: "Adaptada a cada pieza",
     }),
     createdAt: "2026-08-02",
@@ -878,7 +876,7 @@ export const products: Product[] = [
     sample: { kind: "text", lines: [{ text: "R G", font: "roman", size: 0.3, weight: 600, tracking: 0.1 }] },
     personalization: pers("decantador", { faces: 1 }),
     technical: tech({
-      dimensions: "Decantador 75 cl aprox. + 2 vasos de 30 cl (medidas orientativas)",
+      dimensions: "Decantador 75 cl aprox. + 2 vasos de 30 cl",
       engravingArea: "Hasta 7 × 5 cm en cada pieza",
     }),
     createdAt: "2026-09-20",

@@ -31,7 +31,7 @@ export const footerNav = {
   Ayuda: [
     { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
     { label: "Contacto", href: "/contacto" },
-    { label: "Mis pedidos (demo)", href: "/mis-pedidos" },
+    { label: "Mis pedidos", href: "/mis-pedidos" },
     { label: "Favoritos", href: "/favoritos" },
   ],
   Legal: [

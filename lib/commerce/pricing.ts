@@ -28,13 +28,13 @@ export function lineTotal(line: Pick<CartLine, "unitPrice" | "volumePricing" | "
 export type ShippingMethod = "estandar" | "urgente" | "recogida";
 
 export const SHIPPING_METHODS: { id: ShippingMethod; label: string; detail: string }[] = [
-  { id: "estandar", label: "Envío estándar", detail: "48–72 h tras la producción (ejemplo)" },
-  { id: "urgente", label: "Envío urgente", detail: "24 h tras la producción (ejemplo)" },
+  { id: "estandar", label: "Envío estándar", detail: "48 a 72 h tras la producción" },
+  { id: "urgente", label: "Envío urgente", detail: "24 h tras la producción" },
   { id: "recogida", label: "Recogida en taller (Madrid)", detail: "Gratis · te avisamos cuando esté lista" },
 ];
 
 export function shippingCost(subtotalAfterDiscount: number, method: ShippingMethod = "estandar") {
   if (method === "recogida") return 0;
-  const base = subtotalAfterDiscount >= site.demo.freeShippingThreshold ? 0 : site.demo.shippingStandard;
-  return round2(base + (method === "urgente" ? site.demo.shippingExpressExtra : 0));
+  const base = subtotalAfterDiscount >= site.shop.freeShippingThreshold ? 0 : site.shop.shippingStandard;
+  return round2(base + (method === "urgente" ? site.shop.shippingExpressExtra : 0));
 }

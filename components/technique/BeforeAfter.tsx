@@ -38,12 +38,8 @@ export function BeforeAfter({ glass, engraving }: { glass: GlassId; engraving: S
             </svg>
           </span>
         </div>
-        <span className="absolute top-4 left-4 rounded-full bg-black/50 px-3 py-1 text-[0.6875rem] font-semibold tracking-[0.1em] text-paper uppercase">
-          Antes
-        </span>
-        <span className="absolute top-4 right-4 rounded-full bg-black/50 px-3 py-1 text-[0.6875rem] font-semibold tracking-[0.1em] text-paper uppercase">
-          Después
-        </span>
+        <span className="absolute top-4 left-4 text-[0.8125rem] text-paper/80">Antes</span>
+        <span className="absolute top-4 right-4 text-[0.8125rem] text-paper/80">Después</span>
         <label htmlFor={id} className="sr-only">
           Deslizar para comparar antes y después del grabado
         </label>
@@ -58,7 +54,7 @@ export function BeforeAfter({ glass, engraving }: { glass: GlassId; engraving: S
         />
       </div>
       <figcaption className="mt-3 text-center text-[0.8125rem] text-stone-400">
-        Desliza para ver la pieza antes y después del grabado (vista generada)
+        Desliza para comparar
       </figcaption>
     </figure>
   );

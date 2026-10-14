@@ -20,7 +20,6 @@ export default function PersonalizePage() {
       <section className="theme-dark grain relative overflow-hidden bg-ink pt-[calc(var(--header-h)+1.5rem)] pb-8 sm:pb-10">
         <div className="relative z-[2] container-x flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="css-fade-up mb-3 eyebrow">Estudio de personalización</p>
             <h1
               className="css-fade-up font-display text-display-m tracking-[-0.02em] text-paper"
               style={{ "--d": "80ms" } as React.CSSProperties}
@@ -32,7 +31,7 @@ export default function PersonalizePage() {
             className="css-fade-up max-w-md text-[0.9375rem] text-stone-300"
             style={{ "--d": "160ms" } as React.CSSProperties}
           >
-            Sube tu logo o escribe tu texto. Todo ocurre en tu navegador: no subimos nada a ningún servidor.
+            Sube tu logo o escribe tu texto y míralo sobre la pieza.
           </p>
         </div>
       </section>

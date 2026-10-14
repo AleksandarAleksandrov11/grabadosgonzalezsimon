@@ -25,7 +25,6 @@ export default function NotFound() {
       />
       <div className="relative z-[2] container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="css-fade-up eyebrow">Error 404</p>
           <h1
             className="css-fade-up mt-5 max-w-[16ch] font-display text-display-l text-paper"
             style={{ "--d": "80ms" } as React.CSSProperties}
@@ -36,8 +35,7 @@ export default function NotFound() {
             className="css-fade-up mt-6 max-w-[48ch] text-lead text-stone-300"
             style={{ "--d": "160ms" } as React.CSSProperties}
           >
-            Puede que el enlace haya cambiado o que nunca existiera. Lo que sí existe es una pieza esperando
-            tu grabado.
+            Puede que el enlace haya cambiado.
           </p>
           <div
             className="css-fade-up mt-10 flex flex-col gap-3 sm:flex-row"

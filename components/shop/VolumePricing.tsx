@@ -58,7 +58,7 @@ export function VolumePricing({
                   )}
                 </td>
                 <td className="w-20 px-4 py-2.5 text-right text-fg-subtle tabular-nums">
-                  {t.discount > 0 && !t.quote ? `−${Math.round(t.discount * 100)} %` : "—"}
+                  {t.discount > 0 && !t.quote ? `−${Math.round(t.discount * 100)} %` : ""}
                 </td>
               </tr>
             );

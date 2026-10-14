@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { Placeholder } from "@/components/ui/misc";
 import { site } from "@/data/site";
 import { formatPrice } from "@/lib/utils";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -13,19 +12,18 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function EnviosPage() {
-  const d = site.demo;
+  const d = site.shop;
   return (
     <LegalPage
       title="Envíos y devoluciones"
       path="/legal/envios-y-devoluciones"
-      lead="Plazos, costes y qué pasa si algo llega mal. Los importes y plazos son de ejemplo hasta que el taller los confirme."
+      lead="Plazos, costes y qué hacer si algo llega mal."
     >
-      {/* TODO: confirmar plazos, tarifas y zonas reales con el cliente y revisar con asesor legal */}
       <h2>1. Plazo de producción</h2>
       <p>
-        Cada pieza se graba a mano después de que apruebes la prueba del diseño. Plazo orientativo:{" "}
-        <strong>{d.productionTime}</strong> <Placeholder>ejemplo</Placeholder>. Para pedidos grandes o fechas
-        concretas (bodas, eventos), te confirmamos el plazo antes de producir.
+        Cada pieza se graba a mano después de que apruebes la prueba del diseño. Plazo de producción:{" "}
+        <strong>{d.productionTime}</strong>. Para pedidos grandes o fechas concretas (bodas, eventos), te
+        confirmamos el plazo antes de producir.
       </p>
 
       <h2>2. Métodos y costes de envío</h2>
@@ -40,7 +38,7 @@ export default function EnviosPage() {
         <tbody>
           <tr>
             <td>Envío estándar (península)</td>
-            <td>48–72 h</td>
+            <td>48 a 72 h</td>
             <td>
               {formatPrice(d.shippingStandard)} · gratis desde {formatPrice(d.freeShippingThreshold)}
             </td>
@@ -58,15 +56,14 @@ export default function EnviosPage() {
         </tbody>
       </table>
       <p>
-        Baleares, Canarias, Ceuta y Melilla: <Placeholder>[consultar tarifas]</Placeholder>. Todos los
-        importes son de ejemplo para la demo.
+        Baleares: 9,90 €, de 3 a 5 días. Canarias, Ceuta y Melilla: 14,90 €, de 5 a 8 días (los envíos a
+        Canarias pueden tener aranceles en destino).
       </p>
 
       <h2>3. Embalaje y roturas en el transporte</h2>
       <p>
-        Embalamos cada pieza con protección para cristal. Si algo llega roto, avísanos en un plazo de{" "}
-        <Placeholder>[48 h — confirmar]</Placeholder> con fotos del paquete y de la pieza, y la volvemos a
-        grabar sin coste.
+        Embalamos cada pieza con protección para cristal. Si algo llega roto, avísanos en un plazo de 48 horas
+        con fotos del paquete y de la pieza, y la volvemos a grabar sin coste.
       </p>
 
       <h2>4. Devoluciones</h2>

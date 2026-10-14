@@ -127,11 +127,8 @@ export function QuoteForm({ products }: { products: QuoteProduct[] }) {
             <SuccessMark size={72} />
             <p className="font-display text-display-s">¡Solicitud recibida!</p>
             <p className="max-w-[52ch] text-fg-muted">
-              Referencia <strong className="text-fg tabular-nums">{result.reference}</strong>. En la web real
-              te enviaríamos el presupuesto para {result.data.quantity} uds. en 24–48 h laborables (ejemplo).
-            </p>
-            <p className="rounded-full border border-line-strong px-3 py-1.5 text-[0.8125rem] text-fg-muted">
-              🧪 Demo: la solicitud se ha validado pero no se ha enviado a nadie.
+              Referencia <strong className="text-fg tabular-nums">{result.reference}</strong>. Te enviaremos
+              el presupuesto para {result.data.quantity} unidades en un plazo de 24 a 48 horas laborables.
             </p>
             <Button
               variant="outline"
@@ -254,7 +251,7 @@ export function QuoteForm({ products }: { products: QuoteProduct[] }) {
 
             <div className="lg:col-span-5">
               <div className="theme-dark rounded-[var(--radius-lg)] bg-ink p-5 sm:p-6">
-                <p className="text-[0.8125rem] font-semibold text-paper">Tu logo, grabado (vista previa)</p>
+                <p className="text-[0.8125rem] font-semibold text-paper">Tu logo, grabado</p>
                 <div className="relative mx-auto mt-3 max-w-[300px] bg-[radial-gradient(60%_55%_at_50%_42%,rgba(255,255,255,0.08),transparent_70%)]">
                   {logo ? (
                     <MiniStage glass={glass} design={logo.design} />
@@ -299,7 +296,7 @@ export function QuoteForm({ products }: { products: QuoteProduct[] }) {
                   />
                 </div>
                 <p className="mt-2 truncate text-[0.75rem] text-stone-400">
-                  {logo ? logo.name : "PNG, JPG, SVG o WEBP · el archivo no sale de tu navegador"}
+                  {logo ? logo.name : "PNG, JPG, SVG o WEBP"}
                 </p>
                 {logoError ? (
                   <p role="alert" className="mt-2 text-[0.8125rem] text-[#ffb4ab]">

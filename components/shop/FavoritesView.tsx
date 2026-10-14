@@ -15,8 +15,8 @@ export function FavoritesView({ products }: { products: Product[] }) {
 
   if (!hydrated) {
     return (
-      <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4" aria-busy="true">
-        {[0, 1, 2, 3].map((i) => (
+      <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3" aria-busy="true">
+        {[0, 1, 2].map((i) => (
           <div key={i} className="aspect-[4/5] animate-pulse rounded-[var(--radius-lg)] bg-fg/6" />
         ))}
       </div>
@@ -46,8 +46,8 @@ export function FavoritesView({ products }: { products: Product[] }) {
           <h2 id="ideas" className="mb-8 font-display text-display-s">
             Para inspirarte
           </h2>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
-            {products.slice(0, 4).map((p) => (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
+            {products.slice(0, 3).map((p) => (
               <ProductCard key={p.handle} product={p} />
             ))}
           </div>
@@ -67,7 +67,7 @@ export function FavoritesView({ products }: { products: Product[] }) {
         </Button>
       </div>
       <h2 className="sr-only">Tus favoritos</h2>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-8 lg:grid-cols-3">
         {favs.map((p) => (
           <ProductCard key={p.handle} product={p} />
         ))}

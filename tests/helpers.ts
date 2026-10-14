@@ -5,7 +5,7 @@ export async function acceptCookies(page: Page) {
   await page.addInitScript(() => {
     try {
       window.localStorage.setItem(
-        "ggs-demo:cookies",
+        "ggs:cookies",
         JSON.stringify({ necessary: true, analytics: false, preferences: true, date: "test" }),
       );
     } catch {

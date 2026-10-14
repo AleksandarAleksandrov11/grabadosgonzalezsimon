@@ -1,7 +1,7 @@
 import { site } from "@/data/site";
 import { OG_CONTENT_TYPE, OG_SIZE, ogImage } from "@/lib/og/render";
 
-export const alt = `${site.name} — grabados en cristal con chorro de arena en Madrid`;
+export const alt = `${site.name}, grabados en cristal con chorro de arena en Madrid`;
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
